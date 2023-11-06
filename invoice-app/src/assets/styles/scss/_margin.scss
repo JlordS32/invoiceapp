@@ -1,0 +1,125 @@
+@mixin margin($value) {
+	margin: #{$value}rem;
+}
+
+@mixin marginX($value) {
+	margin: 0 #{$value}rem;
+}
+
+@mixin marginY($value) {
+	margin: #{$value}rem 0;
+}
+
+@mixin marginTop($value) {
+	margin-top: #{$value}rem;
+}
+
+@mixin marginBottom($value) {
+	margin-bottom: #{$value}rem;
+}
+
+@mixin marginLeft($value) {
+	margin-left: #{$value}rem;
+}
+
+@mixin marginRight($value) {
+	margin-right: #{$value}rem;
+}
+
+@for $i from 1 through 10 {
+	.m-#{$i} {
+		@include margin($i);
+	}
+
+	.m-#{$i}-half {
+		@include margin($i / 2);
+	}
+
+	.m-#{$i}-quarter {
+		@include margin($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.mx-#{$i} {
+		@include marginX($i);
+	}
+
+	.mx-#{$i}-half {
+		@include marginX($i / 2);
+	}
+
+	.mx-#{$i}-quarter {
+		@include marginX($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.my-#{$i} {
+		@include marginY($i);
+	}
+
+	.my-#{$i}-half {
+		@include marginY($i / 2);
+	}
+
+	.my-#{$i}-quarter {
+		@include marginY($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.mt-#{$i} {
+		@include marginTop($i);
+	}
+
+	.mt-#{$i}-half {
+		@include marginTop($i / 2);
+	}
+
+	.mt-#{$i}-quarter {
+		@include marginTop($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.mb-#{$i} {
+		@include marginBottom($i);
+	}
+
+	.mb-#{$i}-half {
+		@include marginBottom($i / 2);
+	}
+
+	.mb-#{$i}-quarter {
+		@include marginBottom($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.ml-#{$i} {
+		@include marginLeft($i);
+	}
+
+	.ml-#{$i}-half {
+		@include marginLeft($i / 2);
+	}
+
+	.ml-#{$i}-quarter {
+		@include marginLeft($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.mr-#{$i} {
+		@include marginRight($i);
+	}
+
+	.mr-#{$i}-half {
+		@include marginRight($i / 2);
+	}
+
+	.mr-#{$i}-quarter {
+		@include marginRight($i / 4);
+	}
+}

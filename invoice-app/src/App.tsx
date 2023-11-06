@@ -8,11 +8,9 @@ function App() {
 				style={{
 					display: 'flex',
 					flexDirection: 'column',
-					gap: '10px',
-					padding: '100px',
 				}}
 			>
-				<div>
+				<div className='d-flex flex-column gap-1 m-4 debug'>
 					<div>
 						<Button>Mark as Paid</Button>
 					</div>
@@ -38,14 +36,14 @@ function App() {
 				</div>
 
 				<div>
-					<h1
-						style={{
-							outline: '1px solid red',
-						}}
-						className='p-2 text-center'
-					>
-						Hello world
-					</h1>
+					<h1 className='text--title uppercase'>I am the danger</h1>
+					<h1 className='text--h1'>Hello world</h1>
+					<h2 className='text--h2'>I know</h2>
+					<h3 className='text--h3'>This is very cool</h3>
+					<h4 className='text--h4'>
+						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+						repellendus doloremque adipisci nostrum sequi?
+					</h4>
 				</div>
 			</div>
 		</div>

@@ -10,6 +10,19 @@
 	padding: #{$value}rem 0;
 }
 
+@mixin paddingTop($value) {
+	padding-top: #{$value}rem;
+}
+@mixin paddingBottom($value) {
+	padding-bottom: #{$value}rem;
+}
+@mixin paddingLeft($value) {
+	padding-left: #{$value}rem;
+}
+@mixin paddingRight($value) {
+	padding-right: #{$value}rem;
+}
+
 @for $i from 1 through 10 {
 	.p-#{$i} {
 		@include padding($i);
@@ -29,7 +42,7 @@
 		@include paddingX($i);
 	}
 
-   .px-#{$i}-half {
+	.px-#{$i}-half {
 		@include paddingX($i / 2);
 	}
 
@@ -43,11 +56,66 @@
 		@include paddingY($i);
 	}
 
-   .py-#{$i}-half {
+	.py-#{$i}-half {
 		@include paddingY($i / 2);
 	}
 
 	.py-#{$i}-quarter {
 		@include paddingY($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.pt-#{$i} {
+		@include paddingTop($i);
+	}
+
+	.pt-#{$i}-half {
+		@include paddingTop($i / 2);
+	}
+
+	.pt-#{$i}-quarter {
+		@include paddingTop($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.pb-#{$i} {
+		@include paddingBottom($i);
+	}
+
+	.pb-#{$i}-half {
+		@include paddingBottom($i / 2);
+	}
+
+	.pb-#{$i}-quarter {
+		@include paddingBottom($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.pl-#{$i} {
+		@include paddingLeft($i);
+	}
+
+	.pl-#{$i}-half {
+		@include paddingLeft($i / 2);
+	}
+
+	.pl-#{$i}-quarter {
+		@include paddingLeft($i / 4);
+	}
+}
+@for $i from 1 through 10 {
+	.pr-#{$i} {
+		@include paddingRight($i);
+	}
+
+	.pr-#{$i}-half {
+		@include paddingRight($i / 2);
+	}
+
+	.pr-#{$i}-quarter {
+		@include paddingRight($i / 4);
 	}
 }

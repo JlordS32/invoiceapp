@@ -1,15 +1,43 @@
 @mixin gap($value) {
-   gap: #{$value}rem;
+	gap: #{$value}rem;
+}
+@mixin gapX($value) {
+	gap: 0 #{$value}rem;
+}
+@mixin gapY($value) {
+	gap: #{$value}rem 0;
 }
 
 @for $i from 1 through 10 {
-   .gap-#{$i} {
-      @include gap($i);
-   }
-   .gap-#{$i}-half {
-      @include gap($i / 2);
-   }
-   .gap-#{$i}-quarter {
-      @include gap($i / 4);
-   }
+	.gap-#{$i} {
+		@include gap($i);
+	}
+	.gap-#{$i}-half {
+		@include gap($i / 2);
+	}
+	.gap-#{$i}-quarter {
+		@include gap($i / 4);
+	}
+}
+@for $i from 1 through 10 {
+	.gapX-#{$i} {
+		@include gapX($i);
+	}
+	.gapX-#{$i}-half {
+		@include gapX($i / 2);
+	}
+	.gapX-#{$i}-quarter {
+		@include gapX($i / 4);
+	}
+}
+@for $i from 1 through 10 {
+	.gapY-#{$i} {
+		@include gapY($i);
+	}
+	.gapY-#{$i}-half {
+		@include gapY($i / 2);
+	}
+	.gapY-#{$i}-quarter {
+		@include gapY($i / 4);
+	}
 }

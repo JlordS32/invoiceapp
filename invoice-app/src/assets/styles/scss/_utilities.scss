@@ -21,7 +21,16 @@
 .uppercase {
 	text-transform: uppercase;
 }
-.h1 {
+
+.text--title {
+	font-size: 6.15385rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: -0.19231rem;
+}
+
+.text--h1 {
 	font-size: 2.76923rem;
 	font-style: normal;
 	font-weight: 700;
@@ -29,7 +38,7 @@
 	letter-spacing: -0.08654rem;
 }
 
-.h2 {
+.text--h2 {
 	font-size: 1.84615rem;
 	font-style: normal;
 	font-weight: 700;
@@ -37,7 +46,7 @@
 	letter-spacing: -0.05769rem;
 }
 
-.h3 {
+.text--h3 {
 	font-size: 1.15385rem;
 	font-style: normal;
 	font-weight: 700;
@@ -45,7 +54,7 @@
 	letter-spacing: -0.01923rem;
 }
 
-.h4 {
+.text--h4 {
 	font-family: League Spartan;
 	font-size: 1.15385rem;
 	font-style: normal;
@@ -68,4 +77,8 @@
 	font-weight: 500;
 	line-height: 1.15385rem;
 	letter-spacing: -0.00769rem;
+}
+
+.debug {
+   outline: 1px solid red;
 }
