@@ -1,9 +1,21 @@
+import { useRef } from 'react';
+import Button from './components/Button';
+
 function App() {
-
-
 	return (
 		<div className='app'>
-			<h1>Hello World</h1>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					gap: '10px',
+					padding: '100px',
+				}}
+			>
+				<Button>Mark as Paid</Button>
+				<Button>Mark as Paid</Button>
+				<Button>Mark as Paid</Button>
+			</div>
 		</div>
 	);
 }
