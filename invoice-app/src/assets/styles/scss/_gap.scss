@@ -1,0 +1,15 @@
+@mixin gap($value) {
+   gap: #{$value}rem;
+}
+
+@for $i from 1 through 10 {
+   .gap-#{$i} {
+      @include gap($i);
+   }
+   .gap-#{$i}-half {
+      @include gap($i / 2);
+   }
+   .gap-#{$i}-quarter {
+      @include gap($i / 4);
+   }
+}

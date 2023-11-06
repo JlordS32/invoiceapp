@@ -1,0 +1,71 @@
+.d-flex {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.justify-content-center {
+	justify-content: center;
+}
+
+.justify-content-between {
+	justify-content: space-between;
+}
+
+.align-items-center {
+	align-items: center;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+.h1 {
+	font-size: 2.76923rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: -0.08654rem;
+}
+
+.h2 {
+	font-size: 1.84615rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: -0.05769rem;
+}
+
+.h3 {
+	font-size: 1.15385rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 1.84615rem;
+	letter-spacing: -0.01923rem;
+}
+
+.h4 {
+	font-family: League Spartan;
+	font-size: 1.15385rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 1.15385rem;
+	letter-spacing: -0.01923rem;
+}
+
+.default-body {
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.38462rem;
+	letter-spacing: -0.00769rem;
+}
+
+.body-text-variant {
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.15385rem;
+	letter-spacing: -0.00769rem;
+}

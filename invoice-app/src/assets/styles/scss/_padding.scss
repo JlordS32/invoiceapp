@@ -1,0 +1,53 @@
+@mixin padding($value) {
+	padding: #{$value}rem;
+}
+
+@mixin paddingX($value) {
+	padding: 0 #{$value}rem;
+}
+
+@mixin paddingY($value) {
+	padding: #{$value}rem 0;
+}
+
+@for $i from 1 through 10 {
+	.p-#{$i} {
+		@include padding($i);
+	}
+
+	.p-#{$i}-half {
+		@include padding($i / 2);
+	}
+
+	.p-#{$i}-quarter {
+		@include padding($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.px-#{$i} {
+		@include paddingX($i);
+	}
+
+   .px-#{$i}-half {
+		@include paddingX($i / 2);
+	}
+
+	.px-#{$i}-quarter {
+		@include paddingX($i / 4);
+	}
+}
+
+@for $i from 1 through 10 {
+	.py-#{$i} {
+		@include paddingY($i);
+	}
+
+   .py-#{$i}-half {
+		@include paddingY($i / 2);
+	}
+
+	.py-#{$i}-quarter {
+		@include paddingY($i / 4);
+	}
+}
