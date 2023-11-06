@@ -1,14 +1,130 @@
+/* Default Button */
+
 .button {
 	height: 3.69231rem;
 	border-radius: 100px;
 	border: 0;
 	background-color: var(--primary);
-   font-size: 1.15385rem;
-   color: var(--white);
-   font-weight: 700;
-   cursor: pointer;
+	font-size: 1.15385rem;
+	color: var(--white);
+	font-weight: 700;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: 150ms linear;
+	padding: 0.62rem;
 }
 
 .button:hover {
-   background-color: var(--primary-active);
+	background-color: var(--primary-active);
+	transform: scale(1.01);
+}
+
+.button:active {
+	background-color: var(--primary);
+}
+
+.button > span {
+	padding: 0 1.2rem;
+	display: flex;
+}
+
+/* Add Button */
+
+.plusSvg {
+	padding: 0.85rem;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	width: 2.46154rem;
+	height: 2.46154rem;
+}
+
+/* Delete Button */
+
+.button.deleteButton {
+	background-color: var(--error);
+}
+
+.button.deleteButton:hover {
+	background-color: var(--error-active);
+}
+
+.button.deleteButton:active {
+	background-color: var(--error);
+}
+
+/* Edit Light */
+
+.button.editButtonLight {
+	background-color: hsl(228, 71%, 99%);
+	color: var(--text-light);
+}
+
+.button.editButtonLight:hover {
+	background-color: hsl(231, 73%, 93%);
+}
+
+.button.editButtonLight:active {
+	background-color: hsl(228, 71%, 99%);
+}
+
+/* Edit Dark */
+
+.button.editButtonDark {
+	background-color: var(--secondary);
+}
+
+.button.editButtonDark:hover {
+	background-color: var(--white);
+	color: #dfe3fa;
+}
+
+.button.editButtonDark:active {
+	background-color: var(--secondary);
+}
+
+/* Save as Draft */
+.button.saveAsDraftButtonLight {
+	background-color: hsl(231, 20%, 27%);
+	color: var(--text-2-dark);
+}
+
+.button.saveAsDraftButtonDark {
+	background-color: hsl(231, 20%, 27%);
+	color: var(--text-2-light);
+}
+
+.button.saveAsDraftButtonLight:hover {
+	background-color: var(--text-dark);
+}
+
+.button.saveAsDraftButtonDark:hover {
+	background-color: var(--secondary);
+}
+
+.button.saveAsDraftButtonLight:active {
+	background-color: hsl(231, 20%, 27%);
+}
+
+.button.saveAsDraftButtonDark:active {
+	background-color: hsl(231, 20%, 27%);
+}
+
+/* Add New Item */
+.button.addNewItemButton {
+	background-color: hsl(228, 71%, 99%);
+	color: var(--text-light);
+	justify-content: center;
+}
+
+.button.addNewItemButton:hover {
+	background-color: hsl(231, 73%, 93%);
+}
+
+.button.addNewItemButton:active {
+	background-color: hsl(228, 71%, 99%);
 }

@@ -12,9 +12,28 @@ function App() {
 					padding: '100px',
 				}}
 			>
-				<Button>Mark as Paid</Button>
-				<Button>Mark as Paid</Button>
-				<Button>Mark as Paid</Button>
+				<div>
+					<Button>Mark as Paid</Button>
+				</div>
+				<div>
+					<Button variant='addButton'>New Invoice</Button>
+				</div>
+				<div>
+					<Button variant='deleteButton'>Delete</Button>
+				</div>
+				<div>
+					<Button variant='editButtonDark'>Edit</Button>
+				</div>
+				<div>
+					<Button variant='editButtonLight'>Edit</Button>
+				</div>
+				<div>
+					<Button variant='saveAsDraftButtonLight'>Save as Draft</Button>
+				</div>
+				<div>
+					<Button variant='saveAsDraftButtonDark'>Save as Draft</Button>
+				</div>
+				<Button variant='addNewItemButton'>+Add New Item</Button>
 			</div>
 		</div>
 	);

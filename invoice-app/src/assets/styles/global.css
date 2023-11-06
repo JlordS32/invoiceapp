@@ -20,13 +20,16 @@
 	--light-bg: var(--grey);
 
 	/* default typography */
-	--text: hsl(228, 29%, 7%);
+	--text-dark: hsl(228, 29%, 7%);
+   --text-light: hsl(231, 37%, 63%);
+   --text-2-dark: hsl(231, 20%, 61%);
+   --text-2-light:hsl(231, 73%, 93%);
 
 	/* setting root typography */
 	font-size: 13px;
 	font-family: 'League Spartan', sans-serif;
 	font-weight: 500;
-	color: var(--text);
+	color: var(--text-dark);
 	line-height: 1.38462rem;
 	letter-spacing: -0.00769rem;
 }

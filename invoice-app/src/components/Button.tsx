@@ -2,32 +2,43 @@ import React from 'react';
 import styles from '../assets/styles/buttons.module.css';
 import plusSvg from '../assets/svg/icon-plus.svg';
 
+type ButtonTypes =
+	| ''
+	| 'default'
+	| 'addButton'
+	| 'editButtonLight'
+	| 'editButtonDark'
+	| 'deleteButton'
+	| 'saveAsDraftButtonDark'
+   | 'saveAsDraftButtonLight'
+	| 'addNewItemButton';
+
 type CustomButtonProps = React.HTMLProps<HTMLButtonElement> & {
 	width?: string;
 	type?: 'button' | 'reset' | 'submit';
+	variant?: ButtonTypes;
 };
 
 const Button = (props: CustomButtonProps) => {
+	const { variant } = props;
+
 	return (
 		<button
-			className={styles.button}
-			style={{
-				width: props.width ?? '11.53846rem',
-			}}
+			className={`${styles.button} ${styles[variant ?? '']}`}
 			{...props}
 		>
-			<img
-				src={plusSvg}
-				alt=''
-				style={{
-					backgroundColor: 'white',
-					width: '2rem',
-					height: '2rem',
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-				}}
-			/>
+			{variant && variant === 'addButton' && (
+				<div className={styles.plusSvg}>
+					<img
+						src={plusSvg}
+						alt=''
+						style={{
+							width: '10px',
+							height: '10px',
+						}}
+					/>
+				</div>
+			)}
 			<span>{props.children}</span>
 		</button>
 	);
