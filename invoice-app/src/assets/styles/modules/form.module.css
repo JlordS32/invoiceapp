@@ -1,0 +1,33 @@
+.formContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 0.7rem 0;
+	width: 18.46154rem;
+}
+
+.formContainer > input {
+	/* typography */
+	font-size: 1.15385rem;
+	font-weight: 700;
+
+	/* styles */
+	border-radius: 0.30769rem;
+	border: 1px solid var(--form-outline);
+	background: var(--white);
+	padding: 1.3rem;
+	caret-color: var(--form-label);
+}
+
+.formContainer > input:focus {
+	outline: 1px solid var(--form-outline-focus);
+}
+
+.formContainer > label {
+	color: var(--form-label);
+	font-family: League Spartan;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.15385rem; /* 115.385% */
+	letter-spacing: -0.00769rem;
+}

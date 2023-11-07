@@ -25,6 +25,11 @@
 	--text-2-dark: hsl(231, 20%, 61%);
 	--text-2-light: hsl(231, 73%, 93%);
 
+	/* form colors */
+	--form-outline: hsl(231, 73%, 93%);
+	--form-outline-focus: hsl(252, 100%, 73%);
+	--form-label: hsl(231, 37%, 63%);	
+
 	/* setting root typography */
 	font-size: 13px;
 	font-family: 'League Spartan', sans-serif;
