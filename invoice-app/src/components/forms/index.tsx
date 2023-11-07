@@ -1,6 +1,7 @@
 // components
 import Text from './Text.tsx';
 import Select from './Select.tsx';
+import Date from './Date.tsx';
 
 export interface FormProps {
 	id?: string;
@@ -13,7 +14,8 @@ export interface FormProps {
 
 const Form = {
 	Text,
-	Select
+	Select,
+	Date
 };
 
 export default Form;

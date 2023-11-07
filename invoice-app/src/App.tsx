@@ -1,21 +1,12 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 // components
 import Form from './components/forms';
 import { FormTextRef } from './components/forms/Text';
+import Button from './components/Button';
 
 function App() {
 	const customRef = useRef<FormTextRef | null>(null);
-
-	const options = [
-		{
-			value: '30',
-			label: 'Net 30 Days',
-		},
-		{ value: '14', label: 'Net 14 Days' },
-		{ value: '7', label: 'Net 7 Days' },
-		{ value: '1', label: 'Net 1 Day' },
-	];
 
 	return (
 		<div className='app'>
@@ -27,16 +18,14 @@ function App() {
 			>
 				<div className='d-flex align-items-center flex-column pt-5'>
 					<div className='mt-5'>
-						<Form.Select
-							ref={customRef}
-							label='Payment Terms'
-							options={options}
-						/>
+						<Form.Date ref={customRef} />
 					</div>
 
-					{/* <button onClick={() => {
-						console.log(customRef.current?.value)
-					}}>Click me</button> */}
+					<div className='mt-2'>
+						<Button onClick={() => console.log(customRef.current?.value)}>
+							Get Value
+						</Button>
+					</div>
 				</div>
 			</div>
 		</div>

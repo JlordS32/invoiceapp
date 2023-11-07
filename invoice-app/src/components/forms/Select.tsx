@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useEffect, useState } from 'react';
-import ReactSelect, { ActionMeta } from 'react-select';
+import ReactSelect, { StylesConfig } from 'react-select';
 
 // styles
 import styles from '../../assets/styles/modules/form.module.css';
@@ -7,64 +7,71 @@ import styles from '../../assets/styles/modules/form.module.css';
 // from index
 import { FormProps } from './index';
 
+// TYPES
 interface OptionType {
 	value: string;
 	label: string;
 }
+
+type GroupBase<OptionType> = {
+	label: string;
+	options: OptionType[];
+};
 
 export interface FormSelectProps extends FormProps {
 	options: OptionType[];
 }
 
 export interface FormSelectRef {
-	value: string;
 	_test: (value: string) => void;
+	value: string;
 }
 
-// custom styles for react-select
-const customStyles = {
-   control: (
-      provided: React.CSSProperties,
-      state: { isFocused: boolean }
-   ) => ({
-      ...provided,
-      backgroundColor: 'var(--white)',
-      height: '3.69231rem',
-      border: 0,
-      outline: state.isFocused
-         ? '1px solid var(--primary)'
-         : '1px solid var(--form-outline)',
-      fontWeight: '700',
+const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
+	control: (provided, state) => ({
+		...provided,
+		backgroundColor: 'var(--white)',
+		height: '3.69231rem',
+		border: 0,
+		outline: state.isFocused
+			? '1px solid var(--primary)'
+			: '1px solid var(--form-outline)',
+		fontWeight: '700',
+		padding: '0 0.7rem',
 
-      '&:hover': {
-         outline: '1px solid var(--primary)'
-      }
-   }),
-   option: (
-      provided: React.CSSProperties,
-      state: { isSelected: boolean }
-   ) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? 'white' : 'white',
-      color: state.isSelected ? 'var(--primary)' : 'black',
-      fontWeight: '700',
-      fontSize: '1.15rem',
-      padding: '1rem',
-      borderBottom: '1px solid var(--form-outline)',
-      top: '1rem',
-      '&:hover': {
-         backgroundColor: 'var(--primary)',
-         color: 'white',
-      },
-      '&:active': {
-         backgroundColor: 'var(--primary)',
-         color: 'white',
-      },
-   }),
-   menu: (provided: React.CSSProperties) => ({
-      ...provided,
-      marginTop: '1.85rem',
-   })
+		'&:hover': {
+			outline: '1px solid var(--primary)',
+		},
+	}),
+	option: (provided, state) => ({
+		...provided,
+		backgroundColor: state.isSelected ? 'white' : 'white',
+		color: state.isSelected ? 'var(--primary)' : 'black',
+		fontWeight: '700',
+		fontSize: '1.15rem',
+		padding: '1.15rem 1.85rem',
+		borderBottom: '1px solid var(--form-outline)',
+		top: '1rem',
+
+		'&:hover': {
+			backgroundColor: 'var(--primary)',
+			color: 'white',
+		},
+		'&:active': {
+			backgroundColor: 'var(--primary)',
+			color: 'white',
+		},
+	}),
+	menu: (provided) => ({
+		...provided,
+		marginTop: '1.85rem',
+		boxShadow: '0px 10px 20px 0px rgba(72, 84, 159, 0.25)',
+		transition: '150ms ease-in',
+	}),
+	dropdownIndicator: (provided) => ({
+		...provided,
+		color: 'var(--primary)',
+	}),
 };
 
 const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
@@ -89,7 +96,7 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 				},
 			};
 		},
-		[]
+		[selectedValue]
 	);
 
 	return (
@@ -103,6 +110,7 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 			<ReactSelect
 				options={props.options}
 				onChange={handleOnChange}
+				defaultValue={props.options[0]}
 				styles={customStyles}
 			/>
 		</div>
