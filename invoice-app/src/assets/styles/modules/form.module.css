@@ -31,3 +31,9 @@
 	line-height: 1.15385rem; /* 115.385% */
 	letter-spacing: -0.00769rem;
 }
+
+.formContainer > input[type='date']::webkit {
+	background-color: red;
+	color: #000;
+	opacity: 1;
+}

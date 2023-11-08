@@ -1,10 +1,16 @@
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { forwardRef, useRef, useImperativeHandle, useState } from 'react';
 
 // styles
 import styles from '../../assets/styles/modules/form.module.css';
 
 // from index
 import { FormProps } from './index';
+
+// libraries
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import '../../assets/styles/global.css'
 
 export interface FormSelectProps extends FormProps {}
 
@@ -17,6 +23,8 @@ export interface FormSelectRef {
 
 const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 	const childRef = useRef<HTMLInputElement | null>(null);
+
+	const [date, setDate] = useState<Date>();
 
 	useImperativeHandle(
 		ref,
@@ -43,6 +51,11 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 		[]
 	);
 
+	const handleDayHover = (date: Date) => {
+		// Add a custom class to the day element on hover
+		return date && date.getDate() === 15 ? 'custom-hover-class' : null;
+	};
+
 	return (
 		<div
 			className={styles.formContainer}
@@ -51,10 +64,15 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 			}}
 		>
 			{props.label && <label htmlFor={props.id}>{props.label}</label>}
-			<input
-            ref={childRef}
-				type='date'
-				{...props}
+			<DatePicker
+				selected={date}
+				onChange={(date) => {
+					if (date) {
+						setDate(date);
+					}
+				}}
+				dayClassName={handleDayHover}
+				formatWeekDay={(data) => {return ''}}
 			/>
 		</div>
 	);

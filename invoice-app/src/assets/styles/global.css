@@ -28,7 +28,7 @@
 	/* form colors */
 	--form-outline: hsl(231, 73%, 93%);
 	--form-outline-focus: hsl(252, 100%, 73%);
-	--form-label: hsl(231, 37%, 63%);	
+	--form-label: hsl(231, 37%, 63%);
 
 	/* setting root typography */
 	font-size: 13px;
@@ -49,4 +49,41 @@
 *::after {
 	box-sizing: border-box;
 	font-family: inherit;
+}
+
+.react-datepicker__day {
+	font-weight: 700;
+	font-family: 'League Spartan', sans-serif;
+	font-size: 1rem;
+}
+.react-datepicker__day--selected {
+	color: var(--primary);
+	background-color: transparent;
+}
+
+.react-datepicker__day:hover {
+	background-color: var(--primary) !important;
+	color: white;
+	border-radius: 50%;
+}
+
+.react-datepicker__header {
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+}
+
+.react-datepicker__navigation--previous {
+	background-image: url(../../assets/svg/icon-arrow-left.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.react-datepicker__navigation-icon::before {
+	display: none;
+}
+
+.react-datepicker__navigation--next {
+	background-image: url(../../assets/svg/icon-arrow-right.svg);
+	background-repeat: no-repeat;
+	background-position: center;
 }
