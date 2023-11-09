@@ -37,3 +37,24 @@
 	color: #000;
 	opacity: 1;
 }
+
+.calendarContainer label {
+	background-image: url(../svg/icon-calendar.svg);
+	background-position: left;
+
+}
+
+.calendar {
+	width: 100%;
+	border: var(--form-outline) 1px solid;
+	border-radius: 0.5rem;
+	outline: none;
+}
+
+.calendar:hover {
+	border: var(--primary) 1px solid !important;
+}
+
+.calendar:focus {
+	border: var(--primary) 1px solid !important;
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from '../assets/styles/modules/buttons.module.css';
 import plusSvg from '../assets/svg/icon-plus.svg';
 

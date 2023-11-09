@@ -51,10 +51,16 @@
 	font-family: inherit;
 }
 
+.react-datepicker {
+	box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
+	border: 0;
+}
+
 .react-datepicker__day {
 	font-weight: 700;
 	font-family: 'League Spartan', sans-serif;
-	font-size: 1rem;
+	font-size: 1.15385rem;
+	margin: 0.4rem;
 }
 .react-datepicker__day--selected {
 	color: var(--primary);
@@ -86,4 +92,8 @@
 	background-image: url(../../assets/svg/icon-arrow-right.svg);
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+.react-datepicker__triangle {
+	display: none;
 }

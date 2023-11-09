@@ -1,4 +1,10 @@
-import { forwardRef, useRef, useImperativeHandle, useState } from 'react';
+import {
+	forwardRef,
+	useRef,
+	useImperativeHandle,
+	useState,
+	useEffect,
+} from 'react';
 
 // styles
 import styles from '../../assets/styles/modules/form.module.css';
@@ -10,7 +16,8 @@ import { FormProps } from './index';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import '../../assets/styles/global.css'
+import '../../assets/styles/global.css';
+import { format } from 'date-fns';
 
 export interface FormSelectProps extends FormProps {}
 
@@ -72,7 +79,25 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 					}
 				}}
 				dayClassName={handleDayHover}
-				formatWeekDay={(data) => {return ''}}
+				formatWeekDay={() => {
+					return '';
+				}}
+				dateFormatCalendar='MMM yyyy'
+				customInput={
+					<div className={styles.calendarContainer}>
+						<label
+							htmlFor={props.id}
+						>
+							<input
+								type='text'
+								id={props.id}
+								name={props.name}
+								className={styles.calendar}
+							/>
+						</label>
+					</div>
+				}
+				dateFormat={'dd/MM/yyyy'}
 			/>
 		</div>
 	);
