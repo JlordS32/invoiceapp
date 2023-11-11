@@ -75,6 +75,10 @@
 	align-items: center;
 }
 
+.wrapper > .darkmodeToggle img {
+   cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
 	.nav {
 		width: 100vw;

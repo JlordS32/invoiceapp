@@ -4,8 +4,11 @@ import logo from '../../assets/svg/logo.svg';
 import avatar from '../../assets/img/image-avatar.jpg';
 import sunSvg from '../../assets/svg/icon-sun.svg';
 import moonSvg from '../../assets/svg/icon-moon.svg';
+import useDarkModeToggle from '../../utilities/toggleDarkMode';
 
 const Navbar = () => {
+	const { isDarkMode, toggleTheme } = useDarkModeToggle();
+
 	return (
 		<div className={styles.nav}>
 			<div className={styles.logo}>
@@ -16,9 +19,12 @@ const Navbar = () => {
 			</div>
 
 			<div className={styles.wrapper}>
-				<div className={styles.darkmodeToggle}>
+				<div
+					className={styles.darkmodeToggle}
+					onClick={toggleTheme}
+				>
 					<img
-						src={moonSvg}
+						src={isDarkMode ? sunSvg : moonSvg}
 						alt='toggle-darkmode'
 					/>
 				</div>
