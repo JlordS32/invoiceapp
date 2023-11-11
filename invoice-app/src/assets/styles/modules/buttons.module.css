@@ -154,6 +154,7 @@
 	border: 0;
 	padding: 0.5rem 1rem;
 	background-color: var(--form-bg);
+	z-index: 10;
 }
 
 .dropdown .dropdownDialog:active,

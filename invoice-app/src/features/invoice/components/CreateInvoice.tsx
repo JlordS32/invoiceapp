@@ -4,12 +4,14 @@ import formatCurrency from '../../../utilities/formatCurrencies';
 
 // utils
 import formatDate from '../../../utilities/formatDate';
+import checkStatusType from '../utils/CheckStatusType';
 
 // icons
 import arrowRight from '../assets/icon-arrow-right.svg';
 
 // type imports
 import { InvoiceType } from '../types/InvoiceTypes';
+import { paymentStatusType } from '../types/StatusType';
 
 // type interfaces
 interface CreateInvoiceProps {
@@ -17,9 +19,10 @@ interface CreateInvoiceProps {
 }
 
 const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
+	const status: paymentStatusType = checkStatusType(invoice.status);
+
 	return (
 		<div
-			key={invoice.id}
 			className={styles.invoice}
 			id={invoice.id}
 		>
@@ -38,8 +41,11 @@ const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
 			<div className={styles.totalPrice}>
 				<div>{formatCurrency(invoice.total)}</div>
 			</div>
-			<div className={styles.status}>
-				<div>{invoice.status}</div>
+			<div className={`${styles.status} ${styles[status]}`}>
+				<div className='d-flex justify-content-center align-items-center'>
+               <div className={styles.circle}></div>
+					<span>{status}</span>
+				</div>
 			</div>
 
 			<div className={styles.goTo}>

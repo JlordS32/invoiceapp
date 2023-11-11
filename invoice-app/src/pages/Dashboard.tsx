@@ -70,7 +70,10 @@ const Dashboard = () => {
 				{data && data.length > 0 ? (
 					<div className={styles.invoiceWrapper}>
 						{data.map((invoice: InvoiceType) => (
-							<Invoice data={invoice} />
+							<Invoice
+								data={invoice}
+								key={invoice.id}
+							/>
 						))}
 					</div>
 				) : (

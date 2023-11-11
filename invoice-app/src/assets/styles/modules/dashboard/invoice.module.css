@@ -1,4 +1,11 @@
 .invoice {
+	--pending: hsl(34, 100%, 50%);
+	--paid: hsl(160, 67%, 52%);
+	--draft: hsl(231, 20%, 27%);
+	--pending-bg: hsla(34, 100%, 50%, 0.05);
+	--paid-bg: hsla(160, 67%, 52%, 0.05);
+	--draft-bg: hsla(231, 20%, 27%, 0.05);
+
 	width: 56.15385rem;
 	height: 5.53846rem;
 	background-color: var(--form-bg);
@@ -6,6 +13,16 @@
 	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.1);
 	display: grid;
 	grid-template-columns: repeat(4, 1fr) repeat(2, 0.8fr) 0.4fr;
+	cursor: pointer;
+	transition: 150ms ease-in;
+}
+
+.invoice:hover {
+	transform: translateY(-3%) scale(1.01);
+	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.5);
+}
+.invoice:active {
+	transform: translateY(0%) scale(1);
 }
 
 .invoice > * {
@@ -20,6 +37,7 @@
 	font-weight: 700;
 	font-size: 1.15385rem;
 	line-height: 1.15385rem;
+
 	letter-spacing: -0.01923rem;
 }
 
@@ -27,11 +45,93 @@
 	color: var(--07);
 }
 
+/* dueDate */
+
+.dueDate {
+	color: var(--text-2);
+}
+
+/* clientName */
 .clientName {
 	grid-column: span 2;
 	justify-content: start;
+	color: hsl(232, 23%, 61%);
 }
 
-.clientName div {
+.clientName > div {
 	padding-left: 3rem;
+}
+
+/* price */
+
+.totalPrice {
+	color: var(--text);
+	font-weight: 700;
+	font-size: 1.15rem;
+	line-height: calc(1rem * 1.6);
+}
+
+/* status */
+
+.status {
+	text-transform: capitalize;
+	font-weight: 700;
+	position: relative;
+}
+
+.status > div {
+	width: 8rem;
+	height: 3.07692rem;
+	border-radius: 0.46154rem;
+}
+
+.status > div .circle {
+	margin-right: 0.62rem;
+	width: 0.65rem;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+}
+
+.status.pending {
+	color: var(--pending);
+}
+
+.status.pending > div {
+	background-color: var(--pending-bg);
+}
+
+.status.pending > div .circle {
+	background-color: var(--pending);
+}
+
+.status.paid {
+	color: var(--paid);
+}
+
+.status.paid > div {
+	background-color: var(--paid-bg);
+}
+
+.status.paid > div .circle {
+	background-color: var(--paid);
+}
+
+.status.draft {
+	color: var(--draft);
+}
+
+.status.draft > div {
+	background-color: var(--draft-bg);
+}
+
+.status.draft > div .circle {
+	background-color: var(--draft);
+}
+
+.status.error {
+	color: var(--error);
+}
+
+.status.error > div .circle {
+	background-color: var(--error);
 }
