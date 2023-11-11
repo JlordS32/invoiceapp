@@ -4,7 +4,7 @@ import logo from '../../assets/svg/logo.svg';
 import avatar from '../../assets/img/image-avatar.jpg';
 import sunSvg from '../../assets/svg/icon-sun.svg';
 import moonSvg from '../../assets/svg/icon-moon.svg';
-import useDarkModeToggle from '../../utilities/toggleDarkMode';
+import useDarkModeToggle from '../../hooks/useDarkMode';
 
 const Navbar = () => {
 	const { isDarkMode, toggleTheme } = useDarkModeToggle();
