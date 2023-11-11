@@ -79,8 +79,8 @@ body {
 	background-color: var(--body-bg);
 	color: var(--text);
 }
-/* 
-@media (prefers-color-scheme: dark) {
+
+/* @media (prefers-color-scheme: dark) {
 	:root {
 		--body-bg: var(--dark);
 		--form-bg: var(--dark-mode-form-bg);

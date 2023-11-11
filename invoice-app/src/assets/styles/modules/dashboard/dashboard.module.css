@@ -25,18 +25,11 @@
 	justify-content: center;
 	margin-bottom: 5rem;
 }
+
 .invoiceWrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 1.2rem 0;
 	align-items: center;
 	padding: 5rem 0;
-}
-
-.invoice {
-	width: 56.15385rem;
-	height: 5.53846rem;
-	background-color: var(--form-bg);
-	border-radius: 0.5rem;
-	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.1);
 }

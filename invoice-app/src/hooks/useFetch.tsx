@@ -4,7 +4,7 @@ export const useFetchData = async (url: string) => {
 	return await getData(url);
 };
 
-export const useFetchInvoice = (
+export const useFetchDatabyId = (
 	url: string,
 	params: {
 		id: string;

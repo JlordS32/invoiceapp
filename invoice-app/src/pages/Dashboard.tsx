@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState } from 'react';
 
 // styles
-import styles from '../assets/styles/modules/dashboard.module.css';
+import styles from '../assets/styles/modules/dashboard/dashboard.module.css';
 
 // components
 import Button from '../components/button/Button';
@@ -10,44 +10,21 @@ import Dropdown, { DropdownRef } from '../components/button/Dropdown';
 
 // image
 import noInvoiceImg from '../assets/svg/illustration-empty.svg';
+import arrowRight from '../assets/svg/icon-arrow-right.svg';
 
 // custom hooks
 import { useFetchData } from '../hooks/useFetch';
 
-// types
-interface Invoice {
-	id: string;
-	createdAt: string;
-	paymentDue: string;
-	description: string;
-	paymentTerms: number;
-	clientName: string;
-	clientEmail: string;
-	status: string;
-	senderAddress: {
-		street: string;
-		city: string;
-		postCode: string;
-		country: string;
-	};
-	clientAddress: {
-		street: string;
-		city: string;
-		postCode: string;
-		country: string;
-	};
-	items: {
-		name: string;
-		quantity: number;
-		price: number;
-		total: number;
-	}[];
-	total: number;
-}
+// utilities
+import formatDate from '../utilities/formatDate';
+
+// type imports
+import { InvoiceType } from '../features/invoice/types/InvoiceTypes';
+import Invoice from '../features/invoice';
 
 const Dashboard = () => {
 	// states
-	const [data, setData] = useState<Invoice[]>([]);
+	const [data, setData] = useState<InvoiceType[]>([]);
 
 	// dropdown
 	const dropdownRef = useRef<DropdownRef>(null);
@@ -92,14 +69,8 @@ const Dashboard = () => {
 			<div className={styles.invoiceContainer}>
 				{data && data.length > 0 ? (
 					<div className={styles.invoiceWrapper}>
-						{data.map((invoice: Invoice, index) => (
-							<div
-								key={index}
-								className={styles.invoice}
-								id={invoice.id}
-							>
-								{invoice.id}
-							</div>
+						{data.map((invoice: InvoiceType) => (
+							<Invoice data={invoice} />
 						))}
 					</div>
 				) : (
