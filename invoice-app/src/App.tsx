@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // components
 import MainLayout from './layout/MainLayout';
-import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
 
 function App() {
 	const router = createBrowserRouter([
@@ -12,7 +12,7 @@ function App() {
 			children: [
 				{
 					index: true,
-					element: <Home />,
+					element: <Dashboard />,
 				},
 			],
 		},

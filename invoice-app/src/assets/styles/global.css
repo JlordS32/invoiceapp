@@ -23,7 +23,7 @@
 	--white: hsl(0, 0%, 100%);
 	--grey: hsl(240, 27%, 98%);
 	--dark: hsl(233, 30%, 11%);
-	--text: var(--white);
+	--text: var(--012);
 
 	/* feedback colors */
 	--error: var(--09);
@@ -77,6 +77,7 @@
 
 body {
 	background-color: var(--body-bg);
+	color: var(--text);
 }
 
 /* @media (prefers-color-scheme: dark) {

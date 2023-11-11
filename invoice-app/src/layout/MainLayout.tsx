@@ -8,7 +8,11 @@ const MainLayout = () => {
 	return (
 		<div className='layout'>
 			<Navbar />
-			<main>
+			<main
+				style={{
+					marginLeft: '8rem',
+				}}
+			>
 				<Outlet />
 			</main>
 			<ScrollRestoration />

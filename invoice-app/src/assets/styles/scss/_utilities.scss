@@ -71,6 +71,10 @@
 	letter-spacing: -0.00769rem;
 }
 
+.body-text-2 {
+	color: var(--06);
+}
+
 .body-text-variant {
 	font-size: 1rem;
 	font-style: normal;
@@ -85,4 +89,8 @@
 
 .debug {
    outline: 1px solid red;
+}
+
+.standout {
+	font-weight: 700;
 }

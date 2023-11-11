@@ -1,0 +1,25 @@
+.dashboard {
+	min-height: 100vh;
+}
+
+.dashboardNav {
+	display: flex;
+	width: 56.15385rem;
+	padding-top: 6rem;
+	margin: 0 auto;
+}
+
+.noInvoice {
+	min-height: 86vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.noInvoice > .imgContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 5rem;
+}

@@ -122,4 +122,8 @@
 	.mr-#{$i}-quarter {
 		@include marginRight($i / 4);
 	}
+
+	.mr-auto {
+		margin-right: auto;
+	}
 }
