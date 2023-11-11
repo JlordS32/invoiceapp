@@ -23,6 +23,7 @@
 	--white: hsl(0, 0%, 100%);
 	--grey: hsl(240, 27%, 98%);
 	--dark: hsl(233, 30%, 11%);
+	--text: var(--white);
 
 	/* feedback colors */
 	--error: var(--09);
@@ -57,7 +58,7 @@
 	font-size: 13px;
 	font-family: 'League Spartan', sans-serif;
 	font-weight: 500;
-	color: var(--text-dark);
+	color: var(--text);
 	line-height: 1.38462rem;
 	letter-spacing: -0.00769rem;
 }
@@ -78,7 +79,7 @@ body {
 	background-color: var(--body-bg);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 	:root {
 		--body-bg: var(--dark);
 		--form-bg: var(--dark-mode-form-bg);
@@ -87,6 +88,7 @@ body {
 		--form-placeholder: var(--white);
 		--box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
 		--form-text: var(--white);
+		--text: var(--white);
 	}
 }
 
@@ -99,5 +101,6 @@ body {
 		--form-placeholder: var(--dark);
 		--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
 		--form-text: var(--08);
+		--text: var(--dark);
 	}
-}
+} */

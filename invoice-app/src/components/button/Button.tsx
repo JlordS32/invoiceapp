@@ -1,5 +1,5 @@
-import styles from '../assets/styles/modules/buttons.module.css';
-import plusSvg from '../assets/svg/icon-plus.svg';
+import styles from '../../assets/styles/modules/buttons.module.css';
+import plusSvg from '../../assets/svg/icon-plus.svg';
 
 type ButtonTypes =
 	| ''

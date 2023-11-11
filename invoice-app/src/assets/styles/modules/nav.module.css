@@ -1,0 +1,14 @@
+.nav {
+	width: 7.92308rem;
+	height: 100vh;
+	background-color: var(--nav-bg);
+	border-radius: 0rem 1.53846rem 1.53846rem 0rem;
+}
+
+@media screen and (max-width: 767px) {
+   .nav {
+      width: 100vw;
+      height: 6.15385rem;
+      border-radius: 0;
+   }
+}
