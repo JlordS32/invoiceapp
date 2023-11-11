@@ -1,0 +1,26 @@
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+.animate {
+	animation-duration: 100ms;
+	animation-timing-function: ease-in;
+}
+
+.animate--slow {
+   animation-duration: 200ms;
+}
+
+.animate--fast {
+   animation-duration: 50ms;
+}
+
+.fadeIn {
+	animation-name: fadeIn;
+}

@@ -128,3 +128,51 @@
 .button.addNewItemButton:active {
 	background-color: hsl(228, 71%, 99%);
 }
+
+/* dropdown */
+.dropdown {
+	/* outline: 1px red solid; */
+	cursor: pointer;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.dropdown p {
+	color: var(--text);
+	font-weight: 700;
+	font-size: 1.15385rem;
+	margin-right: 1rem;
+}
+
+.dropdown .dropdownDialog {
+	position: absolute;
+	top: 2rem;
+	box-shadow: var(--box-shadow);
+	width: 100%;
+	border: 0;
+	padding: 0.5rem 1rem;
+	background-color: var(--form-bg);
+}
+
+.dropdown .dropdownDialog:active,
+.dropdown .dropdownDialog:focus {
+	border: 0;
+	outline: 0;
+}
+
+.dropdown .dropdownDialog div {
+	cursor: pointer;
+	margin: 0.5rem 0;
+	display: flex;
+}
+
+.dropdown .dropdownDialog span {
+	text-transform: capitalize;
+	font-weight: 700;
+}
+
+.dropdown .dropdownDialog span:hover {
+	color: var(--primary);
+}

@@ -32,7 +32,7 @@
 	/* component colors */
 	--nav-bg: hsl(231, 20%, 27%);
 	--light-bg: var(--grey);
-	--body-bg: var(--white);
+	--body-bg: hsl(240, 27%, 98%);
 	--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
 
 	/* default typography */
@@ -79,8 +79,8 @@ body {
 	background-color: var(--body-bg);
 	color: var(--text);
 }
-
-/* @media (prefers-color-scheme: dark) {
+/* 
+@media (prefers-color-scheme: dark) {
 	:root {
 		--body-bg: var(--dark);
 		--form-bg: var(--dark-mode-form-bg);
@@ -95,7 +95,7 @@ body {
 
 @media (prefers-color-scheme: light) {
 	:root {
-		--body-bg: var(--white);
+		--body-bg: hsl(240, 27%, 98%);
 		--form-outline: hsl(231, 73%, 93%);
 		--form-label: var(--07);
 		--form-bg: var(--white);
