@@ -3,6 +3,7 @@ import ReactSelect, { StylesConfig } from 'react-select';
 
 // styles
 import styles from '../../assets/styles/modules/form.module.css';
+import '../../assets/styles/select.css';
 
 // from index
 import { FormProps } from './index';
@@ -30,7 +31,7 @@ export interface FormSelectRef {
 const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
 	control: (provided, state) => ({
 		...provided,
-		backgroundColor: 'var(--white)',
+		backgroundColor: 'var(--form-bg)',
 		height: '3.69231rem',
 		border: 0,
 		outline: state.isFocused
@@ -45,17 +46,15 @@ const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
 	}),
 	option: (provided, state) => ({
 		...provided,
-		backgroundColor: state.isSelected ? 'white' : 'white',
-		color: state.isSelected ? 'var(--primary)' : 'black',
+		backgroundColor: state.isSelected ? 'var(--form-bg)' : 'var(--form-bg)',
+		color: state.isSelected ? 'var(--primary)' : 'var(--form-placeholder)',
 		fontWeight: '700',
 		fontSize: '1.15rem',
 		padding: '1.15rem 1.85rem',
 		borderBottom: '1px solid var(--form-outline)',
 		top: '1rem',
-
 		'&:hover': {
-			backgroundColor: 'var(--primary)',
-			color: 'white',
+			color: 'var(--primary)',
 		},
 		'&:active': {
 			backgroundColor: 'var(--primary)',
@@ -65,8 +64,9 @@ const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
 	menu: (provided) => ({
 		...provided,
 		marginTop: '1.85rem',
-		boxShadow: '0px 10px 20px 0px rgba(72, 84, 159, 0.25)',
+		boxShadow: 'var(--box-shadow)',
 		transition: '150ms ease-in',
+		backgroundColor: 'var(--form-bg)',
 	}),
 	dropdownIndicator: (provided) => ({
 		...provided,
@@ -112,6 +112,7 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 				onChange={handleOnChange}
 				defaultValue={props.options[0]}
 				styles={customStyles}
+				classNamePrefix='custom-select'
 			/>
 		</div>
 	);

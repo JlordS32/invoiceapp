@@ -1,10 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;400;500;600;700;800;900&display=swap');
 
 :root {
-	--primary: hsl(252, 94%, 67%);
-	--primary-active: hsl(252, 100%, 73%);
-	--secondary: hsl(233, 31%, 17%);
-	--secondary-active: hsl(233, 30%, 21%);
+	--01: hsl(252, 94%, 67%);
+	--02: hsl(252, 100%, 73%);
+	--03: hsl(233, 31%, 17%);
+	--04: hsl(233, 30%, 21%);
+	--05: hsl(231, 73%, 93%);
+	--06: hsl(231, 20%, 61%);
+	--07: hsl(231, 37%, 63%);
+	--08: hsl(228, 29%, 7%);
+	--09: hsl(0, 80%, 63%);
+	--010: hsl(252, 100%, 73%);
+	--011: hsl(240, 27%, 98%);
+	--012: hsl(233, 30%, 11%);
+
+	--primary: var(--01);
+	--primary-active: var(--02);
+	--secondary: var(--03);
+	--secondary-active: var(--04);
 
 	/* neutral */
 	--white: hsl(0, 0%, 100%);
@@ -12,23 +25,33 @@
 	--dark: hsl(233, 30%, 11%);
 
 	/* feedback colors */
-	--error: hsl(0, 80%, 63%);
-	--error-active: hsl(0, 100%, 80%);
+	--error: var(--09);
+	--error-active: var(--10);
 
 	/* component colors */
 	--nav-bg: hsl(231, 20%, 27%);
 	--light-bg: var(--grey);
+	--body-bg: var(--white);
+	--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
 
 	/* default typography */
-	--text-dark: hsl(228, 29%, 7%);
-	--text-light: hsl(231, 37%, 63%);
-	--text-2-dark: hsl(231, 20%, 61%);
-	--text-2-light: hsl(231, 73%, 93%);
+	--text-dark: var(--08);
+	--text-light: var(--07);
+	--text-2-dark: var(--06);
+	--text-2-light: var(--05);
 
 	/* form colors */
 	--form-outline: hsl(231, 73%, 93%);
 	--form-outline-focus: hsl(252, 100%, 73%);
-	--form-label: hsl(231, 37%, 63%);
+	--form-label: var(--05);
+	--form-bg: var(--white);
+	--form-placeholder: var(--dark);
+	--form-text: var(--08);
+
+	/* DARK MODE */
+	--dark-mode-form-bg: hsl(233, 30%, 21%);
+	--dark-mode-form-outline: hsl(233, 31%, 17%);
+	--dark-mode-form-label: var(--05);
 
 	/* setting root typography */
 	font-size: 13px;
@@ -51,49 +74,30 @@
 	font-family: inherit;
 }
 
-.react-datepicker {
-	box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
-	border: 0;
+body {
+	background-color: var(--body-bg);
 }
 
-.react-datepicker__day {
-	font-weight: 700;
-	font-family: 'League Spartan', sans-serif;
-	font-size: 1.15385rem;
-	margin: 0.4rem;
-}
-.react-datepicker__day--selected {
-	color: var(--primary);
-	background-color: transparent;
-}
-
-.react-datepicker__day:hover {
-	background-color: var(--primary) !important;
-	color: white;
-	border-radius: 50%;
+@media (prefers-color-scheme: dark) {
+	:root {
+		--body-bg: var(--dark);
+		--form-bg: var(--dark-mode-form-bg);
+		--form-outline: var(--dark-mode-form-outline);
+		--form-label: var(--dark-mode-form-label);
+		--form-placeholder: var(--white);
+		--box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+		--form-text: var(--white);
+	}
 }
 
-.react-datepicker__header {
-	background-color: transparent;
-	border: 0;
-	outline: 0;
-}
-
-.react-datepicker__navigation--previous {
-	background-image: url(../../assets/svg/icon-arrow-left.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-}
-.react-datepicker__navigation-icon::before {
-	display: none;
-}
-
-.react-datepicker__navigation--next {
-	background-image: url(../../assets/svg/icon-arrow-right.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
-.react-datepicker__triangle {
-	display: none;
+@media (prefers-color-scheme: light) {
+	:root {
+		--body-bg: var(--white);
+		--form-outline: hsl(231, 73%, 93%);
+		--form-label: var(--07);
+		--form-bg: var(--white);
+		--form-placeholder: var(--dark);
+		--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
+		--form-text: var(--08);
+	}
 }

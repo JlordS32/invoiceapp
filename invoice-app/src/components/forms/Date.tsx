@@ -16,8 +16,11 @@ import { FormProps } from './index';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import '../../assets/styles/global.css';
-import { format } from 'date-fns';
+import '../../assets/styles/date.css';
+
+// svg
+
+import calendarSvg from '../../assets/svg/icon-calendar.svg';
 
 export interface FormSelectProps extends FormProps {}
 
@@ -26,6 +29,11 @@ export interface FormSelectRef {
 	value: string;
 	focus: () => void;
 	scrollIntoView: () => void;
+}
+
+interface CustomDateInput {
+	value?: any;
+	onClick?: () => void;
 }
 
 const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
@@ -63,6 +71,34 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 		return date && date.getDate() === 15 ? 'custom-hover-class' : null;
 	};
 
+	const CustomDateInput = forwardRef<any, CustomDateInput>(
+		({ value, onClick }, ref) => (
+			<div
+				className={styles.calendarContainer}
+				onClick={onClick}
+				ref={ref}
+			>
+				<label htmlFor={props.id}>
+					<input
+						type='text'
+						id={props.id}
+						name={props.name}
+						value={value}
+						className={styles.calendar}
+					/>
+				</label>
+				<img
+					src={calendarSvg}
+					alt='calendar icon'
+				/>
+			</div>
+		)
+	);
+
+	useEffect(() => {
+		console.log(date);
+	}, [date]);
+
 	return (
 		<div
 			className={styles.formContainer}
@@ -83,21 +119,8 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 					return '';
 				}}
 				dateFormatCalendar='MMM yyyy'
-				customInput={
-					<div className={styles.calendarContainer}>
-						<label
-							htmlFor={props.id}
-						>
-							<input
-								type='text'
-								id={props.id}
-								name={props.name}
-								className={styles.calendar}
-							/>
-						</label>
-					</div>
-				}
-				dateFormat={'dd/MM/yyyy'}
+				customInput={<CustomDateInput />}
+				dateFormat={'dd MMM yyyy'}
 			/>
 		</div>
 	);

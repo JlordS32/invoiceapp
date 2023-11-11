@@ -1,0 +1,8 @@
+.custom-select__single-value {
+	color: var(--form-placeholder) !important;
+}
+
+.custom-select__input::placeholder {
+	color: var(--form-text) !important;
+}
+   

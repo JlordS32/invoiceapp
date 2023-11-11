@@ -15,11 +15,17 @@
 	border: 1px solid var(--form-outline);
 	background: var(--white);
 	padding: 1.3rem;
+	color: var(--form-text);
 	caret-color: var(--form-label);
+	background-color: var(--form-bg);
 }
 
 .formContainer > input:focus {
 	outline: 1px solid var(--form-outline-focus);
+}
+
+.formContainer > input::placeholder {
+	color: var(--form-placeholder);
 }
 
 .formContainer > label {
@@ -31,30 +37,37 @@
 	line-height: 1.15385rem; /* 115.385% */
 	letter-spacing: -0.00769rem;
 }
-
-.formContainer > input[type='date']::webkit {
-	background-color: red;
-	color: #000;
-	opacity: 1;
+.calendarContainer {
+	position: relative;
+	border-radius: 0.5rem;
 }
 
-.calendarContainer label {
-	background-image: url(../svg/icon-calendar.svg);
-	background-position: left;
-
+.calendarContainer img {
+	position: absolute;
+	top: 50%;
+	right: 1.25rem;
+	transform: translateY(-50%);
 }
-
 .calendar {
 	width: 100%;
-	border: var(--form-outline) 1px solid;
+	border: 0;
 	border-radius: 0.5rem;
 	outline: none;
+	font-size: 1.15385rem;
+	font-weight: 700;
+	padding: 1.15rem 0;
+	padding-left: 1.15rem;
+	background-color: var(--form-bg);
+	border: var(--form-outline) 1px solid;
+	color: var(--form-placeholder);
 }
 
 .calendar:hover {
 	border: var(--primary) 1px solid !important;
+	cursor: pointer;
 }
 
 .calendar:focus {
 	border: var(--primary) 1px solid !important;
+	cursor: pointer;
 }
