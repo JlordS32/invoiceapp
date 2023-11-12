@@ -2,21 +2,21 @@
 import { useRef, useEffect, useState } from 'react';
 
 // styles
-import styles from '../assets/styles/modules/dashboard/dashboard.module.css';
+import styles from '../../assets/styles/modules/dashboard/dashboard.module.css';
 
 // components
-import Button from '../components/button/Button';
-import Dropdown, { DropdownRef } from '../components/button/Dropdown';
+import Button from '../../components/button/Button';
+import Dropdown, { DropdownRef } from '../../components/button/Dropdown';
 
 // image
-import noInvoiceImg from '../assets/svg/illustration-empty.svg';
+import noInvoiceImg from '../../assets/svg/illustration-empty.svg';
 
 // custom hooks
-import { useFetchData } from '../hooks/useFetch';
+import { useFetchData } from '../../hooks/useFetch';
 
 // type imports
-import { InvoiceType } from '../features/invoice/types/InvoiceTypes';
-import Invoice from '../features/invoice';
+import { InvoiceType } from '../../features/invoice/types/InvoiceTypes';
+import Invoice from '../../features/invoice';
 
 const Dashboard = () => {
 	// states

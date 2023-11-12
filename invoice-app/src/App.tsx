@@ -4,11 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './layout/MainLayout';
 
 // pages
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/dashboard';
 import Invoice, { invoiceLoader } from './pages/Invoice';
-
-// context
-import InvoiceDataProvider from './context/getInvoiceData';
 
 function App() {
 	const router = createBrowserRouter([
@@ -30,11 +27,9 @@ function App() {
 	]);
 
 	return (
-		<InvoiceDataProvider>
-			<div className='app'>
-				<RouterProvider router={router} />
-			</div>
-		</InvoiceDataProvider>
+		<div className='app'>
+			<RouterProvider router={router} />
+		</div>
 	);
 }
 

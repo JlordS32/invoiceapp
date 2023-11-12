@@ -4,8 +4,14 @@ import App from './App.tsx';
 import './assets/styles/global.css';
 import './assets/styles/scss/index.scss';
 
+// redux
+import { Provider } from 'react-redux';
+import { store } from './redux/store.ts';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
+	<Provider store={store}>
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>
+	</Provider>
 );
