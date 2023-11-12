@@ -11,29 +11,21 @@ import moonSvg from '../../assets/svg/icon-moon.svg';
 
 // utils
 import useDarkModeToggle from '../../hooks/useDarkMode';
-import {
-	useCreateLocalStorage,
-	useLocalStorage,
-} from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const Navbar = () => {
 	const { isDarkMode, toggleTheme, setDarkMode } = useDarkModeToggle();
+	const [value, setValue] = useLocalStorage('isDarkMode', isDarkMode);
 
 	const handleToggleDarkMode = () => {
 		toggleTheme();
-1
-		useCreateLocalStorage('isDarkMode', !isDarkMode);
+		setValue(!isDarkMode);
 	};
 
 	useEffect(() => {
-		const darkMode = JSON.parse(useLocalStorage('isDarkMode')) ?? isDarkMode;
-
-		if (!useLocalStorage('isDarkMode')) {
-			useCreateLocalStorage('isDarkMode', darkMode);
-		}
-
-		setDarkMode(darkMode);
-	}, []);
+		const darkmode = value ?? isDarkMode;
+		setDarkMode(darkmode);
+	}, [value, isDarkMode]);
 
 	return (
 		<div className={styles.nav}>
