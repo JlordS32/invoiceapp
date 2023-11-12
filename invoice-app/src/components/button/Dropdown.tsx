@@ -36,7 +36,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 		};
 	});
 
-	useEffect(() => {
+	useEffect(() => { 
 		setSelectedOption((options && options[0]) ?? '');
 	}, []);
 
@@ -66,14 +66,15 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 						ref={dialogRef}
 						className={`${styles.dropdownDialog} animate fadeIn animate--fast`}
 					>
-						{options?.map((option) => {
+						{options?.map((option, index) => {
 							return (
 								<div
 									onClick={() => {
 										setSelectedOption(option);
 									}}
+                           key={index}
 								>
-									<span>{option}</span>
+									<span className='body-text-2'>{option}</span>
 								</div>
 							);
 						})}

@@ -1,5 +1,5 @@
 export const useLocalStorage = (key: string): string => {
-	return JSON.parse(localStorage.getItem(key) ?? 'Failed to parse JSON!');
+	return JSON.parse(localStorage.getItem(key) as string);
 };
 
 export const useCreateLocalStorage = (key: string, value: any): void => {

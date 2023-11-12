@@ -4,6 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './layout/MainLayout';
 import Dashboard from './pages/Dashboard';
 
+// context
+import InvoiceDataProvider from './context/getInvoiceData';
+
 function App() {
 	const router = createBrowserRouter([
 		{
@@ -19,9 +22,11 @@ function App() {
 	]);
 
 	return (
-		<div className='app'>
-			<RouterProvider router={router} />
-		</div>
+		<InvoiceDataProvider>
+			<div className='app'>
+				<RouterProvider router={router} />
+			</div>
+		</InvoiceDataProvider>
 	);
 }
 

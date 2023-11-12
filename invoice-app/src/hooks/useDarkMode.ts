@@ -39,6 +39,14 @@ const useDarkModeToggle = () => {
 		setIsDarkMode((prevMode) => !prevMode);
 	};
 
+	const setDarkMode = (value: boolean) => {
+		if (typeof value === 'boolean') {
+			setIsDarkMode(value);
+		} else {
+			throw new Error('Invalid value to set dark mode!. Value must be boolean');
+		}
+	};
+
 	useEffect(() => {
 		applyTheme(isDarkMode);
 	}, [isDarkMode]);
@@ -60,6 +68,7 @@ const useDarkModeToggle = () => {
 	return {
 		isDarkMode,
 		toggleTheme,
+		setDarkMode,
 	};
 };
 
