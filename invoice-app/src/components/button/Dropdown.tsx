@@ -78,6 +78,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 							? 'rotate(180deg)'
 							: 'rotate(0deg)',
 					}}
+					className={styles.arrowIcon}
 					alt='down arrow'
 				/>
 				{options && (
@@ -85,23 +86,25 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 						ref={dialogRef}
 						className={`${styles.dropdownDialog} animate fadeIn animate--fast`}
 					>
-						{options?.map((option, index) => {
-							return (
-								<div
-									onClick={() => {
-										handleClick(option);
-									}}
-									key={index}
-								>
+						<div>
+							{options?.map((option, index) => {
+								return (
 									<div
-										className={`${styles.checkbox} ${
-											selectedOption.includes(option) ? styles.checked : ``
-										}`}
-									></div>
-									<span className='body-text-2'>{option}</span>
-								</div>
-							);
-						})}
+										onClick={() => {
+											handleClick(option);
+										}}
+										key={index}
+									>
+										<div
+											className={`${styles.checkbox} ${
+												selectedOption.includes(option) ? styles.checked : ``
+											}`}
+										></div>
+										<span className='body-text'>{option}</span>
+									</div>
+								);
+							})}
+						</div>
 					</dialog>
 				)}
 			</div>
