@@ -15,8 +15,10 @@ interface DashbordNavProps {
 
 const DashboardNav = ({ length }: DashbordNavProps) => {
 	// dropdown
-	const dropdownRef = useRef<DropdownRef>(null);
-	const options = ['name', 'status', 'date', 'price'];
+	const dropdownFilterRef = useRef<DropdownRef>(null);
+	const dropdownSortRef = useRef<DropdownRef>(null);
+	const sortOptions = ['name', 'status', 'date', 'price'];
+	const filterOptions = ['draft', 'pending', 'paid'];
 
 	return (
 		<div className={styles.dashboardNav}>
@@ -35,8 +37,17 @@ const DashboardNav = ({ length }: DashbordNavProps) => {
 
 			<div>
 				<Dropdown
-					options={options}
-					ref={dropdownRef}
+					options={sortOptions}
+					ref={dropdownSortRef}
+					label='Sort by'
+				/>
+			</div>
+
+			<div>
+				<Dropdown
+					options={filterOptions}
+					ref={dropdownFilterRef}
+					label='Filter by status'
 				/>
 			</div>
 

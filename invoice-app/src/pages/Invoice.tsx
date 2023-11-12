@@ -9,7 +9,7 @@ export const invoiceLoader: LoaderFunction<paramsType> = ({ params }) => {
 
 	return { id };
 };
-
+	
 const Invoice = () => {
 	const navigate = useNavigate();
 

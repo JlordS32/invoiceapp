@@ -35,6 +35,14 @@
 	outline: 0;
 }
 
+.dropdown .dropdownDialog div:hover .checkbox {
+	outline: 1px var(--primary) solid;
+}
+
+.dropdown .dropdownDialog div:hover span {
+	color: var(--primary);
+}
+
 .dropdown .dropdownDialog div {
 	cursor: pointer;
 	margin: 0.5rem 0;
@@ -50,17 +58,14 @@
 
 .checkbox {
 	width: 1.23077rem;
-	height: 1rem;
-	aspect-ratio: 1 / 1;
+	height: 1.23077rem;
 	background-color: var(--checkbox-bg);
 	border-radius: 0.15385rem;
 }
 
 .checkbox.checked {
-	outline: 1px red solid !important;
-	background-color: red !important;
-}
-
-.dropdown .dropdownDialog span:hover {
-	color: var(--primary);
+	background-image: url(../../svg/icon-check.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: var(--primary);
 }

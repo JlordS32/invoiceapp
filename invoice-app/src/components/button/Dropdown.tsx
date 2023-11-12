@@ -16,6 +16,7 @@ import downArrow from '../../assets/svg/icon-arrow-down.svg';
 
 interface DropdownProps {
 	options?: string[];
+	label?: string;
 	onChange?: (value?: string) => void;
 }
 
@@ -26,7 +27,6 @@ export interface DropdownRef {
 const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	const { options } = props;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
-	const [checked, setChecked] = useState<boolean>(false);
 
 	const [selectedOption, setSelectedOption] = useState<string[]>([]);
 
@@ -39,11 +39,16 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	});
 
 	const handleClick = (option: string) => {
-		if (selectedOption.includes(option)) return;
-
-		setSelectedOption((prev) => {
-			return [...prev, option];
-		});
+		if (selectedOption.includes(option)) {
+			setSelectedOption((prev) => {
+				const filteredData = prev.filter((item) => item !== option);
+				return filteredData;
+			});
+		} else {
+			setSelectedOption((prev) => {
+				return [...prev, option];
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -57,12 +62,15 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 				onClick={() => {
 					if (dialogRef.current) {
 						dialogRef.current.show();
-					} else {
+					}
+				}}
+				onBlur={() => {
+					if (dialogRef.current) {
 						dialogRef.current.close();
 					}
 				}}
 			>
-				<p>Filter</p>
+				<p>{props.label ?? 'Filter'}</p>
 				<img
 					src={downArrow}
 					style={{
@@ -89,9 +97,6 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 										className={`${styles.checkbox} ${
 											selectedOption.includes(option) ? styles.checked : ``
 										}`}
-										onClick={() => {
-											setChecked(!checked);
-										}}
 									></div>
 									<span className='body-text-2'>{option}</span>
 								</div>

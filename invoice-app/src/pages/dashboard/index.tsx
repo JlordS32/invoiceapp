@@ -17,6 +17,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../redux/store';
 import { getInvoiceAsync } from '../../redux/invoice/invoiceSlice';
 
+// libraries
+import { debounce } from 'lodash';
+
 const Dashboard = () => {
 	// states
 	const [data, setData] = useState<InvoiceType[]>([]);
@@ -31,9 +34,12 @@ const Dashboard = () => {
 		await dispatch(getInvoiceAsync(url));
 	};
 
+	const debouncedFetchData = debounce(fetchData, 5000);
+
 	useEffect(() => {
-		fetchData();
-	}, []);
+		fetchData()
+		debouncedFetchData();
+	}, [data]);
 
 	useEffect(() => {
 		const { loading, invoiceItems } = invoiceData;
@@ -41,7 +47,7 @@ const Dashboard = () => {
 		if (!loading) {
 			setData(invoiceItems);
 		}
-	}, [invoiceData.loading, invoiceData.invoiceItems]);
+	}, [data, invoiceData.loading, invoiceData.invoiceItems]);
 
 	return (
 		<div className={styles.dashboard}>
