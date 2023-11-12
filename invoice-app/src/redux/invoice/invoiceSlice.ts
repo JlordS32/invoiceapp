@@ -26,8 +26,6 @@ const invoiceSlice = createSlice({
 				(state, action: PayloadAction<InvoiceType[]>) => {
 					state.loading = false;
 					state.invoiceItems = [...action.payload];
-
-					console.log(state.invoiceItems);
 				}
 			);
 	},

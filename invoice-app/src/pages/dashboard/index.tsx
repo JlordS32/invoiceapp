@@ -7,9 +7,7 @@ import styles from '../../assets/styles/modules/dashboard/dashboard.module.css';
 // components
 import Button from '../../components/button/Button';
 import Dropdown, { DropdownRef } from '../../components/button/Dropdown';
-
-// image
-import noInvoiceImg from '../../assets/svg/illustration-empty.svg';
+import ShowNoInvoice from './components/ShowNoInvoice';
 
 // type imports
 import { InvoiceType } from '../../features/invoice/types/InvoiceTypes';
@@ -29,16 +27,26 @@ const Dashboard = () => {
 	const options = ['name', 'status', 'date', 'price'];
 
 	// redux
-	const invoiceData = useSelector(
-		(state: RootState) => state.invoice.invoiceItems
-	);
+	const invoiceData = useSelector((state: RootState) => state.invoice);
 	const dispatch = useDispatch<AppDispatch>();
 
-	const handleClick = async () => {
+	// function to trigger data
+	const fetchData = async () => {
 		const url = 'http://localhost:3000/invoices';
-
 		await dispatch(getInvoiceAsync(url));
 	};
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		const { loading, invoiceItems } = invoiceData;
+
+		if (!loading) {
+			setData(invoiceItems);
+		}
+	}, [invoiceData.loading, invoiceData.invoiceItems]);
 
 	return (
 		<div className={styles.dashboard}>
@@ -63,12 +71,7 @@ const Dashboard = () => {
 					/>
 				</div>
 
-				<Button
-					variant='addButton'
-					onClick={handleClick}
-				>
-					New Invoice
-				</Button>
+				<Button variant='addButton'>New Invoice</Button>
 			</div>
 
 			<div className={styles.invoiceContainer}>
@@ -83,24 +86,7 @@ const Dashboard = () => {
 					</div>
 				) : (
 					<div className={styles.noInvoice}>
-						<div className={styles.imgContainer}>
-							<img
-								src={noInvoiceImg}
-								alt='no invoices!'
-							/>
-						</div>
-
-						<div className='d-flex flex-column justify-content-center align-items-center'>
-							<h1 className='text--h2 mb-2 text-center'>
-								There is nothing here
-							</h1>
-							<p className='text-center body-text-2'>
-								Create an invoice by clicking the
-								<br />
-								<span className='standout'>New Invoice</span> button and get
-								started
-							</p>
-						</div>
+						<ShowNoInvoice />
 					</div>
 				)}
 			</div>
