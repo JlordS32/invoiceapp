@@ -16,6 +16,7 @@ const applyTheme = (isDarkMode: boolean) => {
 		root.style.setProperty('--form-text', 'var(--white)');
 		root.style.setProperty('--text', 'var(--white)');
 		root.style.setProperty('--text-2', 'var(--05)');
+		root.style.setProperty('--checkbox-bg', 'var(--03)');
 	} else {
 		root.style.setProperty('--body-bg', 'hsl(240, 27%, 98%)');
 		root.style.setProperty('--form-outline', 'hsl(231, 73%, 93%)');
@@ -29,6 +30,7 @@ const applyTheme = (isDarkMode: boolean) => {
 		root.style.setProperty('--form-text', 'var(--08)');
 		root.style.setProperty('--text', 'var(--dark)');
 		root.style.setProperty('--text-2', 'var(--06)');
+		root.style.setProperty('--checkbox-bg', 'var(--05)');
 	}
 };
 

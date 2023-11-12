@@ -1,3 +1,4 @@
+// react
 import {
 	useImperativeHandle,
 	useRef,
@@ -6,7 +7,9 @@ import {
 	useEffect,
 } from 'react';
 
-import styles from '../../assets/styles/modules/buttons.module.css';
+// styles
+
+import styles from '../../assets/styles/modules/dropdown.module.css';
 
 // svg
 import downArrow from '../../assets/svg/icon-arrow-down.svg';
@@ -17,28 +20,35 @@ interface DropdownProps {
 }
 
 export interface DropdownRef {
-	value: string;
+	value: string[];
 }
 
 const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	const { options } = props;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
+	const [checked, setChecked] = useState<boolean>(false);
 
-	const [selectedOption, setSelectedOption] = useState<string>(
-		(options && options[0]) ?? ''
-	);
+	const [selectedOption, setSelectedOption] = useState<string[]>([]);
 
 	useImperativeHandle(ref, () => {
 		return {
 			get value() {
-				return selectedOption || '';
+				return selectedOption || [];
 			},
 		};
 	});
 
-	useEffect(() => { 
-		setSelectedOption((options && options[0]) ?? '');
-	}, []);
+	const handleClick = (option: string) => {
+		if (selectedOption.includes(option)) return;
+
+		setSelectedOption((prev) => {
+			return [...prev, option];
+		});
+	};
+
+	useEffect(() => {
+		console.log(selectedOption);
+	}, [selectedOption]);
 
 	return (
 		<>
@@ -46,19 +56,20 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 				className={styles.dropdown}
 				onClick={() => {
 					if (dialogRef.current) {
-						if (dialogRef.current.open) {
-							dialogRef.current.close();
-						} else {
-							dialogRef.current.show();
-						}
+						dialogRef.current.show();
+					} else {
+						dialogRef.current.close();
 					}
 				}}
 			>
-				<p>
-					Filter by <span>{selectedOption}</span>
-				</p>
+				<p>Filter</p>
 				<img
 					src={downArrow}
+					style={{
+						transform: dialogRef.current?.open
+							? 'rotate(180deg)'
+							: 'rotate(0deg)',
+					}}
 					alt='down arrow'
 				/>
 				{options && (
@@ -70,10 +81,18 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 							return (
 								<div
 									onClick={() => {
-										setSelectedOption(option);
+										handleClick(option);
 									}}
-                           key={index}
+									key={index}
 								>
+									<div
+										className={`${styles.checkbox} ${
+											selectedOption.includes(option) ? styles.checked : ``
+										}`}
+										onClick={() => {
+											setChecked(!checked);
+										}}
+									></div>
 									<span className='body-text-2'>{option}</span>
 								</div>
 							);

@@ -35,8 +35,9 @@
 	--light-bg: var(--grey);
 	--body-bg: hsl(240, 27%, 98%);
 	--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
+	--checkbox-bg: var(--05);
 
-	/* default typography */
+	/* default typography colors */
 	--text-dark: var(--08);
 	--text-light: var(--07);
 	--text-2-dark: var(--06);
@@ -84,32 +85,4 @@ body {
 a {
 	text-decoration: none;
 	color: initial;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--body-bg: var(--dark);
-		--form-bg: var(--dark-mode-form-bg);
-		--form-outline: var(--dark-mode-form-outline);
-		--form-label: var(--dark-mode-form-label);
-		--form-placeholder: var(--white);
-		--box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
-		--form-text: var(--white);
-		--text: var(--white);
-		--text-2: var(--05);
-	}
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		--body-bg: hsl(240, 27%, 98%);
-		--form-outline: hsl(231, 73%, 93%);
-		--form-label: var(--07);
-		--form-bg: var(--white);
-		--form-placeholder: var(--dark);
-		--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
-		--form-text: var(--08);
-		--text: var(--dark);
-		--text-2: var(--06);
-	}
 }

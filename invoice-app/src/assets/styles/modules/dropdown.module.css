@@ -1,0 +1,66 @@
+/* dropdown */
+.dropdown {
+	/* outline: 1px red solid; */
+	cursor: pointer;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.dropdown p {
+	color: var(--text);
+	font-weight: 700;
+	font-size: 1.15385rem;
+	margin-right: 1rem;
+}
+
+.dropdown .dropdownDialog {
+	width: 14.76923rem;
+	position: absolute;
+	top: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	box-shadow: var(--box-shadow);
+	border: 0;
+	border-radius: 0.5rem;
+	padding: 1.85rem;
+	background-color: var(--form-bg);
+	z-index: 10;
+}
+
+.dropdown .dropdownDialog:active,
+.dropdown .dropdownDialog:focus {
+	border: 0;
+	outline: 0;
+}
+
+.dropdown .dropdownDialog div {
+	cursor: pointer;
+	margin: 0.5rem 0;
+	display: flex;
+	align-items: center;
+	gap: 0 1rem;
+}
+
+.dropdown .dropdownDialog span {
+	text-transform: capitalize;
+	font-weight: 700;
+}
+
+.checkbox {
+	width: 1.23077rem;
+	height: 1rem;
+	aspect-ratio: 1 / 1;
+	background-color: var(--checkbox-bg);
+	border-radius: 0.15385rem;
+}
+
+.checkbox.checked {
+	outline: 1px red solid !important;
+	background-color: red !important;
+}
+
+.dropdown .dropdownDialog span:hover {
+	color: var(--primary);
+}
