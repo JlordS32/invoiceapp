@@ -11,12 +11,14 @@ import Dropdown, { DropdownRef } from '../../components/button/Dropdown';
 // image
 import noInvoiceImg from '../../assets/svg/illustration-empty.svg';
 
-// custom hooks
-import { useFetchData } from '../../hooks/useFetch';
-
 // type imports
 import { InvoiceType } from '../../features/invoice/types/InvoiceTypes';
 import Invoice from '../../features/invoice';
+
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../redux/store';
+import { getInvoiceAsync } from '../../redux/invoice/invoiceSlice';
 
 const Dashboard = () => {
 	// states
@@ -26,15 +28,17 @@ const Dashboard = () => {
 	const dropdownRef = useRef<DropdownRef>(null);
 	const options = ['name', 'status', 'date', 'price'];
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const data = await useFetchData('http://localhost:3000/invoices');
+	// redux
+	const invoiceData = useSelector(
+		(state: RootState) => state.invoice.invoiceItems
+	);
+	const dispatch = useDispatch<AppDispatch>();
 
-			setData(data);
-		};
+	const handleClick = async () => {
+		const url = 'http://localhost:3000/invoices';
 
-		fetchData();
-	}, []);
+		await dispatch(getInvoiceAsync(url));
+	};
 
 	return (
 		<div className={styles.dashboard}>
@@ -59,7 +63,12 @@ const Dashboard = () => {
 					/>
 				</div>
 
-				<Button variant='addButton'>New Invoice</Button>
+				<Button
+					variant='addButton'
+					onClick={handleClick}
+				>
+					New Invoice
+				</Button>
 			</div>
 
 			<div className={styles.invoiceContainer}>
