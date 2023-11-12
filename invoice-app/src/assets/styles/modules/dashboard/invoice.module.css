@@ -37,7 +37,7 @@
 	font-weight: 700;
 	font-size: 1.15385rem;
 	line-height: 1.15385rem;
-
+	color: var(--text);
 	letter-spacing: -0.01923rem;
 }
 
