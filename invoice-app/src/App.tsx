@@ -1,8 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-// components
+// layout
 import MainLayout from './layout/MainLayout';
+
+// pages
 import Dashboard from './pages/Dashboard';
+import Invoice, { invoiceLoader } from './pages/Invoice';
 
 // context
 import InvoiceDataProvider from './context/getInvoiceData';
@@ -16,6 +19,11 @@ function App() {
 				{
 					index: true,
 					element: <Dashboard />,
+				},
+				{
+					path: '/invoice/:id',
+					element: <Invoice />,
+					loader: invoiceLoader,
 				},
 			],
 		},

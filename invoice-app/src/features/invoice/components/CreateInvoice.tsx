@@ -18,45 +18,50 @@ interface CreateInvoiceProps {
 	invoice: InvoiceType;
 }
 
+// rrd imports
+import { Link } from 'react-router-dom';
+
 const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
 	const status: paymentStatusType = checkStatusType(invoice.status);
 
 	return (
-		<div
-			className={styles.invoice}
-			id={invoice.id}
-		>
-			<div className={styles.invoiceId}>
-				<div>
-					<span>#</span>
-					{invoice.id}
+		<Link to={`/invoice/${invoice.id}`}>
+			<div
+				className={styles.invoice}
+				id={invoice.id}
+			>
+				<div className={styles.invoiceId}>
+					<div>
+						<span>#</span>
+						{invoice.id}
+					</div>
 				</div>
-			</div>
-			<div className={styles.dueDate}>
-				<div>Due {formatDate(invoice.paymentDue)}</div>
-			</div>
-			<div className={styles.clientName}>
-				<div>{invoice.clientName}</div>
-			</div>
-			<div className={styles.totalPrice}>
-				<div>{formatCurrency(invoice.total)}</div>
-			</div>
-			<div className={`${styles.status} ${styles[status]}`}>
-				<div className='d-flex justify-content-center align-items-center'>
-               <div className={styles.circle}></div>
-					<span>{status}</span>
+				<div className={styles.dueDate}>
+					<div>Due {formatDate(invoice.paymentDue)}</div>
 				</div>
-			</div>
+				<div className={styles.clientName}>
+					<div>{invoice.clientName}</div>
+				</div>
+				<div className={styles.totalPrice}>
+					<div>{formatCurrency(invoice.total)}</div>
+				</div>
+				<div className={`${styles.status} ${styles[status]}`}>
+					<div className='d-flex justify-content-center align-items-center'>
+						<div className={styles.circle}></div>
+						<span>{status}</span>
+					</div>
+				</div>
 
-			<div className={styles.goTo}>
-				<div>
-					<img
-						src={arrowRight}
-						alt='arrow right'
-					/>
+				<div className={styles.goTo}>
+					<div>
+						<img
+							src={arrowRight}
+							alt='arrow right'
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

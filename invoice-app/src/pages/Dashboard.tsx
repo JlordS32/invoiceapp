@@ -10,13 +10,9 @@ import Dropdown, { DropdownRef } from '../components/button/Dropdown';
 
 // image
 import noInvoiceImg from '../assets/svg/illustration-empty.svg';
-import arrowRight from '../assets/svg/icon-arrow-right.svg';
 
 // custom hooks
 import { useFetchData } from '../hooks/useFetch';
-
-// utilities
-import formatDate from '../utilities/formatDate';
 
 // type imports
 import { InvoiceType } from '../features/invoice/types/InvoiceTypes';
