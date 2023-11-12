@@ -14,7 +14,7 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr) repeat(2, 0.8fr) 0.4fr;
 	cursor: pointer;
-	transition: 150ms ease-in;
+	transition: transform 150ms ease-in;
 }
 
 .invoice:hover {

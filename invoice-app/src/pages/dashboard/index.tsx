@@ -1,13 +1,12 @@
 // react imports
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // styles
 import styles from '../../assets/styles/modules/dashboard/dashboard.module.css';
 
 // components
-import Button from '../../components/button/Button';
-import Dropdown, { DropdownRef } from '../../components/button/Dropdown';
 import ShowNoInvoice from './components/ShowNoInvoice';
+import DashboardNav from './components/DashboardNav';
 
 // type imports
 import { InvoiceType } from '../../features/invoice/types/InvoiceTypes';
@@ -21,10 +20,6 @@ import { getInvoiceAsync } from '../../redux/invoice/invoiceSlice';
 const Dashboard = () => {
 	// states
 	const [data, setData] = useState<InvoiceType[]>([]);
-
-	// dropdown
-	const dropdownRef = useRef<DropdownRef>(null);
-	const options = ['name', 'status', 'date', 'price'];
 
 	// redux
 	const invoiceData = useSelector((state: RootState) => state.invoice);
@@ -50,29 +45,7 @@ const Dashboard = () => {
 
 	return (
 		<div className={styles.dashboard}>
-			<div className={styles.dashboardNav}>
-				<div className='mr-auto'>
-					<h1 className='text--h1'>Invoices</h1>
-					<div className='body-text-2'>
-						<p>
-							{data && data.length > 0 ? (
-								<span>There are {data.length} total invoices</span>
-							) : (
-								<span>No Invoices</span>
-							)}
-						</p>
-					</div>
-				</div>
-
-				<div>
-					<Dropdown
-						options={options}
-						ref={dropdownRef}
-					/>
-				</div>
-
-				<Button variant='addButton'>New Invoice</Button>
-			</div>
+			<DashboardNav length={data.length ?? 0} />
 
 			<div className={styles.invoiceContainer}>
 				{data && data.length > 0 ? (
