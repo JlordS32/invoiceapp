@@ -1,21 +1,68 @@
-import Dropdown, { DropdownRef } from '../../../components/button/Dropdown';
-import { useRef } from 'react';
+// react
+import { useRef, useState, useEffect } from 'react';
 
-// redux
+// components
+import Dropdown, {
+	DropdownRef,
+	OptionType,
+} from '../../../components/button/Dropdown';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../../../redux/store';
-import { getInvoiceAsync } from '../../../redux/invoice/invoiceSlice';
+// rrd
+import { useNavigate } from 'react-router-dom';
 
 const Filter = () => {
-	const filterOptions = ['draft', 'pending', 'paid'];
 	const dropdownFilterRef = useRef<DropdownRef>(null);
+	const filterOptions = [
+		{
+			label: 'Draft',
+			value: 'draft',
+		},
+		{
+			label: 'Pending',
+			value: 'pending',
+		},
+		{
+			label: 'Paid',
+			value: 'paid',
+		},
+	];
+
+	// rrd navigate
+	const navigate = useNavigate();
+
+	// state
+	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
+
+	useEffect(() => {
+		const searchParams = new URLSearchParams();
+		const valueOfSelectedOption = selectedOption.map((item) => item.value);
+
+		const existingParams = new URLSearchParams(location.search);
+
+		// Remove duplicate parameters
+		existingParams.delete('filter');
+
+		if (valueOfSelectedOption.length > 0) {
+			searchParams.set('filter', valueOfSelectedOption.join(','));
+		}
+
+		let search = existingParams.toString();
+
+		if (searchParams.toString()) {
+			search += search
+				? '&' + searchParams.toString()
+				: searchParams.toString();
+		}
+
+		navigate({ search });
+	}, [selectedOption]);
 
 	return (
 		<div>
 			<Dropdown
 				options={filterOptions}
 				ref={dropdownFilterRef}
+				onChange={setSelectedOption}
 				label='Filter by status'
 			/>
 		</div>

@@ -14,7 +14,7 @@ const Sort = () => {
 	const dropdownSortRef = useRef<DropdownRef>(null);
 	const sortOptions = [
 		{
-			label: 'Client Name',
+			label: 'Name',
 			value: 'clientName',
 		},
 		{
@@ -34,13 +34,27 @@ const Sort = () => {
 	// state
 	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
 
-	const searchParams = new URLSearchParams();
 	useEffect(() => {
+		const searchParams = new URLSearchParams();
 		const valueOfSelectedOption = selectedOption.map((item) => item.value);
 
-		searchParams.append('sort', valueOfSelectedOption.join(','));
+		const existingParams = new URLSearchParams(location.search);
 
-		navigate({ search: searchParams.toString() });
+		existingParams.delete('sort');
+
+		if (valueOfSelectedOption.length > 0) {
+			searchParams.set('sort', valueOfSelectedOption.join(','));
+		}
+
+		let search = existingParams.toString();
+
+		if (searchParams.toString()) {
+			search += search
+				? '&' + searchParams.toString()
+				: searchParams.toString();
+		}
+
+		navigate({ search });
 	}, [selectedOption]);
 
 	return (

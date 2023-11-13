@@ -1,5 +1,5 @@
 // react imports
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // styles
 import styles from '../../assets/styles/modules/dashboard/dashboard.module.css';
@@ -49,7 +49,7 @@ const Dashboard = () => {
 		await dispatch(getInvoiceAsync(url));
 	};
 
-	const debouncedFetchData = debounce(fetchData, 5000); 
+	const debouncedFetchData = useCallback(debounce(fetchData, 1000), []);
 	// UseEffects
 
 	// First two useEffect to handle data fetching.
@@ -76,6 +76,8 @@ const Dashboard = () => {
 	useEffect(() => {
 		const sortedArray = useSort(data, sort);
 
+		console.log('changing');
+
 		setSortedData(sortedArray);
 	}, [data, location]);
 
@@ -84,8 +86,6 @@ const Dashboard = () => {
 		const searchParams = new URLSearchParams(location.search);
 		const newSort = searchParams.get('sort') || '';
 		setSort(newSort.split(','));
-
-		console.log('changing')
 	}, [location]);
 
 	return (
