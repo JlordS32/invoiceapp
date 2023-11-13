@@ -5,19 +5,21 @@ import { useFetchData } from '../../hooks/useFetch';
 interface stateType {
 	invoiceItems: InvoiceType[];
 	loading: boolean;
+	sortedInvoice: InvoiceType[];
 }
 
 const initialState: stateType = {
 	invoiceItems: [],
 	loading: false,
+	sortedInvoice: [],
 };
 
 const invoiceSlice = createSlice({
 	name: 'invoice',
 	initialState,
 	reducers: {
-		updateInvoiceItems: (state, action: PayloadAction<InvoiceType[]>) => {
-			state.invoiceItems = action.payload;
+		updateSortedInvoice: (state, action: PayloadAction<InvoiceType[]>) => {
+			state.sortedInvoice = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -43,6 +45,6 @@ export const getInvoiceAsync = createAsyncThunk(
 	}
 );
 
-export const { updateInvoiceItems } = invoiceSlice.actions;
+export const { updateSortedInvoice } = invoiceSlice.actions;
 
 export default invoiceSlice.reducer;

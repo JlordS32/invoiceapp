@@ -21,12 +21,23 @@ import { getInvoiceAsync } from '../../redux/invoice/invoiceSlice';
 import { debounce } from 'lodash';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
+// custom hooks
+import useSort from '../../hooks/useSort';
+
+// rrd
+import { useLocation } from 'react-router-dom';
+
 const Dashboard = () => {
+	// rrd
+	const location = useLocation();
+
 	// refs
 	const [animationParent] = useAutoAnimate();
 
 	// states
 	const [data, setData] = useState<InvoiceType[]>([]);
+	const [sort, setSort] = useState<string[]>([]);
+	const [sortedData, setSortedData] = useState<InvoiceType[]>([]);
 
 	// redux
 	const invoiceData = useSelector((state: RootState) => state.invoice);
@@ -38,20 +49,44 @@ const Dashboard = () => {
 		await dispatch(getInvoiceAsync(url));
 	};
 
-	const debouncedFetchData = debounce(fetchData, 5000);
+	const debouncedFetchData = debounce(fetchData, 5000); 
+	// UseEffects
+
+	// First two useEffect to handle data fetching.
+	// 1. fetches every 5 seconds.
+	// 2. default fetch to get away with the 5 seconds delay on page reload
+	useEffect(() => {
+		debouncedFetchData();
+	}, [data]);
 
 	useEffect(() => {
 		fetchData();
-		debouncedFetchData();
 	}, []);
 
+	// setting fetched data into data state
 	useEffect(() => {
 		const { loading, invoiceItems } = invoiceData;
 
 		if (!loading) {
 			setData(invoiceItems);
 		}
-	}, [invoiceData.loading, invoiceData.invoiceItems]);
+	}, [data, invoiceData.loading, invoiceData.invoiceItems]);
+
+	// a logic to handle sorted items
+	useEffect(() => {
+		const sortedArray = useSort(data, sort);
+
+		setSortedData(sortedArray);
+	}, [data, location]);
+
+	// sorting is handled using URL
+	useEffect(() => {
+		const searchParams = new URLSearchParams(location.search);
+		const newSort = searchParams.get('sort') || '';
+		setSort(newSort.split(','));
+
+		console.log('changing')
+	}, [location]);
 
 	return (
 		<div className={styles.dashboard}>
@@ -63,7 +98,7 @@ const Dashboard = () => {
 			>
 				{data && data.length > 0 ? (
 					<div className={styles.invoiceWrapper}>
-						{data.map((invoice: InvoiceType) => (
+						{sortedData.map((invoice: InvoiceType) => (
 							<Invoice
 								data={invoice}
 								key={invoice.id}

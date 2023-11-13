@@ -32,11 +32,11 @@
 	}
 
 	.m-#{$i}-half {
-		@include margin($i / 2);
+		@include margin(calc(calc($i / 2)));
 	}
 
 	.m-#{$i}-quarter {
-		@include margin($i / 4);
+		@include margin(calc($i / 4));
 	}
 }
 
@@ -46,11 +46,11 @@
 	}
 
 	.mx-#{$i}-half {
-		@include marginX($i / 2);
+		@include marginX(calc($i / 2));
 	}
 
 	.mx-#{$i}-quarter {
-		@include marginX($i / 4);
+		@include marginX(calc($i / 4));
 	}
 }
 
@@ -60,11 +60,11 @@
 	}
 
 	.my-#{$i}-half {
-		@include marginY($i / 2);
+		@include marginY(calc($i / 2));
 	}
 
 	.my-#{$i}-quarter {
-		@include marginY($i / 4);
+		@include marginY(calc($i / 4));
 	}
 }
 
@@ -74,11 +74,11 @@
 	}
 
 	.mt-#{$i}-half {
-		@include marginTop($i / 2);
+		@include marginTop(calc($i / 2));
 	}
 
 	.mt-#{$i}-quarter {
-		@include marginTop($i / 4);
+		@include marginTop(calc($i / 4));
 	}
 }
 
@@ -88,11 +88,11 @@
 	}
 
 	.mb-#{$i}-half {
-		@include marginBottom($i / 2);
+		@include marginBottom(calc($i / 2));
 	}
 
 	.mb-#{$i}-quarter {
-		@include marginBottom($i / 4);
+		@include marginBottom(calc($i / 4));
 	}
 }
 
@@ -102,11 +102,11 @@
 	}
 
 	.ml-#{$i}-half {
-		@include marginLeft($i / 2);
+		@include marginLeft(calc($i / 2));
 	}
 
 	.ml-#{$i}-quarter {
-		@include marginLeft($i / 4);
+		@include marginLeft(calc($i / 4));
 	}
 }
 
@@ -116,11 +116,11 @@
 	}
 
 	.mr-#{$i}-half {
-		@include marginRight($i / 2);
+		@include marginRight(calc($i / 2));
 	}
 
 	.mr-#{$i}-quarter {
-		@include marginRight($i / 4);
+		@include marginRight(calc($i / 4));
 	}
 
 	.mr-auto {

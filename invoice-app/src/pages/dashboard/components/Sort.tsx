@@ -1,15 +1,15 @@
-import Dropdown, { DropdownRef } from '../../../components/button/Dropdown';
+import Dropdown, {
+	DropdownRef,
+	OptionType,
+} from '../../../components/button/Dropdown';
 import { useEffect, useRef, useState } from 'react';
 
-// redux
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../../../redux/store';
-import { updateInvoiceItems } from '../../../redux/invoice/invoiceSlice';
-
-// hooks
-import useSort from '../../../hooks/useSort';
+// rrd
+import { useNavigate } from 'react-router-dom';
 
 const Sort = () => {
+	const navigate = useNavigate();
+
 	// dropdown
 	const dropdownSortRef = useRef<DropdownRef>(null);
 	const sortOptions = [
@@ -26,25 +26,21 @@ const Sort = () => {
 			value: 'paymentDue',
 		},
 		{
-			price: 'Total',
+			label: 'Total',
 			value: 'total',
 		},
 	];
 
 	// state
-	const [selectedOption, setSelectedOption] = useState<string[]>([]);
+	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
 
-	// redux
-	const invoiceData = useSelector((state: RootState) => state.invoice);
-	const dispatch = useDispatch<AppDispatch>();
-
+	const searchParams = new URLSearchParams();
 	useEffect(() => {
-		console.log('sdf');
+		const valueOfSelectedOption = selectedOption.map((item) => item.value);
 
-		if (dropdownSortRef.current) {
-			const sortedData = useSort(invoiceData.invoiceItems, selectedOption);
-			dispatch(updateInvoiceItems(sortedData));
-		}
+		searchParams.append('sort', valueOfSelectedOption.join(','));
+
+		navigate({ search: searchParams.toString() });
 	}, [selectedOption]);
 
 	return (

@@ -29,11 +29,11 @@
 	}
 
 	.p-#{$i}-half {
-		@include padding($i / 2);
+		@include padding(calc($i / 2));
 	}
 
 	.p-#{$i}-quarter {
-		@include padding($i / 4);
+		@include padding(calc($i / 4));
 	}
 }
 
@@ -43,11 +43,11 @@
 	}
 
 	.px-#{$i}-half {
-		@include paddingX($i / 2);
+		@include paddingX(calc($i / 2));
 	}
 
 	.px-#{$i}-quarter {
-		@include paddingX($i / 4);
+		@include paddingX(calc($i / 4));
 	}
 }
 
@@ -57,11 +57,11 @@
 	}
 
 	.py-#{$i}-half {
-		@include paddingY($i / 2);
+		@include paddingY(calc($i / 2));
 	}
 
 	.py-#{$i}-quarter {
-		@include paddingY($i / 4);
+		@include paddingY(calc($i / 4));
 	}
 }
 
@@ -71,11 +71,11 @@
 	}
 
 	.pt-#{$i}-half {
-		@include paddingTop($i / 2);
+		@include paddingTop(calc($i / 2));
 	}
 
 	.pt-#{$i}-quarter {
-		@include paddingTop($i / 4);
+		@include paddingTop(calc($i / 4));
 	}
 }
 
@@ -85,11 +85,11 @@
 	}
 
 	.pb-#{$i}-half {
-		@include paddingBottom($i / 2);
+		@include paddingBottom(calc($i / 2));
 	}
 
 	.pb-#{$i}-quarter {
-		@include paddingBottom($i / 4);
+		@include paddingBottom(calc($i / 4));
 	}
 }
 
@@ -99,11 +99,11 @@
 	}
 
 	.pl-#{$i}-half {
-		@include paddingLeft($i / 2);
+		@include paddingLeft(calc($i / 2));
 	}
 
 	.pl-#{$i}-quarter {
-		@include paddingLeft($i / 4);
+		@include paddingLeft(calc($i / 4));
 	}
 }
 @for $i from 1 through 10 {
@@ -112,10 +112,10 @@
 	}
 
 	.pr-#{$i}-half {
-		@include paddingRight($i / 2);
+		@include paddingRight(calc($i / 2));
 	}
 
 	.pr-#{$i}-quarter {
-		@include paddingRight($i / 4);
+		@include paddingRight(calc($i / 4));
 	}
 }

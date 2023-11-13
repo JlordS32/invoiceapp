@@ -14,19 +14,19 @@ import styles from '../../assets/styles/modules/dropdown.module.css';
 // svg
 import downArrow from '../../assets/svg/icon-arrow-down.svg';
 
-interface OptionType {
-	label: string,
-	value: string,
+export interface OptionType {
+	label: string;
+	value: string;
 }
 
 interface DropdownProps {
 	options?: OptionType[];
 	label?: string;
-	onChange?: React.Dispatch<React.SetStateAction<string[]>>;
+	onChange?: React.Dispatch<React.SetStateAction<OptionType[]>>;
 }
 
 export interface DropdownRef {
-	value: string[];
+	value: OptionType[];
 }
 
 const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
@@ -43,10 +43,14 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 		};
 	});
 
-	const handleClick = (option: string) => {
-		if (selectedOption.includes(option)) {
+	const handleClick = (option: OptionType) => {
+		const optionExists = selectedOption.some((item) => {
+			return item.value === option.value;
+		});
+
+		if (optionExists) {
 			setSelectedOption((prev) => {
-				const filteredData = prev.filter((item) => item !== option);
+				const filteredData = prev.filter((item) => item.value !== option.value);
 				return filteredData;
 			});
 		} else {
@@ -55,7 +59,6 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 			});
 		}
 	};
-
 	// custom onChange handler
 	useEffect(() => {
 		if (props.onChange) {
@@ -96,6 +99,10 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 					>
 						<div>
 							{options?.map((option, index) => {
+								const optionExists = selectedOption.some((item) => {
+									return item.value === option.value;
+								});
+
 								return (
 									<div
 										onClick={() => {
@@ -105,7 +112,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 									>
 										<div
 											className={`${styles.checkbox} ${
-												selectedOption.includes(option.label) ? styles.checked : ``
+												optionExists ? styles.checked : ``
 											}`}
 										></div>
 										<span className='body-text'>{option.label}</span>
