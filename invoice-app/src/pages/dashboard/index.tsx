@@ -19,8 +19,12 @@ import { getInvoiceAsync } from '../../redux/invoice/invoiceSlice';
 
 // libraries
 import { debounce } from 'lodash';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 const Dashboard = () => {
+	// refs
+	const [animationParent] = useAutoAnimate();
+
 	// states
 	const [data, setData] = useState<InvoiceType[]>([]);
 
@@ -37,9 +41,9 @@ const Dashboard = () => {
 	const debouncedFetchData = debounce(fetchData, 5000);
 
 	useEffect(() => {
-		fetchData()
+		fetchData();
 		debouncedFetchData();
-	}, [data]);
+	}, []);
 
 	useEffect(() => {
 		const { loading, invoiceItems } = invoiceData;
@@ -47,13 +51,16 @@ const Dashboard = () => {
 		if (!loading) {
 			setData(invoiceItems);
 		}
-	}, [data, invoiceData.loading, invoiceData.invoiceItems]);
+	}, [invoiceData.loading, invoiceData.invoiceItems]);
 
 	return (
 		<div className={styles.dashboard}>
 			<DashboardNav length={data.length ?? 0} />
 
-			<div className={styles.invoiceContainer}>
+			<div
+				className={styles.invoiceContainer}
+				ref={animationParent}
+			>
 				{data && data.length > 0 ? (
 					<div className={styles.invoiceWrapper}>
 						{data.map((invoice: InvoiceType) => (

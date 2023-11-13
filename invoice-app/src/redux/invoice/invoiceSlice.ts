@@ -15,7 +15,11 @@ const initialState: stateType = {
 const invoiceSlice = createSlice({
 	name: 'invoice',
 	initialState,
-	reducers: {},
+	reducers: {
+		updateInvoiceItems: (state, action: PayloadAction<InvoiceType[]>) => {
+			state.invoiceItems = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getInvoiceAsync.pending, (state) => {
@@ -38,5 +42,7 @@ export const getInvoiceAsync = createAsyncThunk(
 		return data;
 	}
 );
+
+export const { updateInvoiceItems } = invoiceSlice.actions;
 
 export default invoiceSlice.reducer;

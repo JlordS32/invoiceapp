@@ -1,12 +1,10 @@
-// react
-import { useRef } from 'react';
-
 // styles
 import styles from '../../../assets/styles/modules/dashboard/dashboard.module.css';
 
 // components
 import Button from '../../../components/button/Button';
-import Dropdown, { DropdownRef } from '../../../components/button/Dropdown';
+import Filter from './Filter';
+import Sort from './Sort';
 
 // type
 interface DashbordNavProps {
@@ -14,12 +12,6 @@ interface DashbordNavProps {
 }
 
 const DashboardNav = ({ length }: DashbordNavProps) => {
-	// dropdown
-	const dropdownFilterRef = useRef<DropdownRef>(null);
-	const dropdownSortRef = useRef<DropdownRef>(null);
-	const sortOptions = ['name', 'status', 'date', 'price'];
-	const filterOptions = ['draft', 'pending', 'paid'];
-
 	return (
 		<div className={styles.dashboardNav}>
 			<div className='mr-auto'>
@@ -35,21 +27,9 @@ const DashboardNav = ({ length }: DashbordNavProps) => {
 				</div>
 			</div>
 
-			<div>
-				<Dropdown
-					options={sortOptions}
-					ref={dropdownSortRef}
-					label='Sort by'
-				/>
-			</div>
-
-			<div>
-				<Dropdown
-					options={filterOptions}
-					ref={dropdownFilterRef}
-					label='Filter by status'
-				/>
-			</div>
+			<Filter />
+			
+			<Sort />
 
 			<Button variant='addButton'>New Invoice</Button>
 		</div>

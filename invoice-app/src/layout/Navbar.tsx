@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 
 // styles
-import styles from '../../assets/styles/modules/nav.module.css';
+import styles from '../assets/styles/modules/nav.module.css';
 
 // svgs, images
-import logo from '../../assets/svg/logo.svg';
-import avatar from '../../assets/img/image-avatar.jpg';
-import sunSvg from '../../assets/svg/icon-sun.svg';
-import moonSvg from '../../assets/svg/icon-moon.svg';
+import logo from '../assets/svg/logo.svg';
+import avatar from '../assets/img/image-avatar.jpg';
+import sunSvg from '../assets/svg/icon-sun.svg';
+import moonSvg from '../assets/svg/icon-moon.svg';
 
 // utils
-import useDarkModeToggle from '../../hooks/useDarkMode';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useDarkModeToggle from '../hooks/useDarkMode';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const Navbar = () => {
 	const { isDarkMode, toggleTheme, setDarkMode } = useDarkModeToggle();

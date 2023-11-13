@@ -14,10 +14,15 @@ import styles from '../../assets/styles/modules/dropdown.module.css';
 // svg
 import downArrow from '../../assets/svg/icon-arrow-down.svg';
 
+interface OptionType {
+	label: string,
+	value: string,
+}
+
 interface DropdownProps {
-	options?: string[];
+	options?: OptionType[];
 	label?: string;
-	onChange?: (value?: string) => void;
+	onChange?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export interface DropdownRef {
@@ -28,7 +33,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	const { options } = props;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-	const [selectedOption, setSelectedOption] = useState<string[]>([]);
+	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
 
 	useImperativeHandle(ref, () => {
 		return {
@@ -51,9 +56,12 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 		}
 	};
 
+	// custom onChange handler
 	useEffect(() => {
-		console.log(selectedOption);
-	}, [selectedOption]);
+		if (props.onChange) {
+			props.onChange(selectedOption);
+		}
+	});
 
 	return (
 		<>
@@ -97,10 +105,10 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 									>
 										<div
 											className={`${styles.checkbox} ${
-												selectedOption.includes(option) ? styles.checked : ``
+												selectedOption.includes(option.label) ? styles.checked : ``
 											}`}
 										></div>
-										<span className='body-text'>{option}</span>
+										<span className='body-text'>{option.label}</span>
 									</div>
 								);
 							})}

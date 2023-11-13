@@ -2,7 +2,7 @@
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 // components
-import Navbar from '../components/nav/Navbar';
+import Navbar from './Navbar';
 
 const MainLayout = () => {
 	return (
