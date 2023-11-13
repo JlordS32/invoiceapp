@@ -1,4 +1,4 @@
-const useSort = (array: any[], sortOptions: string[]) => {
+const useSort = (array: any[], sortOptions: string[]): any[] => {
 	const sorted = [...array].sort((a, b) => {
 		for (let i = 0; i < sortOptions.length; i++) {
 			const sortBy = sortOptions[i];
@@ -12,7 +12,7 @@ const useSort = (array: any[], sortOptions: string[]) => {
 		return 0;
 	});
 
-	return sorted;
+	return sorted ?? [];
 };
 
 export default useSort;

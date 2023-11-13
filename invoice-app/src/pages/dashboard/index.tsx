@@ -26,6 +26,7 @@ import useSort from '../../hooks/useSort';
 
 // rrd
 import { useLocation } from 'react-router-dom';
+import useFilter from '../../hooks/useFilter';
 
 const Dashboard = () => {
 	// rrd
@@ -37,7 +38,8 @@ const Dashboard = () => {
 	// states
 	const [data, setData] = useState<InvoiceType[]>([]);
 	const [sort, setSort] = useState<string[]>([]);
-	const [sortedData, setSortedData] = useState<InvoiceType[]>([]);
+	const [filter, setFilter] = useState<string[]>([]);
+	const [manipulatedData, setManipulatedData] = useState<InvoiceType[]>([]);
 
 	// redux
 	const invoiceData = useSelector((state: RootState) => state.invoice);
@@ -49,7 +51,7 @@ const Dashboard = () => {
 		await dispatch(getInvoiceAsync(url));
 	};
 
-	const debouncedFetchData = useCallback(debounce(fetchData, 1000), []);
+	const debouncedFetchData = useCallback(debounce(fetchData, 500), []);
 	// UseEffects
 
 	// First two useEffect to handle data fetching.
@@ -75,30 +77,34 @@ const Dashboard = () => {
 	// a logic to handle sorted items
 	useEffect(() => {
 		const sortedArray = useSort(data, sort);
+		const filteredData = useFilter(sortedArray, filter);
 
-		console.log('changing');
-
-		setSortedData(sortedArray);
+		setManipulatedData(filteredData);
 	}, [data, location]);
 
 	// sorting is handled using URL
 	useEffect(() => {
 		const searchParams = new URLSearchParams(location.search);
+
 		const newSort = searchParams.get('sort') || '';
+		const newFilter = searchParams.get('filter') || '';
+
 		setSort(newSort.split(','));
+
+		setFilter(newFilter.split(','));
 	}, [location]);
 
 	return (
 		<div className={styles.dashboard}>
 			<DashboardNav length={data.length ?? 0} />
 
-			<div
-				className={styles.invoiceContainer}
-				ref={animationParent}
-			>
+			<div className={styles.invoiceContainer}>
 				{data && data.length > 0 ? (
-					<div className={styles.invoiceWrapper}>
-						{sortedData.map((invoice: InvoiceType) => (
+					<div
+						className={styles.invoiceWrapper}
+						ref={animationParent}
+					>
+						{manipulatedData.map((invoice: InvoiceType) => (
 							<Invoice
 								data={invoice}
 								key={invoice.id}
