@@ -136,6 +136,26 @@
 	text-transform: capitalize;
 }
 
+.total {
+	display: flex;
+	justify-content: space-between;
+	background-color: #373b53;
+	color: var(--white);
+	padding: 2.5rem;
+   align-items: center;
+}
+
+.total > p {
+	line-height: calc(1em * 1.38462rem);
+}
+
+.total > .amount {
+	text-align: right;
+	font-size: 1.84615rem;
+	font-weight: 700;
+	line-height: calc(1em * 1.33);
+}
+
 @media print {
 	.invoicePage {
 		display: block;

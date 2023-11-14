@@ -15,8 +15,6 @@ interface InvoiceProps {
 }
 
 const InvoicePaper = ({ invoice }: InvoiceProps) => {
-	const total = getTotal(extractPrices(invoice));
-
 	return (
 		<div className={styles.invoice}>
 			<div className={styles.invoiceInfo}>
@@ -75,18 +73,24 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 						</tr>
 					</thead>
 					<tbody>
-						{invoice?.items.map((item, index) => (
-							<tr key={index}>
-								<td>{item.name}</td>
-								<td>{item.quantity}</td>
-								<td>${item.price.toFixed(2)}</td>
-								<td>${item.total.toFixed(2)}</td>
-							</tr>
-						))}
+						{invoice &&
+							invoice?.items.map((item, index) => (
+								<tr key={index}>
+									<td>{item.name}</td>
+									<td>{item.quantity}</td>
+									<td>{item.price.toFixed(2)}</td>
+									<td>{item.total.toFixed(2)}</td>
+								</tr>
+							))}
 					</tbody>
 				</table>
 
-				<div className={styles.total}>{`${formatCurrency(total)}`}</div>
+				{invoice && (
+					<div className={styles.total}>
+						<p>Amount Due</p>
+						<span className={styles.amount}>{`${formatCurrency(getTotal(extractPrices(invoice)))}`}</span>
+					</div>
+				)}
 			</div>
 		</div>
 	);
