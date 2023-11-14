@@ -15,7 +15,7 @@
 	transition: 150ms linear;
 	padding: 0.62rem;
 }
-	
+
 .button:hover {
 	background-color: var(--primary-active);
 	transform: scale(1.01);
@@ -127,4 +127,20 @@
 
 .button.addNewItemButton:active {
 	background-color: hsl(228, 71%, 99%);
+}
+
+/* go back */
+
+.goBack {
+	display: flex;
+	align-items: center;
+	gap: 0 1.82rem;
+	font-weight: 700;
+	color: var(--text);
+	margin-bottom: 2.4rem;
+	cursor: pointer;
+}
+
+.goBack:hover {
+	color: var(--text-hover);
 }

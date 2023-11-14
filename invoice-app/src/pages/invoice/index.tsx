@@ -1,5 +1,5 @@
 // react
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // rrd
 import { useNavigate, useLoaderData, LoaderFunction } from 'react-router-dom';
@@ -14,13 +14,12 @@ interface paramsType {
 	id: string;
 }
 
-// images
-import arrowLeft from '../../assets/svg/icon-arrow-left.svg';
-
 // redux
 import { InvoiceType } from '../../features/invoice/types/InvoiceTypes';
 import { useFetchDatabyId } from '../../hooks/useFetch';
 import Status from '../../features/invoice/components/Status';
+import formateDate from '../../utilities/formatDate';
+import GoBack from '../../components/button/GoBack';
 
 export const invoiceLoader: LoaderFunction<paramsType> = ({ params }) => {
 	const id = params.id;
@@ -51,13 +50,9 @@ const Invoice = () => {
 	return (
 		<div className={styles.invoicePage}>
 			<div className={styles.container}>
-				<div className={styles.goBack}>
-					<img
-						src={arrowLeft}
-						alt='arrow left'
-					/>
-					<p onClick={() => navigate(-1)}>Go back</p>
-				</div>
+
+				<GoBack />
+
 				<div
 					className={styles.invoiceNav}
 					id='invoiceNav'
@@ -85,10 +80,30 @@ const Invoice = () => {
 
 				<div className={styles.invoice}>
 					<div className={styles.invoiceInfo}>
-						<div>
-							
+						<div className='d-flex'>
+							<div>
+								<p>#{invoice?.id}</p>
+								<div className='desc'>{invoice?.description}</div>
+							</div>
+							<div>
+								<p>{invoice?.clientAddress.street}</p>
+								<p>{invoice?.clientAddress.city}</p>
+								<p>{invoice?.clientAddress.postCode}</p>
+								<p>{invoice?.clientAddress.country}</p>
+							</div>
 						</div>
-						<div></div>
+						<div className='d-flex'>
+							<div>
+								<div>
+									<p>Invoice Date</p>
+									<p>{formateDate(invoice?.createdAt ?? '')}</p>
+								</div>
+								<div>
+									<p>Payment Due</p>
+									<p>{formateDate(invoice?.paymentDue ?? '')}</p>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div></div>
 				</div>
