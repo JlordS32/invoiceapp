@@ -5,7 +5,7 @@ import MainLayout from './layout/MainLayout';
 
 // pages
 import Dashboard from './pages/dashboard';
-import Invoice, { invoiceLoader } from './pages/invoice';
+import InvoicePage, { invoiceLoader } from './pages/invoice';
 
 function App() {
 	const router = createBrowserRouter([
@@ -19,7 +19,7 @@ function App() {
 				},
 				{
 					path: '/invoice/:id',
-					element: <Invoice />,
+					element: <InvoicePage />,
 					loader: invoiceLoader,
 				},
 			],
