@@ -25,6 +25,7 @@
 	--dark: hsl(233, 30%, 11%);
 	--text: var(--012);
 	--text-2: var(--06);
+	--text-3: var(--07);
 	--text-hover: var(--07);
 
 	/* feedback colors */

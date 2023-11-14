@@ -16,6 +16,9 @@ import GoBack from '../../../components/button/GoBack';
 import InvoiceNav from './../component/InvoiceNav';
 import InvoicePaper from './../component/InvoicePaper';
 
+// types
+import { paramsType } from '..';
+
 const Invoice = () => {
 	// states
 	const [invoice, setInvoice] = useState<InvoiceType>();
@@ -42,7 +45,7 @@ const Invoice = () => {
 
 				<InvoiceNav status={invoice ? invoice.status : ''} />
 
-				<InvoicePaper invoice={invoice} />
+				<InvoicePaper invoice={invoice as InvoiceType} />
 			</div>
 		</div>
 	);

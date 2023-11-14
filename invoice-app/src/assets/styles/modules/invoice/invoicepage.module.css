@@ -39,10 +39,76 @@
 }
 
 .invoice {
-   margin: 1.85rem 0;
-   padding: 3.85rem;
-   border-radius: 0.5rem;
+	margin: 1.85rem 0;
+	padding: 3.85rem;
+	border-radius: 0.5rem;
 	background-color: var(--box-bg);
+}
+
+/* Sender Info */
+
+.senderInfo {
+	display: flex;
+	justify-content: space-between;
+}
+
+.senderInfo > .invoiceId > p {
+	font-weight: 700;
+	font-size: 1.15385rem;
+	color: var(--text);
+}
+
+.senderInfo .invoiceDesc {
+	color: var(--text-3);
+	font-weight: 500;
+	line-height: calc(var(--line-height) * 1.15rem);
+	margin-top: 0.5rem;
+}
+
+.senderInfo > .invoiceId > p > span {
+	color: var(--06);
+}
+
+.senderInfo .senderAddress {
+	color: var(--text-3);
+	text-align: right;
+}
+
+/* Client Info */
+
+.clientInfo {
+	display: flex;
+	justify-content: space-between;
+	padding-right: 10rem;
+}
+
+.date .invoiceDate p:first-child,
+.date .dueDate p:first-child,
+.billTo div > p:first-child {
+	color: var(--text-3);
+	font-weight: 500;
+}
+
+.clientInfo .date .invoiceDate p:last-child,
+.clientInfo .date .dueDate p:last-child,
+.billTo .clientName {
+	font-weight: 700;
+	font-size: 1.15385rem;
+	margin-top: 1rem;
+}
+
+.clientInfo .date .dueDate {
+	margin-top: 2.3rem;
+}
+
+.billTo {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.billTo > .clientAddress p {
+	color: var(--text-3);
 }
 
 @media print {

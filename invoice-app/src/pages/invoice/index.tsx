@@ -1,7 +1,7 @@
 import Invoice from './component/Invoice';
 import { LoaderFunction } from 'react-router-dom';
 
-interface paramsType {
+export interface paramsType {
 	id: string;
 }
 
