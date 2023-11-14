@@ -6,7 +6,7 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-   position: fixed;
+	position: fixed;
 }
 
 .logo {
@@ -76,7 +76,7 @@
 }
 
 .wrapper > .darkmodeToggle img {
-   cursor: pointer;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
@@ -84,6 +84,27 @@
 		width: 100vw;
 		height: 6.15385rem;
 		border-radius: 0;
+		overflow: visible;
+		flex-direction: row;
+	}
+
+	.logo {
+		width: 6.15385rem;
+	}
+
+	.logo img {
+		width: 2.38rem;
+	}
+
+	.wrapper {
+		flex-direction: row;
+		margin-left: auto;
+		height: 100%;
+	}
+
+	.wrapper > .imgContainer {
+		border-top: 0;
+		border-left: 1px #494e6e solid;
 	}
 }
 

@@ -8,9 +8,9 @@ const MainLayout = () => {
 	return (
 		<div className='layout'>
 			<Navbar />
-			<main>
+			{/* <main>
 				<Outlet />
-			</main>
+			</main> */}
 			<ScrollRestoration />
 		</div>
 	);

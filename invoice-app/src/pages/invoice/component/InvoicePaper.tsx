@@ -79,7 +79,9 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 									<td className={styles.itemName}>{item.name}</td>
 									<td className={styles.quantity}>{item.quantity}</td>
 									<td className={styles.price}>{formatCurrency(item.price)}</td>
-									<td className={styles.totalOfItem}>{formatCurrency(item.price * item.quantity)}</td>
+									<td className={styles.totalOfItem}>
+										{formatCurrency(item.price * item.quantity)}
+									</td>
 								</tr>
 							))}
 					</tbody>
