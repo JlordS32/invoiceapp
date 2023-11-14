@@ -76,10 +76,10 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 						{invoice &&
 							invoice?.items.map((item, index) => (
 								<tr key={index}>
-									<td>{item.name}</td>
-									<td>{item.quantity}</td>
-									<td>{item.price.toFixed(2)}</td>
-									<td>{item.total.toFixed(2)}</td>
+									<td className={styles.itemName}>{item.name}</td>
+									<td className={styles.quantity}>{item.quantity}</td>
+									<td className={styles.price}>{formatCurrency(item.price)}</td>
+									<td className={styles.totalOfItem}>{formatCurrency(item.price * item.quantity)}</td>
 								</tr>
 							))}
 					</tbody>
@@ -88,7 +88,9 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 				{invoice && (
 					<div className={styles.total}>
 						<p>Amount Due</p>
-						<span className={styles.amount}>{`${formatCurrency(getTotal(extractPrices(invoice)))}`}</span>
+						<span className={styles.amount}>{`${formatCurrency(
+							getTotal(extractPrices(invoice))
+						)}`}</span>
 					</div>
 				)}
 			</div>

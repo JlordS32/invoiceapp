@@ -136,13 +136,48 @@
 	text-transform: capitalize;
 }
 
+.itemTable td {
+	padding: 1.25rem 0;
+}
+
+.itemTable td.itemName,
+.itemTable td.totalOfItem {
+	font-size: 1.15385rem;
+	font-weight: 700;
+}
+
+.itemTable td.quantity,
+.itemTable td.price {
+	font-size: 1.15385rem;
+	font-weight: 500;
+	color: var(--text-3);
+}
+
+.itemTable td.price {
+	font-weight: 700;
+}
+
+.itemTable th:nth-child(2),
+.itemTable td:nth-child(2) {
+	text-align: center;
+}
+
+.itemTable th:nth-child(3),
+.itemTable td:nth-child(3) {
+	text-align: right;
+}
+.itemTable th:nth-child(4),
+.itemTable td:nth-child(4) {
+	text-align: right;
+}
+
 .total {
 	display: flex;
 	justify-content: space-between;
 	background-color: #373b53;
 	color: var(--white);
 	padding: 2.5rem;
-   align-items: center;
+	align-items: center;
 }
 
 .total > p {
