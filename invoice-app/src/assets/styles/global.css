@@ -39,6 +39,7 @@
 	--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
 	--checkbox-bg: var(--05);
 	--box-bg: var(--white);
+	--box-bg-2: hsl(228, 71%, 99%);
 
 	/* button text */
 	--text-dark: var(--08);

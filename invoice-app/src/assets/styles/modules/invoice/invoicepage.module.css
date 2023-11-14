@@ -84,14 +84,16 @@
 
 .date .invoiceDate p:first-child,
 .date .dueDate p:first-child,
-.billTo div > p:first-child {
+.billTo div > p:first-child,
+.sentTo p:first-child {
 	color: var(--text-3);
 	font-weight: 500;
 }
 
 .clientInfo .date .invoiceDate p:last-child,
 .clientInfo .date .dueDate p:last-child,
-.billTo .clientName {
+.billTo .clientName,
+.sentTo p:last-child {
 	font-weight: 700;
 	font-size: 1.15385rem;
 	margin-top: 1rem;
@@ -109,6 +111,29 @@
 
 .billTo > .clientAddress p {
 	color: var(--text-3);
+}
+
+.itemTable {
+	background-color: var(--box-bg-2);
+	margin-top: 3.62rem;
+	position: relative;
+
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
+.itemTable table {
+	width: 100%;
+	padding: 3rem 2.5rem;
+}
+
+.itemTable th {
+	text-align: left;
+	color: var(--text-3);
+	font-weight: 500;
+	line-height: calc(var(--line-height) * 1.38462rem);
+	padding-bottom: 2.4rem;
+	text-transform: capitalize;
 }
 
 @media print {

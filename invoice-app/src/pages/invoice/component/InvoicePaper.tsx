@@ -6,12 +6,17 @@ import styles from '../../../assets/styles/modules/invoice/invoicepage.module.cs
 
 // types
 import { InvoiceType } from '../../../features/invoice/types/InvoiceTypes';
+import getTotal from '../../../utilities/getTotal';
+import extractPrices from '../../../utilities/extractPrices';
+import formatCurrency from '../../../utilities/formatCurrencies';
 
 interface InvoiceProps {
 	invoice: InvoiceType;
 }
 
 const InvoicePaper = ({ invoice }: InvoiceProps) => {
+	const total = getTotal(extractPrices(invoice));
+
 	return (
 		<div className={styles.invoice}>
 			<div className={styles.invoiceInfo}>
@@ -59,7 +64,30 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 					</div>
 				</div>
 			</div>
-			<div></div>
+			<div className={styles.itemTable}>
+				<table>
+					<thead>
+						<tr>
+							<th>Item Name</th>
+							<th>Qty.</th>
+							<th>Price</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						{invoice?.items.map((item, index) => (
+							<tr key={index}>
+								<td>{item.name}</td>
+								<td>{item.quantity}</td>
+								<td>${item.price.toFixed(2)}</td>
+								<td>${item.total.toFixed(2)}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+
+				<div className={styles.total}>{`${formatCurrency(total)}`}</div>
+			</div>
 		</div>
 	);
 };
