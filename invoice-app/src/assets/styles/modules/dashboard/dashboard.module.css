@@ -4,7 +4,7 @@
 
 .dashboardNav {
 	display: flex;
-	width: 56.15385rem;
+	width: clamp(49rem, 70%, 56.15385rem);
 	padding-top: 6rem;
 	margin: 0 auto;
 	align-items: center;
@@ -26,10 +26,15 @@
 	margin-bottom: 5rem;
 }
 
+.invoiceContainer {
+	width: 100%;
+}
+
 .invoiceWrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 1.2rem 0;
 	align-items: center;
 	padding: 5rem 0;
+	width: 100%;
 }

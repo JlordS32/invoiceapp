@@ -1,3 +1,5 @@
+import { useMediaQuery } from 'react-responsive';
+
 import styles from '../../assets/styles/modules/buttons.module.css';
 import plusSvg from '../../assets/svg/icon-plus.svg';
 
@@ -9,18 +11,21 @@ type ButtonTypes =
 	| 'editButtonDark'
 	| 'deleteButton'
 	| 'saveAsDraftButtonDark'
-   | 'saveAsDraftButtonLight'
+	| 'saveAsDraftButtonLight'
 	| 'addNewItemButton';
 
 type CustomButtonProps = React.HTMLProps<HTMLButtonElement> & {
 	width?: string;
 	type?: 'button' | 'reset' | 'submit';
 	variant?: ButtonTypes;
+	shortText?: string;
 };
 
 const Button = (props: CustomButtonProps) => {
 	const { variant } = props;
-	
+
+	const isWide = useMediaQuery({ minWidth: 768 });
+
 	return (
 		<button
 			className={`${styles.button} ${styles[variant ?? '']}`}
@@ -38,7 +43,7 @@ const Button = (props: CustomButtonProps) => {
 					/>
 				</div>
 			)}
-			<span>{props.children}</span>
+			<span>{isWide ? props.children : props.shortText ?? ''}</span>
 		</button>
 	);
 };

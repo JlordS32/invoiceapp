@@ -6,6 +6,9 @@ import Button from '../../../components/button/Button';
 import Filter from './Filter';
 import Sort from './Sort';
 
+// hero icons
+import { BarsArrowDownIcon } from '@heroicons/react/24/solid';
+
 // type
 interface DashbordNavProps {
 	length?: number;
@@ -27,11 +30,20 @@ const DashboardNav = ({ length }: DashbordNavProps) => {
 				</div>
 			</div>
 
-			<Filter />
-			
-			<Sort />
+			{/* <Filter />
 
-			<Button variant='addButton'>New Invoice</Button>
+			<Sort /> */}
+
+			<div>
+				<BarsArrowDownIcon width={24} />
+			</div>
+
+			<Button
+				variant='addButton'
+				shortText='New'
+			>
+				New Invoice
+			</Button>
 		</div>
 	);
 };

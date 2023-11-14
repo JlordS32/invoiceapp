@@ -1,5 +1,6 @@
 .invoice {
-	width: 56.15385rem;
+	width: 100%;
+	
 	height: 5.53846rem;
 	background-color: var(--box-bg);
 	border-radius: 0.5rem;
@@ -17,7 +18,7 @@
 }
 .invoice:active {
 	transform: translateY(0%) scale(1);
-} 
+}
 
 .invoice > * {
 	/* outline: 1px red solid; */

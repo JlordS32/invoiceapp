@@ -103,6 +103,13 @@ main {
 	margin-left: 8rem;
 }
 
+@media screen and (max-width: 767px) {
+	main {
+		margin: 0;
+		padding-top: 6rem;
+	}
+}
+
 @media print {
 	main {
 		margin: 0;
