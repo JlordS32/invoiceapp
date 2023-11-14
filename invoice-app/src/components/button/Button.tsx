@@ -20,8 +20,7 @@ type CustomButtonProps = React.HTMLProps<HTMLButtonElement> & {
 
 const Button = (props: CustomButtonProps) => {
 	const { variant } = props;
-
-
+	
 	return (
 		<button
 			className={`${styles.button} ${styles[variant ?? '']}`}

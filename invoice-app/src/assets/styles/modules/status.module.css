@@ -1,0 +1,64 @@
+/* status */
+
+.status {
+	text-transform: capitalize;
+	font-weight: 700;
+	position: relative;
+}
+
+.status > div {
+	width: 8rem;
+	height: 3.07692rem;
+	border-radius: 0.46154rem;
+}
+
+.status > div .circle {
+	margin-right: 0.62rem;
+	width: 0.65rem;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+}
+
+.status.pending {
+	color: var(--pending);
+}
+
+.status.pending > div {
+	background-color: var(--pending-bg);
+}
+
+.status.pending > div .circle {
+	background-color: var(--pending);
+}
+
+.status.paid {
+	color: var(--paid);
+}
+
+.status.paid > div {
+	background-color: var(--paid-bg);
+}
+
+.status.paid > div .circle {
+	background-color: var(--paid);
+}
+
+.status.draft {
+	color: var(--draft);
+}
+
+.status.draft > div {
+	background-color: var(--draft-bg);
+}
+
+.status.draft > div .circle {
+	background-color: var(--draft);
+}
+
+.status.error {
+	color: var(--error);
+}
+
+.status.error > div .circle {
+	background-color: var(--error);
+}

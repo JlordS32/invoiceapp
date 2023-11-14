@@ -2,35 +2,43 @@ import { useEffect, useState } from 'react';
 
 const applyTheme = (isDarkMode: boolean) => {
 	const root = document.documentElement;
+	const styles = {
+		dark: {
+			'--body-bg': 'var(--dark)',
+			'--form-bg': 'var(--dark-mode-form-bg)',
+			'--form-outline': 'var(--dark-mode-form-outline)',
+			'--form-label': 'var(--dark-mode-form-label)',
+			'--form-placeholder': 'var(--white)',
+			'--box-shadow': '0px 10px 20px 0px rgba(0, 0, 0, 0.25)',
+			'--form-text': 'var(--white)',
+			'--text': 'var(--white)',
+			'--text-2': 'var(--05)',
+			'--checkbox-bg': 'var(--03)',
+			'--draft': 'var(--05)',
+			'--box-bg': 'var(--03)',
+			'--text-hover': 'var(--07)',
+		},
+		light: {
+			'--body-bg': 'hsl(240, 27%, 98%)',
+			'--form-outline': 'hsl(231, 73%, 93%)',
+			'--form-label': 'var(--07)',
+			'--form-bg': 'var(--white)',
+			'--form-placeholder': 'var(--dark)',
+			'--box-shadow': '0px 10px 20px 0px rgba(72, 84, 159, 0.25)',
+			'--form-text': 'var(--08)',
+			'--text': 'var(--dark)',
+			'--text-2': 'var(--06)',
+			'--checkbox-bg': 'var(--05)',
+			'--draft': 'hsl(231, 20%, 27%)',
+			'--box-bg': 'var(--white)',
+			'--text-hover': 'var(--06)',
+		},
+	};
 
-	if (isDarkMode) {
-		root.style.setProperty('--body-bg', 'var(--dark)');
-		root.style.setProperty('--form-bg', 'var(--dark-mode-form-bg)');
-		root.style.setProperty('--form-outline', 'var(--dark-mode-form-outline)');
-		root.style.setProperty('--form-label', 'var(--dark-mode-form-label)');
-		root.style.setProperty('--form-placeholder', 'var(--white)');
-		root.style.setProperty(
-			'--box-shadow',
-			'0px 10px 20px 0px rgba(0, 0, 0, 0.25)'
-		);
-		root.style.setProperty('--form-text', 'var(--white)');
-		root.style.setProperty('--text', 'var(--white)');
-		root.style.setProperty('--text-2', 'var(--05)');
-		root.style.setProperty('--checkbox-bg', 'var(--03)');
-	} else {
-		root.style.setProperty('--body-bg', 'hsl(240, 27%, 98%)');
-		root.style.setProperty('--form-outline', 'hsl(231, 73%, 93%)');
-		root.style.setProperty('--form-label', 'var(--07)');
-		root.style.setProperty('--form-bg', 'var(--white)');
-		root.style.setProperty('--form-placeholder', 'var(--dark)');
-		root.style.setProperty(
-			'--box-shadow',
-			'0px 10px 20px 0px rgba(72, 84, 159, 0.25)'
-		);
-		root.style.setProperty('--form-text', 'var(--08)');
-		root.style.setProperty('--text', 'var(--dark)');
-		root.style.setProperty('--text-2', 'var(--06)');
-		root.style.setProperty('--checkbox-bg', 'var(--05)');
+	const selectedStyle = isDarkMode ? styles.dark : styles.light;
+
+	for (const [property, value] of Object.entries(selectedStyle)) {
+		root.style.setProperty(property, value);
 	}
 };
 

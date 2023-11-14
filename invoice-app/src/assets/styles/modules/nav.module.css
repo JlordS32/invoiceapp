@@ -86,3 +86,9 @@
 		border-radius: 0;
 	}
 }
+
+@media print {
+	.nav {
+		display: none !important;
+	}
+}

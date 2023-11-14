@@ -10,7 +10,7 @@
 	--07: hsl(231, 37%, 63%);
 	--08: hsl(228, 29%, 7%);
 	--09: hsl(0, 80%, 63%);
-	--010: hsl(252, 100%, 73%);
+	--010: hsl(0, 100%, 80%);
 	--011: hsl(240, 27%, 98%);
 	--012: hsl(233, 30%, 11%);
 
@@ -25,10 +25,11 @@
 	--dark: hsl(233, 30%, 11%);
 	--text: var(--012);
 	--text-2: var(--06);
+	--text-hover: var(--07);
 
 	/* feedback colors */
 	--error: var(--09);
-	--error-active: var(--10);
+	--error-active: hsla(0, 80%, 63%, 0.8);
 
 	/* component colors */
 	--nav-bg: hsl(231, 20%, 27%);
@@ -36,8 +37,9 @@
 	--body-bg: hsl(240, 27%, 98%);
 	--box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
 	--checkbox-bg: var(--05);
+	--box-bg: var(--white);
 
-	/* default typography colors */
+	/* button text */
 	--text-dark: var(--08);
 	--text-light: var(--07);
 	--text-2-dark: var(--06);
@@ -50,6 +52,14 @@
 	--form-bg: var(--white);
 	--form-placeholder: var(--dark);
 	--form-text: var(--08);
+
+	/* status */
+	--pending: hsl(34, 100%, 50%);
+	--paid: hsl(160, 67%, 52%);
+	--draft: hsl(231, 20%, 27%);
+	--pending-bg: hsla(34, 100%, 50%, 0.05);
+	--paid-bg: hsla(160, 67%, 52%, 0.05);
+	--draft-bg: hsla(231, 20%, 27%, 0.05);
 
 	/* DARK MODE */
 	--dark-mode-form-bg: hsl(233, 30%, 21%);
@@ -85,4 +95,14 @@ body {
 a {
 	text-decoration: none;
 	color: initial;
+}
+
+main {
+	margin-left: 8rem;
+}
+
+@media print {
+	main {
+		margin: 0;
+	}
 }

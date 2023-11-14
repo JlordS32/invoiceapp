@@ -6,6 +6,7 @@ import formatCurrency from '../../../utilities/formatCurrencies';
 import formatDate from '../../../utilities/formatDate';
 import checkStatusType from '../utils/CheckStatusType';
 import getTotal from '../../../utilities/getTotal';
+import extractPrices from '../../../utilities/extractPrices';
 
 // icons
 import arrowRight from '../assets/icon-arrow-right.svg';
@@ -21,21 +22,12 @@ interface CreateInvoiceProps {
 
 // rrd imports
 import { Link } from 'react-router-dom';
+import Status from './Status';
 
 const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
 	const status: paymentStatusType = checkStatusType(invoice.status);
 
-	const extractData = invoice.items.map((item) => {
-		return {
-			quantity: item.quantity,
-			price: item.price,
-		};
-	}) ?? {
-		quantity: 0,
-		price: 0,
-	};
-
-	const total = getTotal(extractData);
+	const total = getTotal(extractPrices(invoice));
 
 	return (
 		<Link to={`/invoice/${invoice.id}`}>
@@ -58,12 +50,7 @@ const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
 				<div className={styles.totalPrice}>
 					<div>{formatCurrency(total)}</div>
 				</div>
-				<div className={`${styles.status} ${styles[status]}`}>
-					<div className='d-flex justify-content-center align-items-center'>
-						<div className={styles.circle}></div>
-						<span>{status}</span>
-					</div>
-				</div>
+				<Status status={status} />
 
 				<div className={styles.goTo}>
 					<div>

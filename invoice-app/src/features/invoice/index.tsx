@@ -4,7 +4,12 @@ import CreateInvoice from './components/CreateInvoice';
 // type imports
 import { InvoiceType } from './types/InvoiceTypes';
 
-const Invoice = ({ data }: { data: InvoiceType }) => {
+// type
+interface invoiceProps {
+	data: InvoiceType;
+}
+
+const Invoice = ({ data }: invoiceProps) => {
 	return <CreateInvoice invoice={data} />;
 };
 

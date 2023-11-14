@@ -5,7 +5,7 @@ import MainLayout from './layout/MainLayout';
 
 // pages
 import Dashboard from './pages/dashboard';
-import Invoice, { invoiceLoader } from './pages/Invoice';
+import Invoice, { invoiceLoader } from './pages/invoice';
 
 function App() {
 	const router = createBrowserRouter([

@@ -1,14 +1,7 @@
 .invoice {
-	--pending: hsl(34, 100%, 50%);
-	--paid: hsl(160, 67%, 52%);
-	--draft: hsl(231, 20%, 27%);
-	--pending-bg: hsla(34, 100%, 50%, 0.05);
-	--paid-bg: hsla(160, 67%, 52%, 0.05);
-	--draft-bg: hsla(231, 20%, 27%, 0.05);
-
 	width: 56.15385rem;
 	height: 5.53846rem;
-	background-color: var(--form-bg);
+	background-color: var(--box-bg);
 	border-radius: 0.5rem;
 	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.1);
 	display: grid;

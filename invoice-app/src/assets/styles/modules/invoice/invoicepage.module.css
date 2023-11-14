@@ -1,0 +1,67 @@
+.invoicePage {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+   margin-top: 5rem;
+	width: 56.15385rem;
+}
+
+.invoiceNav {
+	background-color: var(--form-bg);
+	padding: 1.5rem 2.5rem;
+	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.1);
+	display: flex;
+}
+
+.invoiceNav > .buttons,
+.invoiceNav > .status > div {
+	display: flex;
+	gap: 0 0.62rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.invoiceNav > .status {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.invoiceNav > .status > div {
+	gap: 0 1.65rem;
+}
+
+.invoiceNav > .buttons {
+	margin-left: auto;
+}
+
+/* go back */
+
+.goBack {
+	display: flex;
+	align-items: center;
+	gap: 0 1.82rem;
+	font-weight: 700;
+	color: var(--text);
+	margin-bottom: 2.4rem;
+	cursor: pointer;
+}
+
+.goBack:hover {
+	color: var(--text-hover);
+}
+
+@media print {
+	.invoicePage {
+		display: block;
+		outline: 1px red solid;
+	}
+
+	.container {
+		width: auto;
+		outline: 1px red solid;
+	}
+}
