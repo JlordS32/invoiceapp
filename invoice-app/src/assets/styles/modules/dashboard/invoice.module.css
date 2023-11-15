@@ -141,7 +141,7 @@
 	.invoice {
 		grid-template-rows: repeat(3, 1fr);
 		grid-template-columns: repeat(2, 1fr);
-		padding: 1.9rem;
+		padding: 1.9rem 1.85rem 1.7rem 1.85rem;
 		height: 10.30769rem;
 	}
 
@@ -172,4 +172,11 @@
 	.invoice .totalPrice {
 		justify-content: start;
 	}
+
+	.invoice .totalPrice,
+	.invoice .statusWrapper,
+	.invoice .dueDate {
+		align-self: flex-end;
+	}
+	
 }

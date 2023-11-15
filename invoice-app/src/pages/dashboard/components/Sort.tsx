@@ -7,6 +7,9 @@ import { useEffect, useRef, useState } from 'react';
 // rrd
 import { useNavigate } from 'react-router-dom';
 
+// hero icons
+import { BarsArrowDownIcon } from '@heroicons/react/24/outline';
+
 const Sort = () => {
 	const navigate = useNavigate();
 
@@ -33,6 +36,9 @@ const Sort = () => {
 
 	// state
 	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
+
+	// icons
+	const Icon = <BarsArrowDownIcon width={22} />;
 
 	useEffect(() => {
 		const searchParams = new URLSearchParams();
@@ -63,6 +69,7 @@ const Sort = () => {
 				options={sortOptions}
 				ref={dropdownSortRef}
 				onChange={setSelectedOption}
+				smallScreenIcon={Icon}
 				label='Sort by'
 			/>
 		</div>

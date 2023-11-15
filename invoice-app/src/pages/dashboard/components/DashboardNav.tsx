@@ -6,8 +6,7 @@ import Button from '../../../components/button/Button';
 import Filter from './Filter';
 import Sort from './Sort';
 
-// hero icons
-import { BarsArrowDownIcon } from '@heroicons/react/24/solid';
+import { useMediaQuery } from 'react-responsive';
 
 // type
 interface DashbordNavProps {
@@ -15,6 +14,8 @@ interface DashbordNavProps {
 }
 
 const DashboardNav = ({ length }: DashbordNavProps) => {
+	const isWide = useMediaQuery({ minWidth: 768 });
+
 	return (
 		<div className={styles.dashboardNav}>
 			<div className='mr-auto'>
@@ -22,7 +23,11 @@ const DashboardNav = ({ length }: DashbordNavProps) => {
 				<div className='body-text-2'>
 					<p>
 						{length && length > 0 ? (
-							<span>There are {length} total invoices</span>
+							<span>{`${
+								isWide
+									? 'There are ' + length + ' total invoices'
+									: length + ' invoices'
+							}`}</span>
 						) : (
 							<span>No Invoices</span>
 						)}
@@ -30,13 +35,9 @@ const DashboardNav = ({ length }: DashbordNavProps) => {
 				</div>
 			</div>
 
-			{/* <Filter />
+			<Filter />
 
-			<Sort /> */}
-
-			<div>
-				<BarsArrowDownIcon width={24} />
-			</div>
+			<Sort />
 
 			<Button
 				variant='addButton'

@@ -10,6 +10,9 @@ import Dropdown, {
 // rrd
 import { useNavigate } from 'react-router-dom';
 
+// heroicons
+import { FunnelIcon } from '@heroicons/react/24/solid';
+
 const Filter = () => {
 	const dropdownFilterRef = useRef<DropdownRef>(null);
 	const filterOptions = [
@@ -57,6 +60,12 @@ const Filter = () => {
 		navigate({ search });
 	}, [selectedOption]);
 
+	const Icon = (
+		<FunnelIcon
+			width={22}
+		/>
+	);
+
 	return (
 		<div>
 			<Dropdown
@@ -64,6 +73,7 @@ const Filter = () => {
 				ref={dropdownFilterRef}
 				onChange={setSelectedOption}
 				label='Filter by status'
+				smallScreenIcon={Icon}
 			/>
 		</div>
 	);

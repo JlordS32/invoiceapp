@@ -4,7 +4,7 @@
 
 .dashboardNav {
 	display: flex;
-	width: clamp(49rem, 70%, 56.15385rem);
+	width: clamp(50rem, 70%, 56.15385rem);
 	padding-top: 6rem;
 	margin: 0 auto;
 	align-items: center;
@@ -50,7 +50,7 @@
 
 @media screen and (max-width: 767px) {
 	.dashboardNav {
-		width: 85%;
+		width: 92%;
 	}
 }
 @media screen and (max-width: 480px) {
