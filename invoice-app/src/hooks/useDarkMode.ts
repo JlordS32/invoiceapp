@@ -19,6 +19,8 @@ const applyTheme = (isDarkMode: boolean) => {
 			'--text-hover': 'var(--07)',
 			'--text-3': 'var(--05)',
 			'--box-bg-2': 'var(--04)',
+			'--nav-bg': 'var(--03)',
+			'--box-bg-3': 'var(--08)'
 		},
 		light: {
 			'--body-bg': 'hsl(240, 27%, 98%)',
@@ -36,6 +38,8 @@ const applyTheme = (isDarkMode: boolean) => {
 			'--text-hover': 'var(--06)',
 			'--text-3': 'var(--07)',
 			'--box-bg-2': 'hsl(228, 71%, 99%)',
+			'--nav-bg': 'hsl(231, 20%, 27%)',
+			'--box-bg-3': 'hsl(231, 20%, 27%)'
 		},
 	};
 

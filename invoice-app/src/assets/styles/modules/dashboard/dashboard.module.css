@@ -51,15 +51,34 @@
 @media screen and (max-width: 767px) {
 	.dashboardNav {
 		width: 92%;
+		padding-top: 2.77rem;
+		gap: 0 1.5rem;
 	}
 }
 @media screen and (max-width: 480px) {
 	.dashboardNav {
 		width: 92%;
-		padding-top: 2.77rem;
 	}
 
 	.invoiceWrapper {
 		padding: 2.5rem 0;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.dashboardNav {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		gap: 1rem 0;
+	}
+
+	.dashboardNav div:nth-child(2),
+	.dashboardNav div:nth-child(3) {
+		justify-self: flex-end;
+	}
+
+	.dashboardNav div:first-child {
+		grid-column: span 3;
 	}
 }

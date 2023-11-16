@@ -14,7 +14,13 @@ interface InvoiceProps {
 	invoice: InvoiceType;
 }
 
+import { useMediaQuery } from 'react-responsive';
+
 const InvoicePaper = ({ invoice }: InvoiceProps) => {
+	const isWide = useMediaQuery({
+		query: '(min-width: 560px)',
+	});
+
 	return (
 		<div className={styles.invoice}>
 			<div className={styles.invoiceInfo}>
@@ -77,8 +83,16 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 							invoice?.items.map((item, index) => (
 								<tr key={index}>
 									<td className={styles.itemName}>{item.name}</td>
-									<td className={styles.quantity}>{item.quantity}</td>
-									<td className={styles.price}>{formatCurrency(item.price)}</td>
+									<td className={styles.quantity}>
+										{isWide
+											? item.quantity
+											: `${item.quantity} x ${formatCurrency(item.price)}`}
+									</td>
+									{isWide && (
+										<td className={styles.price}>
+											{formatCurrency(item.price)}
+										</td>
+									)}
 									<td className={styles.totalOfItem}>
 										{formatCurrency(item.price * item.quantity)}
 									</td>
@@ -89,7 +103,7 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 
 				{invoice && (
 					<div className={styles.total}>
-						<p>Amount Due</p>
+						{isWide ? <p>Amount Due</p> : <p>Grand Total</p>}
 						<span className={styles.amount}>{`${formatCurrency(
 							getTotal(extractPrices(invoice))
 						)}`}</span>

@@ -7,6 +7,7 @@
 .container {
 	margin-top: 5rem;
 	width: 56.15385rem;
+	padding: 1.85rem;
 }
 
 .invoiceNav {
@@ -174,7 +175,7 @@
 .total {
 	display: flex;
 	justify-content: space-between;
-	background-color: #373b53;
+	background-color: var(--box-bg-3);
 	color: var(--white);
 	padding: 2.5rem;
 	align-items: center;
@@ -194,11 +195,113 @@
 @media print {
 	.invoicePage {
 		display: block;
-		outline: 1px red solid;
 	}
 
 	.container {
 		width: auto;
-		outline: 1px red solid;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.container {
+		margin-top: 1rem;
+	}
+	.clientInfo {
+		padding-top: 2.4rem;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.invoiceNav .buttons {
+		position: fixed;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: var(--box-bg);
+		width: 100%;
+		padding: 1.6rem 1.85rem;
+		box-shadow: 0px -32px 15px -3px rgba(0, 0, 0, 0.1);
+		z-index: 100;
+	}
+
+	.invoiceNav .status {
+		width: 100%;
+	}
+
+	.invoiceNav .status > div {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.clientInfo {
+		padding-right: 0;
+	}
+}
+
+@media screen and (max-width: 560px) {
+	.itemTable th {
+		display: none;
+	}
+
+	.itemTable table {
+		padding: 0 1.85rem;
+	}
+
+	.itemTable td {
+		padding: 0;
+	}
+
+	.itemTable tbody {
+		border-spacing: 10px;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1.85rem;
+		padding: 1.9rem 0;
+	}
+
+	.itemTable tbody tr {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+	}
+	.itemTable tbody td.totalOfItem {
+		grid-area: 1 / 2 / -1 / 2;
+		align-self: center;
+	}
+
+	.itemTable tbody td.quantity {
+		justify-self: flex-start;
+		font-weight: 700;
+	}
+
+	.clientInfo > div {
+		width: 7rem;
+	}
+
+	.container {
+		
+		margin-bottom: 5rem;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.senderInfo {
+		flex-direction: column;
+	}
+
+	.senderInfo .senderAddress {
+		text-align: left;
+		padding-top: 2rem;
+	}
+	.clientInfo {
+		flex-wrap: wrap;
+		gap: 2.7rem;
+	}
+}
+
+@media screen and (max-width: 420px) {
+	.invoice {
+		padding: 1.85rem;
 	}
 }

@@ -43,7 +43,7 @@ const Button = (props: CustomButtonProps) => {
 					/>
 				</div>
 			)}
-			<span>{isWide ? props.children : props.shortText ?? ''}</span>
+			<span>{isWide ? props.children : props.shortText ?? props.children}</span>
 		</button>
 	);
 };

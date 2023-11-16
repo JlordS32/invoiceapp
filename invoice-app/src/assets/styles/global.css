@@ -40,6 +40,7 @@
 	--checkbox-bg: var(--05);
 	--box-bg: var(--white);
 	--box-bg-2: hsl(228, 71%, 99%);
+	--box-bg-3: hsl(231, 20%, 27%);
 
 	/* button text */
 	--text-dark: var(--08);
