@@ -109,6 +109,10 @@ a:focus {
 	border-radius: 0.5rem;
 }
 
+fieldset {
+	border: 0;
+}
+
 button:focus {
 	border: 1px solid black;
 	outline: none;

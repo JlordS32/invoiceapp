@@ -16,3 +16,25 @@
    padding: 4.5rem 6.5rem;
 	position: relative;
 }
+
+.canvas form {
+	overflow-y: scroll;
+}
+
+@media screen and (max-width: 767px) {
+	.offcanvas {
+		left: 0;
+	}
+
+	.canvas {
+		margin-top: 6.3rem;
+		height: 90vh;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.canvas {
+		width: 100vw;
+		border-radius: 0;
+	}
+}

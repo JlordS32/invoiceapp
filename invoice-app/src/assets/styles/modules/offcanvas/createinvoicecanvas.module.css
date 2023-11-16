@@ -11,6 +11,7 @@
 	display: flex;
 	justify-content: center;
    gap: 0 0.65rem;
+   z-index: 150;
 }
 
 .buttons button:nth-child(2) {

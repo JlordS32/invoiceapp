@@ -14,7 +14,8 @@
 	border-radius: 0.30769rem;
 	border: 1px solid var(--form-outline);
 	background: var(--white);
-	padding: 1.3rem;
+	text-indent: 1.3rem;
+	padding: 1.3rem 0;
 	color: var(--form-text);
 	caret-color: var(--form-label);
 	background-color: var(--form-bg);
