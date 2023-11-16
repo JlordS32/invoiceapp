@@ -77,30 +77,16 @@
 }
 
 /* Save as Draft */
-.button.saveAsDraftButtonLight {
-	background-color: hsl(231, 20%, 27%);
-	color: var(--text-2-dark);
+.button.saveAsDraftButton {
+	background-color: var(--draft-btn-bg);
+	color: var(--draft-btn-text);
 }
 
-.button.saveAsDraftButtonDark {
-	background-color: hsl(231, 20%, 27%);
-	color: var(--text-2-light);
+.button.saveAsDraftButton:hover {
+	background-color: var(--draft-btn-hover);
 }
-
-.button.saveAsDraftButtonLight:hover {
-	background-color: var(--text-dark);
-}
-
-.button.saveAsDraftButtonDark:hover {
-	background-color: var(--secondary);
-}
-
-.button.saveAsDraftButtonLight:active {
-	background-color: hsl(231, 20%, 27%);
-}
-
-.button.saveAsDraftButtonDark:active {
-	background-color: hsl(231, 20%, 27%);
+.button.saveAsDraftButton:active {
+	background-color: var(--draft-btn-bg);
 }
 
 /* Add New Item */

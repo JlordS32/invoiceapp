@@ -8,9 +8,30 @@
 	}
 }
 
+@keyframes slideToRight {
+	0% {
+		opacity: 0;
+		transform: translateX(-100%);
+	}
+
+
+	90% {
+		transform: translateX(0%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0%);
+	}
+}
+
 .animate {
 	animation-duration: 100ms;
 	animation-timing-function: ease-in;
+}
+
+.animate-ease-in-out {
+	animation-timing-function: ease-in-out;
 }
 
 .animate--slow {
@@ -21,6 +42,14 @@
 	animation-duration: 50ms;
 }
 
+.animate--very-slow {
+	animation-duration: 300ms;
+}
+
 .fadeIn {
 	animation-name: fadeIn;
+}
+
+.slideToRight {
+	animation-name: slideToRight;
 }

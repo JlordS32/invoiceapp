@@ -1,9 +1,10 @@
-import styles from '../../assets/styles/modules/offcanvas.module.css';
+import styles from '../../assets/styles/modules/offcanvas/offcanvas.module.css';
 
 // redux
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import CreateInvoiceCanvas from './CreateInvoiceCanvas';
+import { useEffect } from 'react';
 
 // exportable function
 
@@ -19,6 +20,15 @@ const OffCanvas = () => {
 				return <CreateInvoiceCanvas />;
 		}
 	};
+
+	// disable scrolling
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'unset';
+		}
+	});
 
 	return (
 		<div>

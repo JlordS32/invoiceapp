@@ -44,12 +44,12 @@
 
 	/* button */
 	/* button text */
-	--text-dark: var(--08);
-	--text-2-dark: var(--06);
-	--text-2-light: var(--05);
 	--edit-btn-text: var(--07);
 	--edit-btn-bg: hsl(228, 71%, 99%);
 	--edit-btn-hover: hsl(231, 73%, 93%);
+	--draft-btn-bg: hsl(231, 20%, 27%);
+	--draft-btn-text: var(--06);
+	--draft-btn-hover: var(--08);
 
 	/* form colors */
 	--form-outline: hsl(231, 73%, 93%);

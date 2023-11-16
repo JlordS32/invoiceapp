@@ -24,6 +24,9 @@ const applyTheme = (isDarkMode: boolean) => {
 			'--edit-btn-bg': 'var(--04)',
 			'--edit-btn-hover': 'var(--white)',
 			'--edit-btn-text': 'var(--05)',
+			'--draft-btn-bg': 'hsl(231, 20%, 27%)',
+			'--draft-btn-text': 'var(--05)',
+			'--draft-btn-hover': 'var(--03)',
 		},
 		light: {
 			'--body-bg': 'hsl(240, 27%, 98%)',
@@ -46,6 +49,9 @@ const applyTheme = (isDarkMode: boolean) => {
 			'--edit-btn-bg': 'hsl(228, 71%, 99%)',
 			'--edit-btn-hover': 'hsl(231, 73%, 93%)',
 			'--edit-btn-text': 'var(--07)',
+			'--draft-btn-bg': 'hsl(231, 20%, 27%)',
+			'--draft-btn-text': 'var(--06)',
+			'--draft-btn-hover': 'var(--08)',
 		},
 	};
 
