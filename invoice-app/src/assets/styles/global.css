@@ -42,11 +42,14 @@
 	--box-bg-2: hsl(228, 71%, 99%);
 	--box-bg-3: hsl(231, 20%, 27%);
 
+	/* button */
 	/* button text */
 	--text-dark: var(--08);
-	--text-light: var(--07);
 	--text-2-dark: var(--06);
 	--text-2-light: var(--05);
+	--edit-btn-text: var(--07);
+	--edit-btn-bg: hsl(228, 71%, 99%);
+	--edit-btn-hover: hsl(231, 73%, 93%);
 
 	/* form colors */
 	--form-outline: hsl(231, 73%, 93%);
@@ -100,8 +103,21 @@ a {
 	color: initial;
 }
 
+a:focus {
+	border: 1px var(--primary) solid;
+	outline: none;
+	border-radius: 0.5rem;
+}
+
+button:focus {
+	border: 1px solid black;
+	outline: none;
+	border-radius: 100px;
+}
+
 main {
 	margin-left: 8rem;
+	position: relative;
 }
 
 @media screen and (max-width: 767px) {

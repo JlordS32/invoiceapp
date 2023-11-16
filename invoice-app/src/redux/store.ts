@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import invoiceReducer from './invoice/invoiceSlice';
+import invoiceSlice from './invoice/invoiceSlice';
+import offCanvasSlice from './offcanvas/offCanvasSlice';
 
 export const store = configureStore({
 	reducer: {
-		invoice: invoiceReducer,
+		invoice: invoiceSlice,
+		offCanvas: offCanvasSlice
 	},
 });
 

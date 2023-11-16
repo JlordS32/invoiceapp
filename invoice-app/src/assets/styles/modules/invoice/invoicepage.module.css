@@ -298,6 +298,10 @@
 		flex-wrap: wrap;
 		gap: 2.7rem;
 	}
+
+	.itemTable td.quantity {
+		padding-top: 0.3rem;
+	}
 }
 
 @media screen and (max-width: 420px) {

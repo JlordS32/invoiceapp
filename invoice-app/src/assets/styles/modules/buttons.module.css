@@ -59,28 +59,17 @@
 
 /* Edit Light */
 
-.button.editButtonLight {
-	background-color: hsl(228, 71%, 99%);
-	color: var(--text-light);
+.button.editButton {
+	background-color: var(--edit-btn-bg);
+	color: var(--edit-btn-text);
 }
 
-.button.editButtonLight:hover {
-	background-color: hsl(231, 73%, 93%);
+.button.editButton:hover {
+	background-color: var(--edit-btn-hover);
 }
 
-.button.editButtonLight:active {
-	background-color: hsl(228, 71%, 99%);
-}
-
-/* Edit Dark */
-
-.button.editButtonDark {
-	background-color: var(--secondary);
-}
-
-.button.editButtonDark:hover {
-	background-color: var(--white);
-	color: #dfe3fa;
+.button.editButton:active {
+	background-color: var(--edit-btn-bg);
 }
 
 .button.editButtonDark:active {

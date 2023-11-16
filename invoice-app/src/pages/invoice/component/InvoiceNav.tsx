@@ -24,7 +24,7 @@ const InvoiceNav = ({ status }: InvoiceNavProps) => {
 
 			<div className={styles.buttons}>
 				<Button
-					variant='editButtonLight'
+					variant='editButton'
 					onClick={() => {
 						print();
 					}}

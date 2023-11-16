@@ -3,6 +3,7 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 // components
 import Navbar from './Navbar';
+import OffCanvas from '../components/ui/OffCanvas';
 
 const MainLayout = () => {
 	return (
@@ -10,6 +11,7 @@ const MainLayout = () => {
 			<Navbar />
 			<main>
 				<Outlet />
+				<OffCanvas />	
 			</main>
 			<ScrollRestoration />
 		</div>

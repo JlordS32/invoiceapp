@@ -6,7 +6,13 @@ import Button from '../../../components/button/Button';
 import Filter from './Filter';
 import Sort from './Sort';
 
+// libraries
 import { useMediaQuery } from 'react-responsive';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
+import { toggleCanvas } from '../../../redux/offcanvas/offCanvasSlice';
 
 // type
 interface DashbordNavProps {
@@ -15,6 +21,12 @@ interface DashbordNavProps {
 
 const DashboardNav = ({ length }: DashbordNavProps) => {
 	const isWide = useMediaQuery({ minWidth: 768 });
+
+	const dispatch = useDispatch<AppDispatch>();
+
+	const toggleOffCanvas = () => {
+		dispatch(toggleCanvas());
+	};
 
 	return (
 		<div className={styles.dashboardNav}>
@@ -41,7 +53,8 @@ const DashboardNav = ({ length }: DashbordNavProps) => {
 
 			<Button
 				variant='addButton'
-				shortText='New'
+				shorttext='New'
+				onClick={toggleOffCanvas}
 			>
 				New Invoice
 			</Button>

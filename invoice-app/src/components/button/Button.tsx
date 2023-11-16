@@ -7,18 +7,16 @@ type ButtonTypes =
 	| ''
 	| 'default'
 	| 'addButton'
-	| 'editButtonLight'
-	| 'editButtonDark'
+	| 'editButton'
 	| 'deleteButton'
-	| 'saveAsDraftButtonDark'
-	| 'saveAsDraftButtonLight'
+	| 'saveAsDraftButton'
 	| 'addNewItemButton';
 
 type CustomButtonProps = React.HTMLProps<HTMLButtonElement> & {
 	width?: string;
 	type?: 'button' | 'reset' | 'submit';
 	variant?: ButtonTypes;
-	shortText?: string;
+	shorttext?: string;
 };
 
 const Button = (props: CustomButtonProps) => {
@@ -43,7 +41,7 @@ const Button = (props: CustomButtonProps) => {
 					/>
 				</div>
 			)}
-			<span>{isWide ? props.children : props.shortText ?? props.children}</span>
+			<span>{isWide ? props.children : props.shorttext ?? props.children}</span>
 		</button>
 	);
 };
