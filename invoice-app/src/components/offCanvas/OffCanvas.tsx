@@ -2,20 +2,23 @@ import styles from '../../assets/styles/modules/offcanvas.module.css';
 
 // redux
 import { useSelector } from 'react-redux';
-
 import { RootState } from '../../redux/store';
+import CreateInvoiceCanvas from './CreateInvoiceCanvas';
 
-import { useEffect } from 'react';
+// exportable function
 
 const OffCanvas = () => {
 	// redux
 	const offCanvasState = useSelector((state: RootState) => state.offCanvas);
 
-	const { isOpen } = offCanvasState;
+	const { isOpen, contentKey } = offCanvasState;
 
-	useEffect(() => {
-		console.log(isOpen);
-	}, [isOpen]);
+	const getKey = () => {
+		switch (contentKey) {
+			case 'create-invoice':
+				return <CreateInvoiceCanvas />;
+		}
+	};
 
 	return (
 		<div>
@@ -23,7 +26,9 @@ const OffCanvas = () => {
 				<div
 					className={styles.offcanvas}
 					tabIndex={-1}
-				></div>
+				>
+					{getKey()}
+				</div>
 			)}
 		</div>
 	);

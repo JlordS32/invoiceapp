@@ -3,7 +3,7 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 // components
 import Navbar from './Navbar';
-import OffCanvas from '../components/ui/OffCanvas';
+import OffCanvas from '../components/offCanvas/OffCanvas';
 
 const MainLayout = () => {
 	return (

@@ -12,7 +12,10 @@ import { useMediaQuery } from 'react-responsive';
 // redux
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../redux/store';
-import { toggleCanvas } from '../../../redux/offcanvas/offCanvasSlice';
+import {
+	toggleCanvas,
+	onLoadCanvas,
+} from '../../../redux/offcanvas/offCanvasSlice';
 
 // type
 interface DashbordNavProps {
@@ -23,9 +26,9 @@ const DashboardNav = ({ length }: DashbordNavProps) => {
 	const isWide = useMediaQuery({ minWidth: 768 });
 
 	const dispatch = useDispatch<AppDispatch>();
-
 	const toggleOffCanvas = () => {
 		dispatch(toggleCanvas());
+		dispatch(onLoadCanvas('create-invoice'));
 	};
 
 	return (
