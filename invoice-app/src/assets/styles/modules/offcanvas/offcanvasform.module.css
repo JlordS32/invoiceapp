@@ -36,8 +36,8 @@
 }
 
 .fieldsetHeader p {
-   color: var(--07);
-   margin: 1rem 0;
+	color: var(--07);
+	margin: 1rem 0;
 }
 
 .itemListFieldset .item {
@@ -47,5 +47,19 @@
 }
 
 .itemListFieldset .addNewItem {
-   width: 100%;
+	width: 100%;
+	margin-top: 1.25rem;
+}
+
+.item > .deleteItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.item > .deleteItem p {
+	font-size: 1.15rem;
+	color: var(--text-2);
+	font-weight: 700;
+	letter-spacing: -0.01923rem;
 }

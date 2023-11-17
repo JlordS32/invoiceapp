@@ -3,6 +3,9 @@ import styles from '../../assets/styles/modules/offcanvas/offcanvasform.module.c
 import Button from '../button/Button';
 import Form from '../forms';
 
+// svg
+import deleteSvg from '../../assets/svg/icon-delete.svg';
+
 const OffCanvasForm = () => {
 	const options = [
 		{
@@ -122,6 +125,14 @@ const OffCanvasForm = () => {
 						<Form.Text />
 						<Form.Text />
 						<Form.Text />
+						<div aria-label='Delete Item' className={styles.deleteItem}>
+							<p>0.00</p>
+							<img
+								src={deleteSvg}
+								alt='Delete Item'
+								width={13}
+							/>
+						</div>
 					</div>
 
 					<div className={styles.addNewItem}>
