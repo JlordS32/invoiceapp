@@ -41,6 +41,7 @@
 	--box-bg: var(--white);
 	--box-bg-2: hsl(228, 71%, 99%);
 	--box-bg-3: hsl(231, 20%, 27%);
+	--offcanvas-bg: var(--white);
 
 	/* button */
 	/* button text */
@@ -122,6 +123,23 @@ button:focus {
 main {
 	margin-left: 8rem;
 	position: relative;
+}
+
+::-webkit-scrollbar {
+	width: 0.61538rem;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--05);
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--06);
 }
 
 @media screen and (max-width: 767px) {

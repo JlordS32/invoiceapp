@@ -27,6 +27,7 @@ const applyTheme = (isDarkMode: boolean) => {
 			'--draft-btn-bg': 'hsl(231, 20%, 27%)',
 			'--draft-btn-text': 'var(--05)',
 			'--draft-btn-hover': 'var(--03)',
+			'--offcanvas-bg': 'var(--012)',
 		},
 		light: {
 			'--body-bg': 'hsl(240, 27%, 98%)',
@@ -52,6 +53,7 @@ const applyTheme = (isDarkMode: boolean) => {
 			'--draft-btn-bg': 'hsl(231, 20%, 27%)',
 			'--draft-btn-text': 'var(--06)',
 			'--draft-btn-hover': 'var(--08)',
+			'--offcanvas-bg': 'var(--white)'
 		},
 	};
 

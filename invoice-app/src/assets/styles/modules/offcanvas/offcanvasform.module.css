@@ -1,18 +1,51 @@
+.billFrom h4,
 .billTo h4 {
-   margin-top: 3.5rem;
-   margin-bottom: 1.85rem;
-   color: var(--primary);
+	margin-top: 3.5rem;
+	margin-bottom: 1.85rem;
+	color: var(--primary);
 }
 
+.billFromfieldset,
 .billTofieldset {
-   margin-top: 1.9rem;
-   border: 0;
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   width: 100%;
+	margin-top: 1.9rem;
+	border: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	width: 100%;
+	gap: 0 1.85rem;
 }
 
-.billTofieldset > * {
-   grid-column: span 1;
-   justify-self: center;
+.billFromfieldset > .billFromfieldsetInner {
+	grid-column: span 1;
+}
+
+.itemList h2 {
+	color: #777f98;
+	margin-top: 2.7rem;
+}
+
+.itemListFieldset {
+	display: flex;
+	flex-direction: column;
+}
+
+.itemListFieldset > .fieldsetHeader {
+	display: grid;
+	grid-template-columns: 1fr 0.33fr repeat(2, 0.5fr);
+	gap: 0 1.25rem;
+}
+
+.fieldsetHeader p {
+   color: var(--07);
+   margin: 1rem 0;
+}
+
+.itemListFieldset .item {
+	display: grid;
+	grid-template-columns: 1fr 0.33fr repeat(2, 0.5fr);
+	gap: 0 1.25rem;
+}
+
+.itemListFieldset .addNewItem {
+   width: 100%;
 }

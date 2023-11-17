@@ -6,9 +6,7 @@ import styles from '../../assets/styles/modules/form.module.css';
 // from index
 import { FormProps } from './index';
 
-export interface FormTextProps extends FormProps {
-	
-}
+export interface FormTextProps extends FormProps {}
 
 export interface FormTextRef {
 	value: string;
@@ -49,7 +47,7 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 		<div
 			className={styles.formContainer}
 			style={{
-				width: props.width ?? '18.46154rem',
+				width: props.width,
 			}}
 		>
 			{props.label && <label htmlFor={props.id}>{props.label}</label>}

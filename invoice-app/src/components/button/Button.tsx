@@ -27,6 +27,9 @@ const Button = (props: CustomButtonProps) => {
 	return (
 		<button
 			className={`${styles.button} ${styles[variant ?? '']}`}
+			style={{
+				width: props.width,
+			}}
 			{...props}
 		>
 			{variant && variant === 'addButton' && (
@@ -41,7 +44,7 @@ const Button = (props: CustomButtonProps) => {
 					/>
 				</div>
 			)}
-			<span>{isWide ? props.children : props.shorttext ?? props.children}</span>
+			<span className='text-center'>{isWide ? props.children : props.shorttext ?? props.children}</span>
 		</button>
 	);
 };

@@ -11,7 +11,7 @@
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	transition: 150ms linear;
 	padding: 0.62rem;
 }

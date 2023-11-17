@@ -34,16 +34,8 @@ const CreateInvoiceCanvas = () => {
 		<div
 			className={`${styles.canvas} animate animate--very-slow animate-ease-in-out slideToRight`}
 		>
-			<h2 className='text--h2'>Create Invoice</h2>
-
-			<form
-				style={{
-					overflow: 'scroll',
-					display: 'flex',
-					flexDirection: 'column',
-					height: '500px',
-				}}
-			>
+			<form>
+				<h2 className='text--h2'>Create Invoice</h2>
 				<OffCanvasForm />
 			</form>
 

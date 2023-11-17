@@ -2,7 +2,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.7rem 0;
-	width: 18.46154rem;
 }
 
 .formContainer > input {
@@ -19,6 +18,7 @@
 	color: var(--form-text);
 	caret-color: var(--form-label);
 	background-color: var(--form-bg);
+	width: 100%;
 }
 
 .formContainer > input:focus {
