@@ -2,6 +2,7 @@
 	box-shadow: var(--box-shadow);
 	padding: 1rem 0;
 	border: 0;
+	background-color: var(--form-bg);
 }
 
 .react-datepicker__day {
@@ -9,6 +10,7 @@
 	font-family: 'League Spartan', sans-serif;
 	font-size: 1.15385rem;
 	margin: 0.4rem;
+	color: var(--text);
 }
 .react-datepicker__day--selected {
 	color: var(--primary);
@@ -28,7 +30,7 @@
 }
 
 .react-datepicker__current-month {
-	color: var(--dark);
+	color: var(--text);
 	text-align: center;
 	font-size: 1.15rem;
 	font-family: League Spartan;
@@ -53,19 +55,4 @@
 
 .react-datepicker__triangle {
 	display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-	.react-datepicker {
-		background-color: var(--dark-mode-form-bg);
-		box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
-	}
-
-	.react-datepicker__current-month {
-		color: var(--white);
-	}
-
-	.react-datepicker__day {
-		color: var(--white);
-	}
 }

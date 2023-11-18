@@ -3,16 +3,18 @@ import { useEffect, useState } from 'react';
 
 // styles
 import styles from '../../assets/styles/modules/offcanvas/offcanvasform.module.css';
+
+// components
 import Button from '../button/Button';
 import Form from '../forms';
+import FormItems from './FormItems';
 
 // libraries
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useMediaQuery } from 'react-responsive';
 
 // types
-import { ItemType } from '../../types';
-import FormItems from './FormItems';
+import { ItemType, FormDataType as FormData } from '../../types';
 
 const OffCanvasForm = () => {
 	// defaults
@@ -38,9 +40,9 @@ const OffCanvasForm = () => {
 	const defaultItem = [
 		{
 			id: crypto.randomUUID(),
-			name: 'Banner Design',
-			quantity: 156,
-			price: 1,
+			name: '',
+			quantity: 0,
+			price: 0,
 		},
 	];
 
@@ -50,14 +52,7 @@ const OffCanvasForm = () => {
 
 	// state
 	const [items, setItems] = useState<ItemType[]>(defaultItem);
-	const [formData, setFormData] = useState<FormData>({});
-
-	// types
-	interface FormData {
-		[name: string]: {
-			[name: string]: string;
-		};
-	}
+	const [formData, setFormData] = useState<FormData>();
 
 	const handleAddNewItem = () => {
 		setItems([
@@ -83,17 +78,18 @@ const OffCanvasForm = () => {
 
 	const handleInputChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
-		nest: string | null = null
+		nest?: string | null
 	) => {
 		const { name, value } = e.target;
 		if (nest) {
+
 			setFormData({
 				...formData,
 				[nest]: {
-					...formData[nest],
+					...(formData[nest || ''] || {}),
 					[name]: value,
 				},
-			});
+			} as FormData);
 		} else {
 			setFormData({
 				...formData,
@@ -103,11 +99,11 @@ const OffCanvasForm = () => {
 	};
 
 	useEffect(() => {
-		setFormData((prev) => {
+		setFormData((prev: FormData | undefined) => {
 			return {
-				...prev,
+				...(prev || {}),
 				items: items,
-			};
+			} as FormData;
 		});
 	}, [items]);
 

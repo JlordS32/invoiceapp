@@ -81,6 +81,10 @@
 	letter-spacing: -0.01923rem;
 }
 
+.item > .deleteItem img {
+	cursor: pointer;
+}
+
 @media screen and (max-width: 620px) {
 	.billFrom h4,
 	.billTo h4 {
