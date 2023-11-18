@@ -6,57 +6,77 @@ import styles from '../../assets/styles/modules/offcanvas/offcanvasform.module.c
 
 import deleteSvg from '../../assets/svg/icon-delete.svg';
 
-// utilies
-import extractPrices from '../../utilities/extractPrices';
-import getTotal, { priceType } from '../../utilities/getTotal';
-
 // libraries
 import { useMediaQuery } from 'react-responsive';
 
 // types
 import { ItemType } from '../../types';
 import formatCurrency from '../../utilities/formatCurrencies';
-import { useEffect, useRef, useState } from 'react';
-import { FormTextRef } from '../forms/Text';
+import { useEffect, useState } from 'react';
 interface FormItemsProps {
 	item: ItemType;
 	deleteItem: (itemTodelete: ItemType) => void;
+	itemList: ItemType[];
+	setItemList: React.Dispatch<React.SetStateAction<ItemType[]>>;
 }
 
-const FormItems = ({ item, deleteItem }: FormItemsProps) => {
-   // state
+const FormItems = ({
+	item,
+	deleteItem,
+	itemList,
+	setItemList,
+}: FormItemsProps) => {
+	// state
+	const [itemName, setItemName] = useState<string>(item.name);
+	const [quantity, setQuantity] = useState<number>(item.quantity as number);
+	const [price, setPrice] = useState<number>(item.price as number);
 	const [total, setTotal] = useState<number>(0);
-	const [quantity, setQuantity] = useState<number>(0);
-	const [price, setPrice] = useState<number>(0);
 
 	// libraries
 	const isWide = useMediaQuery({ query: '(min-width: 620px)' });
 
-   useEffect(() => {
-      setTotal(price * quantity);
-   }, [total, quantity, price]);
+	// Calculate
+	useEffect(() => {
+		setTotal(quantity * price);
+	}, [total, quantity, price]);
+
+	useEffect(() => {
+		const updatedData = itemList.map((itemlist) => {
+			if (itemlist.id === item.id) {
+				return { ...itemlist, name: itemName, quantity, price };
+			}
+			return itemlist;
+		});
+		setItemList(updatedData);
+	}, [quantity, price, itemName]);
 
 	return (
 		<div className={styles.item}>
 			<Form.Text
 				id='name'
 				name='name'
+				defaultValue={item.name}
+				onChange={(e) => {
+					setItemName(e.target.value);
+				}}
 				label={!isWide ? 'Item Name' : ''}
 			/>
 			<Form.Text
 				id='quantity'
 				name='quantity'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-               setQuantity(Number(e.target.value));
-            }}
+				defaultValue={`${item.quantity}`}
+				onChange={(e) => {
+					setQuantity(Number(e.target.value));
+				}}
 				label={!isWide ? 'Qty.' : ''}
 			/>
 			<Form.Text
 				id='price'
 				name='price'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-               setPrice(Number(e.target.value));
-            }}
+				defaultValue={`${item.price}`}
+				onChange={(e) => {
+					setPrice(Number(e.target.value));
+				}}
 				label={!isWide ? 'Price' : ''}
 			/>
 			<div

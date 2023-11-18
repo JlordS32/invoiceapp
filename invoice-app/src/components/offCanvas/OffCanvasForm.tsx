@@ -38,9 +38,9 @@ const OffCanvasForm = () => {
 	const defaultItem = [
 		{
 			id: crypto.randomUUID(),
-			name: '',
-			quantity: 0,
-			price: 0,
+			name: 'Banner Design',
+			quantity: 156,
+			price: 1,
 		},
 	];
 
@@ -50,6 +50,14 @@ const OffCanvasForm = () => {
 
 	// state
 	const [items, setItems] = useState<ItemType[]>(defaultItem);
+	const [formData, setFormData] = useState<FormData>({});
+
+	// types
+	interface FormData {
+		[name: string]: {
+			[name: string]: string;
+		};
+	}
 
 	const handleAddNewItem = () => {
 		setItems([
@@ -73,9 +81,39 @@ const OffCanvasForm = () => {
 		return;
 	};
 
+	const handleInputChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		nest: string | null = null
+	) => {
+		const { name, value } = e.target;
+		if (nest) {
+			setFormData({
+				...formData,
+				[nest]: {
+					...formData[nest],
+					[name]: value,
+				},
+			});
+		} else {
+			setFormData({
+				...formData,
+				[name]: value,
+			} as FormData);
+		}
+	};
+
 	useEffect(() => {
-		console.log(items);
+		setFormData((prev) => {
+			return {
+				...prev,
+				items: items,
+			};
+		});
 	}, [items]);
+
+	useEffect(() => {
+		console.log(formData);
+	}, [formData]);
 
 	return (
 		<>
@@ -83,6 +121,10 @@ const OffCanvasForm = () => {
 				<h4 className='text--h3'>Bill From</h4>
 				<Form.Text
 					label='Street Address'
+					name='street'
+					onChange={(e) => {
+						handleInputChange(e, 'address');
+					}}
 					width='100%'
 				/>
 
@@ -91,18 +133,30 @@ const OffCanvasForm = () => {
 						<Form.Text
 							label='City'
 							width='100%'
+							name='city'
+							onChange={(e) => {
+								handleInputChange(e, 'address');
+							}}
 						/>
 					</div>
 					<div className={styles.billFromfieldsetInner}>
 						<Form.Text
 							label='Post Code'
 							width='100%'
+							name='postCode'
+							onChange={(e) => {
+								handleInputChange(e, 'address');
+							}}
 						/>
 					</div>
 					<div className={styles.billFromfieldsetInner}>
 						<Form.Text
 							label='Country'
 							width='100%'
+							name='country'
+							onChange={(e) => {
+								handleInputChange(e, 'address');
+							}}
 						/>
 					</div>
 				</div>
@@ -114,14 +168,22 @@ const OffCanvasForm = () => {
 					<Form.Text
 						label={`Client's Name`}
 						width='100%'
+						name='clientName'
+						onChange={handleInputChange}
 					/>
 					<Form.Text
 						label={`Client's Email`}
 						width='100%'
+						name='clientEmail'
+						onChange={handleInputChange}
 					/>
 					<Form.Text
 						label='Street Address'
 						width='100%'
+						name='clientStreet'
+						onChange={(e) => {
+							handleInputChange(e, 'clientAddress');
+						}}
 					/>
 				</div>
 				<div className={styles.billTofieldset}>
@@ -129,18 +191,30 @@ const OffCanvasForm = () => {
 						<Form.Text
 							label='City'
 							width='100%'
+							name='city'
+							onChange={(e) => {
+								handleInputChange(e, 'clientAddress');
+							}}
 						/>
 					</div>
 					<div className={styles.billTofieldsetInner}>
 						<Form.Text
 							label='Post Code'
 							width='100%'
+							name='postcode'
+							onChange={(e) => {
+								handleInputChange(e, 'clientAddress');
+							}}
 						/>
 					</div>
 					<div className={styles.billTofieldsetInner}>
 						<Form.Text
 							label='Country'
 							width='100%'
+							name='country'
+							onChange={(e) => {
+								handleInputChange(e, 'clientAddress');
+							}}
 						/>
 					</div>
 				</div>
@@ -157,6 +231,8 @@ const OffCanvasForm = () => {
 					<Form.Text
 						label='Project Description'
 						width='100%'
+						name='description'
+						onChange={handleInputChange}
 					/>
 				</div>
 			</section>
@@ -182,6 +258,8 @@ const OffCanvasForm = () => {
 							return (
 								<FormItems
 									item={item}
+									itemList={items}
+									setItemList={setItems}
 									deleteItem={handleDeleteItem}
 									key={item.id}
 								/>
