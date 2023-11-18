@@ -14,7 +14,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useMediaQuery } from 'react-responsive';
 
 // types
-import { ItemType, FormDataType as FormData } from '../../types';
+import { ItemType, FormDataType } from '../../types';
 
 const OffCanvasForm = () => {
 	// defaults
@@ -52,7 +52,7 @@ const OffCanvasForm = () => {
 
 	// state
 	const [items, setItems] = useState<ItemType[]>(defaultItem);
-	const [formData, setFormData] = useState<FormData>();
+	const [formData, setFormData] = useState<FormDataType>();
 
 	const handleAddNewItem = () => {
 		setItems([
@@ -82,28 +82,36 @@ const OffCanvasForm = () => {
 	) => {
 		const { name, value } = e.target;
 		if (nest) {
-
-			setFormData({
-				...formData,
-				[nest]: {
-					...(formData[nest || ''] || {}),
-					[name]: value,
-				},
-			} as FormData);
+			setFormData((prev: any) => {
+				if (prev && prev[nest]) {
+					return {
+						...prev,
+						[nest]: {
+							...(prev[nest] as Object),
+							[name]: value,
+						},
+					};
+				} else {
+					return {
+						...prev,
+						[nest]: {
+							[name]: value,
+						},
+					};
+				}
+			});
 		} else {
 			setFormData({
 				...formData,
 				[name]: value,
-			} as FormData);
+			});
 		}
 	};
 
 	useEffect(() => {
-		setFormData((prev: FormData | undefined) => {
-			return {
-				...(prev || {}),
-				items: items,
-			} as FormData;
+		setFormData({
+			...formData,
+			items,
 		});
 	}, [items]);
 
