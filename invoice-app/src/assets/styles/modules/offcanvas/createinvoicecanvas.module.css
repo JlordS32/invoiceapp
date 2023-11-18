@@ -10,11 +10,22 @@
 	border-radius: 0rem 1.53846rem 1.53846rem 0rem;
 	display: flex;
 	justify-content: center;
-   gap: 0 0.65rem;
-   z-index: 150;
+	gap: 0 0.65rem;
+	z-index: 150;
 	background-color: var(--offcanvas-bg);
 }
 
 .buttons button:nth-child(2) {
-   margin-left: auto;
+	margin-left: auto;
+}
+
+@media screen and (max-width: 620px) {
+	.buttons {
+		border-radius: 0;
+		padding: 1.9rem;
+	}
+
+	.buttons button span {
+		padding: 0 0.5rem;
+	}
 }

@@ -39,8 +39,8 @@ const OffCanvasForm = () => {
 		{
 			id: crypto.randomUUID(),
 			name: '',
-			quantity: 22,
-			price: 22,
+			quantity: 0,
+			price: 0,
 		},
 	];
 
@@ -57,8 +57,8 @@ const OffCanvasForm = () => {
 			{
 				id: crypto.randomUUID(),
 				name: '',
-				quantity: null,
-				price: null,
+				quantity: 0,
+				price: 0,
 			},
 		]);
 	};

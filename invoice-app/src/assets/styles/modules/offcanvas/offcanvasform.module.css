@@ -82,6 +82,10 @@
 }
 
 @media screen and (max-width: 620px) {
+	.billFrom h4,
+	.billTo h4 {
+		margin-top: 1.7rem;
+	}
 	.itemsWrapper .item {
 		grid-template-columns: 0.33fr repeat(2, 0.5fr);
 		grid-template-rows: repeat(2, 1fr);
@@ -90,5 +94,23 @@
 
 	.item > div:nth-child(1) {
 		grid-column: span 3;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.billFromfieldset,
+	.billTofieldset {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		gap: 1.9rem;
+	}
+	.billFromfieldset > .billFromfieldsetInner:last-child,
+	.billTofieldset > .billTofieldsetInner:last-child {
+		grid-column: span 2;
+	}
+
+	.itemList h2 {
+		margin-top: 5rem;
+		margin-bottom: 0.7rem;
 	}
 }

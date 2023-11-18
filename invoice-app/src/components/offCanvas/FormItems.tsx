@@ -16,27 +16,25 @@ import { useMediaQuery } from 'react-responsive';
 // types
 import { ItemType } from '../../types';
 import formatCurrency from '../../utilities/formatCurrencies';
+import { useEffect, useRef, useState } from 'react';
+import { FormTextRef } from '../forms/Text';
 interface FormItemsProps {
 	item: ItemType;
 	deleteItem: (itemTodelete: ItemType) => void;
 }
 
 const FormItems = ({ item, deleteItem }: FormItemsProps) => {
-	let price: priceType[] = [
-		{
-			quantity: 0,
-			price: 0,
-		},
-	];
-
-	if (item.price && item.quantity) {
-		price = extractPrices([item]);
-	}
-
-	const total = getTotal(price);
+   // state
+	const [total, setTotal] = useState<number>(0);
+	const [quantity, setQuantity] = useState<number>(0);
+	const [price, setPrice] = useState<number>(0);
 
 	// libraries
 	const isWide = useMediaQuery({ query: '(min-width: 620px)' });
+
+   useEffect(() => {
+      setTotal(price * quantity);
+   }, [total, quantity, price]);
 
 	return (
 		<div className={styles.item}>
@@ -48,11 +46,17 @@ const FormItems = ({ item, deleteItem }: FormItemsProps) => {
 			<Form.Text
 				id='quantity'
 				name='quantity'
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+               setQuantity(Number(e.target.value));
+            }}
 				label={!isWide ? 'Qty.' : ''}
 			/>
 			<Form.Text
 				id='price'
 				name='price'
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+               setPrice(Number(e.target.value));
+            }}
 				label={!isWide ? 'Price' : ''}
 			/>
 			<div
