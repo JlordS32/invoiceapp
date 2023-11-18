@@ -105,7 +105,7 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 					<div className={styles.total}>
 						{isWide ? <p>Amount Due</p> : <p>Grand Total</p>}
 						<span className={styles.amount}>{`${formatCurrency(
-							getTotal(extractPrices(invoice))
+							getTotal(extractPrices(invoice.items))
 						)}`}</span>
 					</div>
 				)}

@@ -1,8 +1,7 @@
-import { InvoiceType } from '../types/InvoiceTypes';
 import { priceType } from './getTotal';
 
-const extractPrices = (array: InvoiceType): priceType[] => {
-	const prices = array.items.map((item) => {
+const extractPrices = (array: any): priceType[] => {
+	const prices = array.map((item: any) => {
 		return {
 			quantity: item.quantity,
 			price: item.price,

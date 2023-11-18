@@ -11,10 +11,10 @@ const useSort = (array: any[], sortOptions: string[]): any[] => {
 			// I have made this into switch statement for scalability.
 			switch (sortBy) {
 				case 'total':
-					if (getTotal(extractPrices(a)) < getTotal(extractPrices(b))) {
+					if (getTotal(extractPrices(a.items)) < getTotal(extractPrices(b.items))) {
 						return -1;
 					}
-					if (getTotal(extractPrices(a)) > getTotal(extractPrices(b))) {
+					if (getTotal(extractPrices(a.items)) > getTotal(extractPrices(b.items))) {
 						return 1;
 					}
 					break;

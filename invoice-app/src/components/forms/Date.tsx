@@ -85,6 +85,7 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 						name={props.name}
 						value={value}
 						className={styles.calendar}
+						readOnly
 					/>
 				</label>
 				<img
@@ -94,10 +95,6 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 			</div>
 		)
 	);
-
-	useEffect(() => {
-		console.log(date);
-	}, [date]);
 
 	return (
 		<div

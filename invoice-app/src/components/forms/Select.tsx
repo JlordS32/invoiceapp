@@ -80,10 +80,6 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 		setSelectedValue(option?.value ?? '');
 	};
 
-	useEffect(() => {
-		console.log(selectedValue);
-	});
-
 	useImperativeHandle(
 		ref,
 		() => {

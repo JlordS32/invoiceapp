@@ -8,6 +8,7 @@ import Form from '../forms';
 
 // libraries
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useMediaQuery } from 'react-responsive';
 
 // types
 import { ItemType } from '../../types';
@@ -38,13 +39,14 @@ const OffCanvasForm = () => {
 		{
 			id: crypto.randomUUID(),
 			name: '',
-			quantity: null,
-			price: null,
+			quantity: 22,
+			price: 22,
 		},
 	];
 
 	// libraries
 	const [animateParent] = useAutoAnimate();
+	const isWide = useMediaQuery({ query: '(min-width: 620px)' });
 
 	// state
 	const [items, setItems] = useState<ItemType[]>(defaultItem);
@@ -163,12 +165,14 @@ const OffCanvasForm = () => {
 				<h2 className='text--h2'>Item List</h2>
 
 				<div className={styles.itemListFieldset}>
-					<div className={styles.fieldsetHeader}>
-						<p>Item Name</p>
-						<p>Qty.</p>
-						<p>Price</p>
-						<p>Total</p>
-					</div>
+					{isWide && (
+						<div className={styles.fieldsetHeader}>
+							<p>Item Name</p>
+							<p>Qty.</p>
+							<p>Price</p>
+							<p>Total</p>
+						</div>
+					)}
 
 					<div
 						className={styles.itemsWrapper}

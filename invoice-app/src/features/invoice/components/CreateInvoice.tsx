@@ -29,7 +29,7 @@ import { useMediaQuery } from 'react-responsive';
 const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
 	const status: paymentStatusType = checkStatusType(invoice.status);
 
-	const total = getTotal(extractPrices(invoice));
+	const total = getTotal(extractPrices(invoice.items));
 
 	const isWide = useMediaQuery({
 		query: '(min-width: 650px)',

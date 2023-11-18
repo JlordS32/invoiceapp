@@ -44,6 +44,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1.38rem 0;
+	padding-top: 1rem;
 }
 
 .itemsWrapper .item {
@@ -59,8 +60,18 @@
 
 .item > .deleteItem {
 	display: flex;
+	flex-direction: column;
+}
+
+.item > .deleteItem > div {
+	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	flex: 1%;
+}
+
+.item > .deleteItem > label {
+	color: var(--form-label);
 }
 
 .item > .deleteItem p {
@@ -68,4 +79,16 @@
 	color: var(--text-2);
 	font-weight: 700;
 	letter-spacing: -0.01923rem;
+}
+
+@media screen and (max-width: 620px) {
+	.itemsWrapper .item {
+		grid-template-columns: 0.33fr repeat(2, 0.5fr);
+		grid-template-rows: repeat(2, 1fr);
+		gap: 1.9rem 1.25rem;
+	}
+
+	.item > div:nth-child(1) {
+		grid-column: span 3;
+	}
 }

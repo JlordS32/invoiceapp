@@ -6,7 +6,10 @@ import styles from '../../assets/styles/modules/form.module.css';
 // from index
 import { FormProps } from './index';
 
-export interface FormTextProps extends FormProps {}
+export interface FormTextProps extends FormProps {
+	defaultValue?: string;
+	onChange?: () => void;
+}
 
 export interface FormTextRef {
 	value: string;
@@ -53,6 +56,8 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 			{props.label && <label htmlFor={props.id}>{props.label}</label>}
 			<input
 				ref={childRef}
+				defaultValue={props.defaultValue}
+				onChange={props.onChange}
 				{...props}
 			/>
 		</div>

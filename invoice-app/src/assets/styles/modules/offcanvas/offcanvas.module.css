@@ -42,5 +42,14 @@
 	.canvas {
 		width: 100vw;
 		border-radius: 0;
+		padding: 4rem 2rem;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.canvas {
+		width: 100vw;
+		border-radius: 0;
+		padding: 3rem 0rem;
 	}
 }
