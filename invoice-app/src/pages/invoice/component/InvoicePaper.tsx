@@ -5,7 +5,7 @@ import formateDate from '../../../utilities/formatDate';
 import styles from '../../../assets/styles/modules/invoice/invoicepage.module.css';
 
 // types
-import { InvoiceType } from '../../../features/invoice/types/InvoiceTypes';
+import { InvoiceType } from '../../../types/InvoiceTypes';
 import getTotal from '../../../utilities/getTotal';
 import extractPrices from '../../../utilities/extractPrices';
 import formatCurrency from '../../../utilities/formatCurrencies';

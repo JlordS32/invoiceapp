@@ -40,15 +40,21 @@
 	margin: 1rem 0;
 }
 
-.itemListFieldset .item {
+.itemListFieldset .itemsWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1.38rem 0;
+}
+
+.itemsWrapper .item {
 	display: grid;
 	grid-template-columns: 1fr 0.33fr repeat(2, 0.5fr);
 	gap: 0 1.25rem;
 }
 
-.itemListFieldset .addNewItem {
+.addNewItem {
 	width: 100%;
-	margin-top: 1.25rem;
+	margin-top: 1.5rem;
 }
 
 .item > .deleteItem {

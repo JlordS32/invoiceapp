@@ -2,7 +2,7 @@
 import CreateInvoice from './components/CreateInvoice';
 
 // type imports
-import { InvoiceType } from './types/InvoiceTypes';
+import { InvoiceType } from '../../types/InvoiceTypes';
 
 // type
 interface invoiceProps {

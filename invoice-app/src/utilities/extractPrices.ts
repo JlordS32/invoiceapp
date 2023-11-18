@@ -1,4 +1,4 @@
-import { InvoiceType } from '../features/invoice/types/InvoiceTypes';
+import { InvoiceType } from '../types/InvoiceTypes';
 import { priceType } from './getTotal';
 
 const extractPrices = (array: InvoiceType): priceType[] => {

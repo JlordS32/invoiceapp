@@ -1,12 +1,20 @@
+// react
+import { useEffect, useState } from 'react';
+
 // styles
 import styles from '../../assets/styles/modules/offcanvas/offcanvasform.module.css';
 import Button from '../button/Button';
 import Form from '../forms';
 
-// svg
-import deleteSvg from '../../assets/svg/icon-delete.svg';
+// libraries
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+// types
+import { ItemType } from '../../types';
+import FormItems from './FormItems';
 
 const OffCanvasForm = () => {
+	// defaults
 	const options = [
 		{
 			value: '30',
@@ -25,6 +33,47 @@ const OffCanvasForm = () => {
 			label: 'Next 1 Day',
 		},
 	];
+
+	const defaultItem = [
+		{
+			id: crypto.randomUUID(),
+			name: '',
+			quantity: null,
+			price: null,
+		},
+	];
+
+	// libraries
+	const [animateParent] = useAutoAnimate();
+
+	// state
+	const [items, setItems] = useState<ItemType[]>(defaultItem);
+
+	const handleAddNewItem = () => {
+		setItems([
+			...items,
+			{
+				id: crypto.randomUUID(),
+				name: '',
+				quantity: null,
+				price: null,
+			},
+		]);
+	};
+
+	const handleDeleteItem = (itemToDelete: ItemType) => {
+		if (items.length > 1) {
+			const filteredItem = items.filter((item) => item.id !== itemToDelete.id);
+
+			setItems(filteredItem);
+		}
+
+		return;
+	};
+
+	useEffect(() => {
+		console.log(items);
+	}, [items]);
 
 	return (
 		<>
@@ -121,18 +170,19 @@ const OffCanvasForm = () => {
 						<p>Total</p>
 					</div>
 
-					<div className={styles.item}>
-						<Form.Text />
-						<Form.Text />
-						<Form.Text />
-						<div aria-label='Delete Item' className={styles.deleteItem}>
-							<p>0.00</p>
-							<img
-								src={deleteSvg}
-								alt='Delete Item'
-								width={13}
-							/>
-						</div>
+					<div
+						className={styles.itemsWrapper}
+						ref={animateParent}
+					>
+						{items.map((item) => {
+							return (
+								<FormItems
+									item={item}
+									deleteItem={handleDeleteItem}
+									key={item.id}
+								/>
+							);
+						})}
 					</div>
 
 					<div className={styles.addNewItem}>
@@ -140,6 +190,7 @@ const OffCanvasForm = () => {
 							width='100%'
 							type='button'
 							variant='editButton'
+							onClick={handleAddNewItem}
 						>
 							+ Add New Item
 						</Button>

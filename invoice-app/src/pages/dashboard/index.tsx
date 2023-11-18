@@ -9,7 +9,7 @@ import ShowNoInvoice from './components/ShowNoInvoice';
 import DashboardNav from './components/DashboardNav';
 
 // type imports
-import { InvoiceType } from '../../features/invoice/types/InvoiceTypes';
+import { InvoiceType } from '../../types/InvoiceTypes';
 import Invoice from '../../features/invoice';
 
 // redux

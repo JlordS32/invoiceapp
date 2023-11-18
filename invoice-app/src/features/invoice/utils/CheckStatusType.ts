@@ -1,4 +1,4 @@
-import { paymentStatusType } from '../types/StatusType';
+import { paymentStatusType } from '../../../types/StatusType';
 
 export default function checkStatusType(value: string): paymentStatusType {
 	const paymentStatus: paymentStatusType[] = ['pending', 'draft', 'paid'];

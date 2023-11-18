@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { InvoiceType } from '../../features/invoice/types/InvoiceTypes';
+import { InvoiceType } from '../../types/InvoiceTypes';
 import { useFetchData } from '../../hooks/useFetch';
 
 interface stateType {

@@ -12,8 +12,8 @@ import extractPrices from '../../../utilities/extractPrices';
 import arrowRight from '../assets/icon-arrow-right.svg';
 
 // type imports
-import { InvoiceType } from '../types/InvoiceTypes';
-import { paymentStatusType } from '../types/StatusType';
+import { InvoiceType } from '../../../types/InvoiceTypes';
+import { paymentStatusType } from '../../../types/StatusType';
 
 // type interfaces
 interface CreateInvoiceProps {

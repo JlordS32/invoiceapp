@@ -8,7 +8,7 @@ import { useLoaderData } from 'react-router-dom';
 import styles from '../../../assets/styles/modules/invoice/invoicepage.module.css';
 
 // redux
-import { InvoiceType } from '../../../features/invoice/types/InvoiceTypes';
+import { InvoiceType } from '../../../types/InvoiceTypes';
 import { useFetchDatabyId } from '../../../hooks/useFetch';
 
 // components
