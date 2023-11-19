@@ -9,7 +9,7 @@ import styles from '../../../assets/styles/modules/invoice/invoicepage.module.cs
 
 // redux
 import { InvoiceType } from '../../../types/InvoiceTypes';
-import { useFetchDatabyId } from '../../../hooks/useFetch';
+import { useFetchDatabyId } from '../../../services/api/useFetch';
 
 // components
 import GoBack from '../../../components/button/GoBack';

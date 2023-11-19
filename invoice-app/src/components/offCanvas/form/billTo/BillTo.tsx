@@ -10,6 +10,7 @@ import { FormSelectRef } from '../../../forms/Select';
 
 // utils
 import formatDate from '../../../../utilities/formatDate';
+import { calculatePaymentDueDate } from '../../../../utilities/calculatePaymentDue';
 
 // types
 import { BillToProps } from '.';
@@ -53,7 +54,10 @@ const BillTo = ({ handleInputChange, setFormData, formData }: BillToProps) => {
 			...formData,
 			createdAt: formatDate(formDate.toString()),
 			paymentTerm: selectedValue,
+			paymentDue: calculatePaymentDueDate(formDate, Number(selectedValue)),
 		});
+
+      console.log(formData);
 	}, [formDate, selectedValue]);
 
 	return (

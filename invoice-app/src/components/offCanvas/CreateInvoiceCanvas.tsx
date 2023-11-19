@@ -22,35 +22,11 @@ const CreateInvoiceCanvas = () => {
 		dispatch(onLoadCanvas(''));
 	};
 
-	const handleSaveDraft = () => {
-		handleClose();
-	};
-
-	const handleSave = () => {
-		handleClose();
-	};
-
 	return (
 		<div
 			className={`${styles.canvas} animate animate--very-slow animate-ease-in-out slideToRight`}
 		>
-			<OffCanvasForm header='Create Form' />
-
-			<div className={thisCanvasStyles.buttons}>
-				<Button
-					variant='editButton'
-					onClick={handleClose}
-				>
-					Discard
-				</Button>
-				<Button
-					variant='saveAsDraftButton'
-					onClick={handleSaveDraft}
-				>
-					Save as Draft
-				</Button>
-				<Button onClick={handleSave}>Save & Send</Button>
-			</div>
+			<OffCanvasForm header='Create Form' close={handleClose}/>
 		</div>
 	);
 };
