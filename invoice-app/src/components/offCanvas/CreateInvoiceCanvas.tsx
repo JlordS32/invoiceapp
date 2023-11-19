@@ -12,7 +12,7 @@ import {
 	toggleCanvas,
 	onLoadCanvas,
 } from '../../redux/offcanvas/offCanvasSlice';
-import OffCanvasForm from './OffCanvasForm';
+import OffCanvasForm from './form/OffCanvasForm';
 
 const CreateInvoiceCanvas = () => {
 	const dispatch = useDispatch<AppDispatch>();

@@ -2,19 +2,19 @@
 import { useEffect, useState } from 'react';
 
 // styles
-import styles from '../../assets/styles/modules/offcanvas/offcanvasform.module.css';
+import styles from '../../../assets/styles/modules/offcanvas/offcanvasform.module.css';
 
 // components
-import Button from '../button/Button';
-import Form from '../forms';
-import FormItems from './FormItems';
+import Form from '../../forms';
+import ItemList from './itemList';
 
 // libraries
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useMediaQuery } from 'react-responsive';
 
 // types
-import { ItemType, FormDataType, FormErrorType } from '../../types';
+import { FormDataType, FormErrorType } from '../../../types';
+import formatDate from '../../../utilities/formatDate';
 
 interface OffCanvasFormProps {
 	header: string;
@@ -41,47 +41,14 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 		},
 	];
 
-	const defaultItem = [
-		{
-			id: crypto.randomUUID(),
-			name: '',
-			quantity: 0,
-			price: 0,
-		},
-	];
-
 	// libraries
 	const [animateParent] = useAutoAnimate();
 	const isWide = useMediaQuery({ query: '(min-width: 620px)' });
 
 	// state
-	const [items, setItems] = useState<ItemType[]>(defaultItem);
 	const [formData, setFormData] = useState<FormDataType>();
 	const [formError, setFormError] = useState<FormErrorType[]>();
-
-	// function to handle Adding items for offCanvas
-	const handleAddNewItem = () => {
-		setItems([
-			...items,
-			{
-				id: crypto.randomUUID(),
-				name: '',
-				quantity: 0,
-				price: 0,
-			},
-		]);
-	};
-
-	// function to handle deleting Items
-	const handleDeleteItem = (itemToDelete: ItemType) => {
-		if (items.length > 1) {
-			const filteredItem = items.filter((item) => item.id !== itemToDelete.id);
-
-			setItems(filteredItem);
-		}
-
-		return;
-	};
+	const [formDate, setFormDate] = useState<Date>(new Date());	
 
 	// function to handle formData
 	const handleInputChange = (
@@ -116,16 +83,24 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 		}
 	};
 
+	// // Use effects
+	// useEffect(() => {
+	// 	setFormData({
+	// 		...formData,
+	// 		items,
+	// 	});
+	// }, [items]);
+
+	useEffect(() => {
+		console.log(formData);
+	}, [formError, formData]);
+
 	useEffect(() => {
 		setFormData({
 			...formData,
-			items,
+			createdAt: formatDate(formDate.toString()),
 		});
-	}, [items]);
-
-	useEffect(() => {
-		console.log(formError);
-	}, [formError, formData]);
+	}, [formDate]);
 
 	return (
 		<form>
@@ -233,7 +208,11 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 				</div>
 
 				<div className='d-flex gap-2 pt-4'>
-					<Form.Date label='Invoice Date' />
+					<Form.Date
+						label='Invoice Date'
+						date={formDate}
+						setDate={setFormDate}
+					/>
 					<Form.Select
 						label='Payment Terms'
 						options={options}
@@ -250,48 +229,7 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 				</div>
 			</section>
 
-			<section className={styles.itemList}>
-				<h2 className='text--h2'>Item List</h2>
-
-				<div className={styles.itemListFieldset}>
-					{isWide && (
-						<div className={styles.fieldsetHeader}>
-							<p>Item Name</p>
-							<p>Qty.</p>
-							<p>Price</p>
-							<p>Total</p>
-						</div>
-					)}
-
-					<div
-						className={styles.itemsWrapper}
-						ref={animateParent}
-					>
-						{items.map((item) => {
-							return (
-								<FormItems
-									item={item}
-									itemList={items}
-									setItemList={setItems}
-									deleteItem={handleDeleteItem}
-									key={item.id}
-								/>
-							);
-						})}
-					</div>
-
-					<div className={styles.addNewItem}>
-						<Button
-							width='100%'
-							type='button'
-							variant='editButton'
-							onClick={handleAddNewItem}
-						>
-							+ Add New Item
-						</Button>
-					</div>
-				</div>
-			</section>
+			<ItemList />
 		</form>
 	);
 };

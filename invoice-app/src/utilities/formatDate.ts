@@ -1,4 +1,4 @@
-export default function formateDate(inputDate: string) {
+export default function formatDate(inputDate: string) {
 	const date = new Date(inputDate);
 
 	if (isNaN(date.getTime())) {
@@ -7,10 +7,10 @@ export default function formateDate(inputDate: string) {
 	}
 
 	const formattedDate = new Intl.DateTimeFormat('en', {
-		day: 'numeric',
-		month: 'short',
+		day: '2-digit',
+		month: '2-digit',
 		year: 'numeric',
 	}).format(date);
 
-	return formattedDate;
+	return formattedDate.toString().split('/').join('-');
 }

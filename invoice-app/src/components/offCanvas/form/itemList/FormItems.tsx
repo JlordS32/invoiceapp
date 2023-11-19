@@ -1,17 +1,17 @@
 // components
-import Form from '../forms';
+import Form from '../../../forms';
 
 // styles
-import styles from '../../assets/styles/modules/offcanvas/offcanvasform.module.css';
+import styles from '../../../../assets/styles/modules/offcanvas/offcanvasform.module.css';
 
-import deleteSvg from '../../assets/svg/icon-delete.svg';
+import deleteSvg from '../../../../assets/svg/icon-delete.svg';
 
 // libraries
 import { useMediaQuery } from 'react-responsive';
 
 // types
-import { ItemType } from '../../types';
-import formatCurrency from '../../utilities/formatCurrencies';
+import { ItemType } from '../../../../types';
+import formatCurrency from '../../../../utilities/formatCurrencies';
 import { useEffect, useState } from 'react';
 interface FormItemsProps {
 	item: ItemType;
