@@ -1,16 +1,19 @@
 // react
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // styles
 import styles from '../../../../assets/styles/modules/offcanvas/offcanvasform.module.css';
 
 // components
 import Form from '../../../forms';
+import { FormSelectRef } from '../../../forms/Select';
 
 // utils
 import formatDate from '../../../../utilities/formatDate';
-import { BillToProps } from '.';
 
+// types
+import { BillToProps } from '.';
+import { OptionType } from '../../../button/Dropdown';
 const BillTo = ({ handleInputChange, setFormData, formData }: BillToProps) => {
 	// defaults
 	const options = [
@@ -34,13 +37,24 @@ const BillTo = ({ handleInputChange, setFormData, formData }: BillToProps) => {
 
 	// state
 	const [formDate, setFormDate] = useState<Date>(new Date());
+	const [selectedValue, setSelectedValue] = useState<string>('30');
 
+	// ref
+	const OptionRef = useRef<FormSelectRef>(null);
+
+	// FUNCTIONS
+	const handleOnChange = (option: OptionType | null) => {
+		setSelectedValue(option?.value ?? '');
+	};
+
+	// useEffect hooks
 	useEffect(() => {
 		setFormData({
 			...formData,
 			createdAt: formatDate(formDate.toString()),
+			paymentTerm: selectedValue,
 		});
-	}, [formDate]);
+	}, [formDate, selectedValue]);
 
 	return (
 		<section className={styles.billTo}>
@@ -108,7 +122,10 @@ const BillTo = ({ handleInputChange, setFormData, formData }: BillToProps) => {
 				/>
 				<Form.Select
 					label='Payment Terms'
+					onChange={handleOnChange}
+					selectedValue={selectedValue}
 					options={options}
+					ref={OptionRef}
 				/>
 			</div>
 
