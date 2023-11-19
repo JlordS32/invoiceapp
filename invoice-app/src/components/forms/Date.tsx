@@ -1,10 +1,4 @@
-import {
-	forwardRef,
-	useRef,
-	useImperativeHandle,
-	useState,
-	useEffect,
-} from 'react';
+import { forwardRef, useRef, useImperativeHandle, useState } from 'react';
 
 // styles
 import styles from '../../assets/styles/modules/form.module.css';
@@ -22,7 +16,10 @@ import '../../assets/styles/date.css';
 
 import calendarSvg from '../../assets/svg/icon-calendar.svg';
 
-export interface FormSelectProps extends FormProps {}
+export interface FormSelectProps extends FormProps {
+	date: Date;
+	setDate: (date: Date) => void;
+}
 
 export interface FormSelectRef {
 	_test: (value: string) => void;
@@ -36,10 +33,8 @@ interface CustomDateInput {
 	onClick?: () => void;
 }
 
-const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
+const DateComponent = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 	const childRef = useRef<HTMLInputElement | null>(null);
-
-	const [date, setDate] = useState<Date>();
 
 	useImperativeHandle(
 		ref,
@@ -96,6 +91,8 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 		)
 	);
 
+	const today = new Date();
+
 	return (
 		<div
 			className={styles.formContainer}
@@ -105,10 +102,12 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 		>
 			{props.label && <label htmlFor={props.id}>{props.label}</label>}
 			<DatePicker
-				selected={date}
+				selected={props.date}
+				name='createdAt'
+				maxDate={today}
 				onChange={(date) => {
 					if (date) {
-						setDate(date);
+						props.setDate(date);
 					}
 				}}
 				dayClassName={handleDayHover}
@@ -123,4 +122,4 @@ const Date = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 	);
 });
 
-export default Date;
+export default DateComponent;

@@ -136,7 +136,7 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 					label='Street Address'
 					name='street'
 					onChange={(e) => {
-						handleInputChange(e, 'address');
+						handleInputChange(e, 'senderAddress');
 					}}
 					width='100%'
 				/>
@@ -148,7 +148,7 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 							width='100%'
 							name='city'
 							onChange={(e) => {
-								handleInputChange(e, 'address');
+								handleInputChange(e, 'senderAddress');
 							}}
 						/>
 					</div>
@@ -158,7 +158,7 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 							width='100%'
 							name='postCode'
 							onChange={(e) => {
-								handleInputChange(e, 'address');
+								handleInputChange(e, 'senderAddress');
 							}}
 						/>
 					</div>
@@ -168,7 +168,7 @@ const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 							width='100%'
 							name='country'
 							onChange={(e) => {
-								handleInputChange(e, 'address');
+								handleInputChange(e, 'senderAddress');
 							}}
 						/>
 					</div>

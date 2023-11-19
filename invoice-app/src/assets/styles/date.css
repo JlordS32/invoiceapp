@@ -17,8 +17,12 @@
 	background-color: transparent;
 }
 
+.react-datepicker__day--disabled {
+	opacity: 0.5;
+}
+
 .react-datepicker__day:hover {
-	background-color: var(--primary) !important;
+	background-color: var(--primary);
 	color: white;
 	border-radius: 50%;
 }
