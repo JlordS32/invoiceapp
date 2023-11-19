@@ -10,7 +10,6 @@ export interface FormTextProps extends FormProps {
 	defaultValue?: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	iserror?: boolean;
-	placeholder?: string;
 }
 
 export interface FormTextRef {
@@ -61,8 +60,11 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 			<input
 				ref={childRef}
 				defaultValue={props.defaultValue}
+				name={props.name ?? ''}
 				onChange={(e) => {
-					props.onChange?.(e);
+					if (props.onChange) {
+						props.onChange(e);
+					}
 				}}
 				placeholder={props.placeholder ?? ''}
 			/>
