@@ -14,16 +14,12 @@ import {
 } from '../../redux/offcanvas/offCanvasSlice';
 import OffCanvasForm from './OffCanvasForm';
 
-const CreateInvoiceCanvas = () => {
+const EditInvoiceCanvas = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	const handleClose = () => {
 		dispatch(toggleCanvas());
 		dispatch(onLoadCanvas(''));
-	};
-
-	const handleSaveDraft = () => {
-		handleClose();
 	};
 
 	const handleSave = () => {
@@ -34,25 +30,19 @@ const CreateInvoiceCanvas = () => {
 		<div
 			className={`${styles.canvas} animate animate--very-slow animate-ease-in-out slideToRight`}
 		>
-			<OffCanvasForm header='Create Form' />
+			<OffCanvasForm header='Edit Form' />
 
 			<div className={thisCanvasStyles.buttons}>
 				<Button
 					variant='editButton'
 					onClick={handleClose}
 				>
-					Discard
+					Cancel
 				</Button>
-				<Button
-					variant='saveAsDraftButton'
-					onClick={handleSaveDraft}
-				>
-					Save as Draft
-				</Button>
-				<Button onClick={handleSave}>Save & Send</Button>
+				<Button onClick={handleSave}>Save Changes</Button>
 			</div>
 		</div>
 	);
 };
 
-export default CreateInvoiceCanvas;
+export default EditInvoiceCanvas;

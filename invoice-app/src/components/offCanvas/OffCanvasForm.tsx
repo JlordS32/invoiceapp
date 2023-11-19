@@ -14,9 +14,13 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useMediaQuery } from 'react-responsive';
 
 // types
-import { ItemType, FormDataType } from '../../types';
+import { ItemType, FormDataType, FormErrorType } from '../../types';
 
-const OffCanvasForm = () => {
+interface OffCanvasFormProps {
+	header: string;
+}
+
+const OffCanvasForm = ({ header }: OffCanvasFormProps) => {
 	// defaults
 	const options = [
 		{
@@ -53,7 +57,9 @@ const OffCanvasForm = () => {
 	// state
 	const [items, setItems] = useState<ItemType[]>(defaultItem);
 	const [formData, setFormData] = useState<FormDataType>();
+	const [formError, setFormError] = useState<FormErrorType[]>();
 
+	// function to handle Adding items for offCanvas
 	const handleAddNewItem = () => {
 		setItems([
 			...items,
@@ -66,6 +72,7 @@ const OffCanvasForm = () => {
 		]);
 	};
 
+	// function to handle deleting Items
 	const handleDeleteItem = (itemToDelete: ItemType) => {
 		if (items.length > 1) {
 			const filteredItem = items.filter((item) => item.id !== itemToDelete.id);
@@ -76,6 +83,7 @@ const OffCanvasForm = () => {
 		return;
 	};
 
+	// function to handle formData
 	const handleInputChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
 		nest?: string | null
@@ -116,11 +124,12 @@ const OffCanvasForm = () => {
 	}, [items]);
 
 	useEffect(() => {
-		console.log(formData);
-	}, [formData]);
+		console.log(formError);
+	}, [formError, formData]);
 
 	return (
-		<>
+		<form>
+			<h2 className='text--h2'>{header}</h2>
 			<section className={styles.billFrom}>
 				<h4 className='text--h3'>Bill From</h4>
 				<Form.Text
@@ -283,7 +292,7 @@ const OffCanvasForm = () => {
 					</div>
 				</div>
 			</section>
-		</>
+		</form>
 	);
 };
 

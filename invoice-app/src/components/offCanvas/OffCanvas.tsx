@@ -1,12 +1,16 @@
+// styles
 import styles from '../../assets/styles/modules/offcanvas/offcanvas.module.css';
+
+// react
+import { useEffect } from 'react';
 
 // redux
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import CreateInvoiceCanvas from './CreateInvoiceCanvas';
-import { useEffect } from 'react';
 
-// exportable function
+// components
+import CreateInvoiceCanvas from './CreateInvoiceCanvas';
+import EditInvoiceCanvas from './EditInvoiceCanvas';
 
 const OffCanvas = () => {
 	// redux
@@ -17,6 +21,10 @@ const OffCanvas = () => {
 	const getKey = () => {
 		switch (contentKey) {
 			case 'create-invoice':
+				return <CreateInvoiceCanvas />;
+			case 'edit-invoice':
+				return <EditInvoiceCanvas />;
+			default:
 				return <CreateInvoiceCanvas />;
 		}
 	};

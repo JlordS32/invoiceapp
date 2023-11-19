@@ -4,6 +4,14 @@
 	gap: 0.7rem 0;
 }
 
+.formContainer.error > input {
+	border: 1px var(--09) solid;
+}
+
+.formContainer.error > input:focus {
+	border: 0;
+}
+
 .formContainer > input {
 	/* typography */
 	font-size: 1.15385rem;

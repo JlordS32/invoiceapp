@@ -5,11 +5,27 @@ import Status from '../../../features/invoice/components/Status';
 // styles
 import styles from '../../../assets/styles/modules/invoice/invoicepage.module.css';
 
+// redux
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
+import {
+	onLoadCanvas,
+	toggleCanvas,
+} from '../../../redux/offcanvas/offCanvasSlice';
+
 interface InvoiceNavProps {
 	status: string;
 }
 
 const InvoiceNav = ({ status }: InvoiceNavProps) => {
+	// redux
+	const dispatch = useDispatch<AppDispatch>();
+
+	const toggleOffCanvas = () => {
+		dispatch(toggleCanvas());
+		dispatch(onLoadCanvas('edit-invoice'));
+	};
+
 	return (
 		<div
 			className={styles.invoiceNav}
@@ -25,9 +41,7 @@ const InvoiceNav = ({ status }: InvoiceNavProps) => {
 			<div className={styles.buttons}>
 				<Button
 					variant='editButton'
-					onClick={() => {
-						print();
-					}}
+					onClick={toggleOffCanvas}
 				>
 					Edit
 				</Button>

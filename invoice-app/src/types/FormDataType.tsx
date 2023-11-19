@@ -1,4 +1,4 @@
-import { ItemType } from "./ItemType";
+import { ItemType } from './ItemType';
 
 export type FormDataType = {
 	[key: string]:
@@ -7,5 +7,13 @@ export type FormDataType = {
 		| ItemType[]
 		| {
 				[key: string]: string;
+		  };
+};
+
+export type FormErrorType = {
+	[key: string]:
+		| boolean
+		| {
+				[key: string]: boolean;
 		  };
 };

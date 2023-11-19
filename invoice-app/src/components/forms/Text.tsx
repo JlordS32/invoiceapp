@@ -1,8 +1,4 @@
-import {
-	forwardRef,
-	useRef,
-	useImperativeHandle
-} from 'react';
+import { forwardRef, useRef, useImperativeHandle } from 'react';
 
 // styles
 import styles from '../../assets/styles/modules/form.module.css';
@@ -13,10 +9,12 @@ import { FormProps } from './index';
 export interface FormTextProps extends FormProps {
 	defaultValue?: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	iserror?: boolean;
+	placeholder?: string;
 }
 
 export interface FormTextRef {
-	value: string;	
+	value: string;
 	_test: (value: string) => void;
 	focus: () => void;
 	scrollIntoView: () => void;
@@ -50,22 +48,24 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 		[]
 	);
 
+	const error = props.iserror;
+
 	return (
 		<div
-			className={styles.formContainer}
+			className={`${styles.formContainer} ${error ? styles.error : ''}`}
 			style={{
 				width: props.width,
 			}}
 		>
 			{props.label && <label htmlFor={props.id}>{props.label}</label>}
 			<input
-	ref={childRef}
-	defaultValue={props.defaultValue}
-	onChange={(e) => {
-		props.onChange?.(e);
-	}}
-	{...props}
-/>
+				ref={childRef}
+				defaultValue={props.defaultValue}
+				onChange={(e) => {
+					props.onChange?.(e);
+				}}
+				placeholder={props.placeholder ?? ''}
+			/>
 		</div>
 	);
 });
