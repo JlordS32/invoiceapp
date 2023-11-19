@@ -6,9 +6,8 @@ export interface BillToProps {
 		e: React.ChangeEvent<HTMLInputElement>,
 		nest?: string | null
 	) => void;
-	formData?: FormDataType;
-	setFormData: React.Dispatch<React.SetStateAction<FormDataType | undefined>>;
 	formError?: FormErrorType;
+	update: (data: FormDataType) => void;
 }
 const index = (props: BillToProps) => {
 	return <BillTo {...props} />;

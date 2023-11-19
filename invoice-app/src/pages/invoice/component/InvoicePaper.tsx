@@ -1,14 +1,14 @@
 // utils
-import formateDate from '../../../utilities/formatDate';
+import { formatToDateString } from '../../../utilities/formatDate';
+import getTotal from '../../../utilities/getTotal';
+import extractPrices from '../../../utilities/extractPrices';
+import formatCurrency from '../../../utilities/formatCurrencies';
 
 // styles
 import styles from '../../../assets/styles/modules/invoice/invoicepage.module.css';
 
 // types
 import { InvoiceType } from '../../../types/InvoiceTypes';
-import getTotal from '../../../utilities/getTotal';
-import extractPrices from '../../../utilities/extractPrices';
-import formatCurrency from '../../../utilities/formatCurrencies';
 
 interface InvoiceProps {
 	invoice: InvoiceType;
@@ -43,11 +43,11 @@ const InvoicePaper = ({ invoice }: InvoiceProps) => {
 					<div className={styles.date}>
 						<div className={styles.invoiceDate}>
 							<p>Invoice Date</p>
-							<p>{formateDate(invoice?.createdAt ?? '')}</p>
+							<p>{formatToDateString(invoice?.createdAt ?? '')}</p>
 						</div>
 						<div className={styles.dueDate}>
 							<p>Payment Due</p>
-							<p>{formateDate(invoice?.paymentDue ?? '')}</p>
+							<p>{formatToDateString(invoice?.paymentDue ?? '')}</p>
 						</div>
 					</div>
 					<div className={styles.billTo}>

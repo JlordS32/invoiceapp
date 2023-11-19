@@ -1,5 +1,5 @@
 // react
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // styles
 import styles from '../../../../assets/styles/modules/offcanvas/offcanvasform.module.css';
@@ -14,8 +14,9 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 // types
 import { ItemType } from '../../../../types';
+import { ItemListProps } from '.';
 
-const ItemList = () => {
+const ItemList = ({ update }: ItemListProps) => {
 	// default
 	const defaultItem = [
 		{
@@ -57,6 +58,15 @@ const ItemList = () => {
 
 		return;
 	};
+
+	// useEffect
+	useEffect(() => {
+		setTimeout(() => {
+			update({
+				items: items,
+			});
+		}, 1)
+	}, [items]);
 
 	return (
 		<section className={styles.itemList}>

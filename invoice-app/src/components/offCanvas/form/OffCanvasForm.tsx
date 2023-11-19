@@ -63,11 +63,14 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		}
 	};
 
-	const handleSaveDraft = () => {
-		close();
+	const handleUpdateFormData = (data: FormDataType) => {
+		setFormData({
+			...formData,
+			...data,
+		});
 	};
 
-	const handleSave = () => {
+	const handleSaveDraft = () => {
 		close();
 	};
 
@@ -83,18 +86,27 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 			});
 	};
 
+	useEffect(() => {
+		console.log(formData);
+	}, [formData]);
+
 	return (
-		<form>
+		<form
+			onSubmit={(e) => {
+				e.preventDefault();
+
+				handleSubmit();
+			}}
+		>
 			<h2 className='text--h2'>{header}</h2>
 			<BillForm handleInputChange={handleInputChange} />
 
 			<BillTo
 				handleInputChange={handleInputChange}
-				formData={formData}
-				setFormData={setFormData}
+				update={handleUpdateFormData}
 			/>
 
-			<ItemList />
+			<ItemList update={handleUpdateFormData} />
 
 			<div className={thisCanvasStyles.buttons}>
 				<Button
@@ -111,12 +123,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				>
 					Save as Draft
 				</Button>
-				<Button
-					onClick={handleSubmit}
-					type='submit'
-				>
-					Save & Send
-				</Button>
+				<Button type='submit'>Save & Send</Button>
 			</div>
 		</form>
 	);

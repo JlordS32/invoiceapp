@@ -15,7 +15,7 @@ import { calculatePaymentDueDate } from '../../../../utilities/calculatePaymentD
 // types
 import { BillToProps } from '.';
 import { OptionType } from '../../../button/Dropdown';
-const BillTo = ({ handleInputChange, setFormData, formData }: BillToProps) => {
+const BillTo = ({ handleInputChange, update }: BillToProps) => {
 	// defaults
 	const options = [
 		{
@@ -50,14 +50,13 @@ const BillTo = ({ handleInputChange, setFormData, formData }: BillToProps) => {
 
 	// useEffect hooks
 	useEffect(() => {
-		setFormData({
-			...formData,
+		const newData = {
 			createdAt: formatDate(formDate.toString()),
 			paymentTerm: selectedValue,
 			paymentDue: calculatePaymentDueDate(formDate, Number(selectedValue)),
-		});
+		};
 
-      console.log(formData);
+		update(newData);
 	}, [formDate, selectedValue]);
 
 	return (
