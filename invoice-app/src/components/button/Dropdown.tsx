@@ -2,7 +2,9 @@
 import {
 	useImperativeHandle,
 	useRef,
-	forwardRef
+	forwardRef,
+	useState,
+	useEffect,
 } from 'react';
 
 // styles
@@ -32,15 +34,19 @@ export interface DropdownRef {
 }
 
 const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
-	// TODO url params persistant
-
 	const { options, searchParam } = props;
+
+	// ref
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+	// state
+	const [selectedOption, setSelectedOption] = useState<string[]>([]);
 
 	// rrd
 	const navigate = useNavigate();
 	const location = useLocation();
 
+	// libraries
 	const isWide = useMediaQuery({
 		query: '(min-width: 768px)',
 	});
@@ -54,26 +60,25 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	});
 
 	const handleClick = (option: OptionType) => {
-		const selectedOption = option.value;
+		const value = option.value;
 		const searchParams = new URLSearchParams(location.search);
-		const existingParams = searchParams.get(searchParam)?.split(',');
+		const existingParams = searchParams.get(searchParam)?.split(',') ?? [];
 
-		if (!existingParams) {
-			searchParams.set(searchParam, selectedOption);
-		} else {
-			const optionExist = existingParams.some(
-				(option) => option === selectedOption
-			);
+		const optionExists = existingParams.includes(value);
 
-			if (optionExist) {
-				existingParams?.splice(existingParams?.indexOf(selectedOption));
+		if (optionExists) {
+			const updatedParams = existingParams.filter((param) => param !== value);
+			if (updatedParams.length === 0) {
+				searchParams.delete(searchParam);
+				setSelectedOption([]);
 			} else {
-				existingParams?.push(selectedOption);
+				searchParams.set(searchParam, updatedParams.join(','));
+				setSelectedOption(updatedParams);
 			}
-
-			if (existingParams) {
-				searchParams.set(searchParam, existingParams.join(','));
-			}
+		} else {
+			existingParams.push(value);
+			searchParams.set(searchParam, existingParams.join(','));
+			setSelectedOption([...selectedOption, value]);
 		}
 
 		navigate({
@@ -81,6 +86,20 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 			search: searchParams.toString(),
 		});
 	};
+
+	useEffect(() => {
+		const searchParams = new URLSearchParams(location.search);
+		const existingParams = searchParams.get(searchParam);
+
+		if (existingParams) {
+			console.log(existingParams);
+			setSelectedOption(existingParams.trim().split(','));
+		}
+	}, [location]);
+
+	useEffect(() => {
+		console.log(selectedOption);
+	}, [selectedOption]);
 
 	return (
 		<>
@@ -121,6 +140,8 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 					>
 						<div>
 							{options?.map((option, index) => {
+								const checked = selectedOption.includes(option.value);
+
 								return (
 									<div
 										onClick={() => {
@@ -128,7 +149,11 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 										}}
 										key={index}
 									>
-										<div className={`${styles.checkbox}`}></div>
+										<div
+											className={`${styles.checkbox} ${
+												checked ? styles.checked : ''
+											}`}
+										></div>
 										<span className='body-text'>{option.label}</span>
 									</div>
 								);
