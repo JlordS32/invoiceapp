@@ -34,6 +34,8 @@ export interface DropdownRef {
 }
 
 const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
+	// TODO url params persistant
+
 	const { options } = props;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -52,9 +54,11 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	});
 
 	const handleClick = (option: OptionType) => {
-		const optionExists = selectedOption.some((item) => {
-			return item.value === option.value;
-		});
+		const optionExists =
+			selectedOption &&
+			selectedOption.some((item) => {
+				return item.value === option.value;
+			});
 
 		if (optionExists) {
 			setSelectedOption((prev) => {
@@ -67,6 +71,38 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 			});
 		}
 	};
+
+	// useEffect
+	useEffect(() => {
+		const currentParams = new URLSearchParams(location.search);
+		const filterValues = currentParams.get('filter')?.split(',');
+		const sortedValues = currentParams.get('sort')?.split(',');
+
+		if (
+			(filterValues && filterValues.length > 0) ||
+			(sortedValues && sortedValues.length > 0)
+		) {
+			const mergedValues = [...(filterValues ?? []), ...(sortedValues ?? [])];
+			const updatedValues =
+				mergedValues &&
+				mergedValues.map((value) => {
+					return {
+						label: value[0].toUpperCase() + value.slice(1),
+						value: value,
+					};
+				});
+
+			if (setSelectedOption) {
+				setSelectedOption((prevOptions) => {
+					const optionSet = new Set(prevOptions.map((option) => option.value));
+					const newOptions = updatedValues.filter(
+						(option) => !optionSet.has(option.value)
+					);
+					return [...prevOptions, ...newOptions];
+				});
+			}
+		}
+	}, []);
 
 	return (
 		<>
@@ -107,10 +143,11 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 					>
 						<div>
 							{options?.map((option, index) => {
-								const optionExists = selectedOption.some((item) => {
-									return item.value === option.value;
-								});
-
+								const optionExists =
+									selectedOption &&
+									selectedOption.some((item) => {
+										return item.value === option.value;
+									});
 								return (
 									<div
 										onClick={() => {
@@ -120,7 +157,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 									>
 										<div
 											className={`${styles.checkbox} ${
-												optionExists ? styles.checked : ``
+												optionExists ? styles.checked : ''
 											}`}
 										></div>
 										<span className='body-text'>{option.label}</span>

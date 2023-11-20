@@ -42,6 +42,7 @@ const Sort = () => {
 
 	useEffect(() => {
 		const searchParams = new URLSearchParams(location.search);
+
 		const valueOfSelectedOption = selectedOption.map((item) => item.value);
 
 		// Check if 'sort' parameter already exists and update its value
@@ -53,7 +54,7 @@ const Sort = () => {
 		}
 
 		const search = searchParams.toString();
-		
+
 		navigate({ search });
 	}, [selectedOption]);
 
@@ -62,7 +63,8 @@ const Sort = () => {
 			<Dropdown
 				options={sortOptions}
 				ref={dropdownSortRef}
-				onChange={setSelectedOption}
+				setSelectedOption={setSelectedOption}
+				selectedOption={selectedOption}
 				smallScreenIcon={Icon}
 				label='Sort by'
 			/>

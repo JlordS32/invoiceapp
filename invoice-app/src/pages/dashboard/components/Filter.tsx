@@ -53,6 +53,10 @@ const Filter = () => {
 		navigate({ search });
 	}, [selectedOption]);
 
+	useEffect(() => {
+		console.log(selectedOption)
+	}, [selectedOption])
+
 	const Icon = <FunnelIcon width={22} />;
 
 	return (
