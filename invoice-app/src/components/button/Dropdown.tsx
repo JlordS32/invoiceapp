@@ -92,14 +92,9 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 		const existingParams = searchParams.get(searchParam);
 
 		if (existingParams) {
-			console.log(existingParams);
 			setSelectedOption(existingParams.trim().split(','));
 		}
 	}, [location]);
-
-	useEffect(() => {
-		console.log(selectedOption);
-	}, [selectedOption]);
 
 	return (
 		<>

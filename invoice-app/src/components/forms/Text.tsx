@@ -9,7 +9,7 @@ import { FormProps } from './index';
 export interface FormTextProps extends FormProps {
 	defaultValue?: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	iserror?: boolean;
+	isValid?: boolean;
 }
 
 export interface FormTextRef {
@@ -47,11 +47,11 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 		[]
 	);
 
-	const error = props.iserror;
+	const valid = props.isValid ?? true;
 
 	return (
 		<div
-			className={`${styles.formContainer} ${error ? styles.error : ''}`}
+			className={`${styles.formContainer} ${valid ? '' : styles.error}`}
 			style={{
 				width: props.width,
 			}}

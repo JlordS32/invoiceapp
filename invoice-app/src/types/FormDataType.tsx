@@ -1,4 +1,4 @@
-import { ItemType } from './ItemType';
+import { ItemType, ItemTypeError } from './ItemType';
 
 export type FormDataType = {
 	[key: string]:
@@ -11,9 +11,61 @@ export type FormDataType = {
 };
 
 export type FormErrorType = {
-	[key: string]:
-		| boolean
-		| {
-				[key: string]: boolean;
-		  };
+	senderAddress: {
+		street: {
+			valid: boolean;
+			errorMsg: string;
+		};
+		city: {
+			valid: boolean;
+			errorMsg: string;
+		};
+		postCode: {
+			valid: boolean;
+			errorMsg: string;
+		};
+		country: {
+			valid: boolean;
+			errorMsg: string;
+		};
+	};
+	clientAddress: {
+		street: {
+			valid: boolean;
+			errorMsg: string;
+		};
+		city: {
+			valid: boolean;
+			errorMsg: string;
+		};
+		postCode: {
+			valid: boolean;
+			errorMsg: string;
+		};
+		country: {
+			valid: boolean;
+			errorMsg: string;
+		};
+	};
+	clientEmail: {
+		valid: boolean;
+		errorMsg: string;
+	};
+	clientName: {
+		valid: boolean;
+		errorMsg: string;
+	};
+	paymentTerms: {
+		valid: boolean;
+		errorMsg: string;
+	};
+	createdAt: {
+		valid: boolean;
+		errorMsg: string;
+	};
+	description: {
+		valid: boolean;
+		errorMsg: string;
+	};
+	items: ItemTypeError[];
 };

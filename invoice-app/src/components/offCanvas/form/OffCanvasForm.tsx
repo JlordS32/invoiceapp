@@ -1,5 +1,5 @@
 // react
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // styles
 import thisCanvasStyles from '../../../assets/styles/modules/offcanvas/createinvoicecanvas.module.css';
@@ -15,6 +15,8 @@ import BillForm from './billFrom/BillFrom';
 // types
 import { FormDataType, FormErrorType } from '../../../types';
 import { usePostData } from '../../../services/api/usePostData';
+import { validateData } from '../../../utilities/validateData';
+import { defaultFormError } from './defaultValues/defaultFormError';
 interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
@@ -23,9 +25,7 @@ interface OffCanvasFormProps {
 const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	// state
 	const [formData, setFormData] = useState<FormDataType>();
-
-	// TODO : Add Form error handling, including styles
-	const [formError, setFormError] = useState<FormErrorType[]>();
+	const [formError, setFormError] = useState<FormErrorType>(defaultFormError);
 
 	// function to handle formData
 	const handleInputChange = (
@@ -33,8 +33,6 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		nest?: string | null
 	) => {
 		const { name, value } = e.target;
-
-		console.log({ name, value });
 
 		if (nest) {
 			setFormData((prev: any) => {
@@ -78,27 +76,73 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const handleSubmit = () => {
-		usePostData('http://localhost:3000/invoices', formData)
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((error) => {
-				console.error(error);
+		if (formData) {
+			Object.entries(formData).forEach(([key, value]) => {
+				let validated: {
+					valid: boolean;
+					errorMsg: string;
+				} = {
+					valid: true,
+					errorMsg: '',
+				};
+
+				
+				const _test = validateData('asdf', '123', 'email')
+
+				console.log(_test);
+
+				if (typeof value === 'string') {
+					setFormError((prev) => {
+						return {
+							...prev,
+							[key]: {
+								valid: validated.valid,
+								errorMsg: validated.errorMsg,
+							},
+						};
+					});
+				} else if (typeof value === 'object') {
+					// setFormError((prev) => {
+					// 	return {
+					// 		...prev,
+					// 		[key]: {
+					// 			valid: validated.valid,
+					// 			errorMsg: validated.errorMsg,
+					// 		},
+					// 	};
+					// });
+				}
 			});
+		}
+
+		// usePostData('http://localhost:3000/invoices', formData)
+		// 	.then((response) => {
+		// 		console.log(response);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.error(error);
+		// 	});
 
 		window.scrollTo(0, document.body.scrollHeight);
 	};
+
+	useEffect(() => {
+		console.log(formError);
+	}, [formError]);
 
 	return (
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
 				handleSubmit();
-				close();
+				// close();
 			}}
 		>
 			<h2 className='text--h2'>{header}</h2>
-			<BillForm handleInputChange={handleInputChange} />
+			<BillForm
+				handleInputChange={handleInputChange}
+				formError={formError}
+			/>
 
 			<BillTo
 				handleInputChange={handleInputChange}
@@ -120,7 +164,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 					onClick={() => {
 						handleSave('draft');
 					}}
-					type='button'
+					type='submit'
 				>
 					Save as Draft
 				</Button>

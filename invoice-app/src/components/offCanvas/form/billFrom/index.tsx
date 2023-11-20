@@ -1,3 +1,4 @@
+import { FormErrorType } from '../../../../types';
 import BillFrom from './BillFrom';
 
 export interface BillFromProps {
@@ -5,6 +6,7 @@ export interface BillFromProps {
 		e: React.ChangeEvent<HTMLInputElement>,
 		nest?: string | null
 	) => void;
+	formError: FormErrorType;
 }
 
 const index = (props: BillFromProps) => {
