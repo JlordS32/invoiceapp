@@ -25,7 +25,8 @@ interface DropdownProps {
 	options?: OptionType[];
 	label?: string;
 	smallScreenIcon: React.ReactNode;
-	onChange?: React.Dispatch<React.SetStateAction<OptionType[]>>;
+	setSelectedOption: React.Dispatch<React.SetStateAction<OptionType[]>>;
+	selectedOption: OptionType[];
 }
 
 export interface DropdownRef {
@@ -36,7 +37,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	const { options } = props;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
+	const { selectedOption, setSelectedOption } = props;
 
 	const isWide = useMediaQuery({
 		query: '(min-width: 768px)',
@@ -66,12 +67,6 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 			});
 		}
 	};
-	// custom onChange handler
-	useEffect(() => {
-		if (props.onChange) {
-			props.onChange(selectedOption);
-		}
-	});
 
 	return (
 		<>

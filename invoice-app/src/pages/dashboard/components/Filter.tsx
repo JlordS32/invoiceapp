@@ -37,41 +37,31 @@ const Filter = () => {
 	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
 
 	useEffect(() => {
-		const searchParams = new URLSearchParams();
+		const searchParams = new URLSearchParams(location.search);
 		const valueOfSelectedOption = selectedOption.map((item) => item.value);
 
-		const existingParams = new URLSearchParams(location.search);
-
-		// Remove duplicate parameters
-		existingParams.delete('filter');
-
-		if (valueOfSelectedOption.length > 0) {
+		// Check if 'sort' parameter already exists and update its value
+		if (searchParams.has('filter') && valueOfSelectedOption.length > 0) {
 			searchParams.set('filter', valueOfSelectedOption.join(','));
+		} else if (valueOfSelectedOption.length > 0) {
+			// Add 'sort' parameter if it doesn't exist
+			searchParams.append('filter', valueOfSelectedOption.join(','));
 		}
 
-		let search = existingParams.toString();
-
-		if (searchParams.toString()) {
-			search += search
-				? '&' + searchParams.toString()
-				: searchParams.toString();
-		}
+		const search = searchParams.toString();
 
 		navigate({ search });
 	}, [selectedOption]);
 
-	const Icon = (
-		<FunnelIcon
-			width={22}
-		/>
-	);
+	const Icon = <FunnelIcon width={22} />;
 
 	return (
 		<div>
 			<Dropdown
 				options={filterOptions}
 				ref={dropdownFilterRef}
-				onChange={setSelectedOption}
+				setSelectedOption={setSelectedOption}
+				selectedOption={selectedOption}
 				label='Filter by status'
 				smallScreenIcon={Icon}
 			/>

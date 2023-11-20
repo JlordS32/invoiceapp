@@ -41,25 +41,19 @@ const Sort = () => {
 	const Icon = <BarsArrowDownIcon width={22} />;
 
 	useEffect(() => {
-		const searchParams = new URLSearchParams();
+		const searchParams = new URLSearchParams(location.search);
 		const valueOfSelectedOption = selectedOption.map((item) => item.value);
 
-		const existingParams = new URLSearchParams(location.search);
-
-		existingParams.delete('sort');
-
-		if (valueOfSelectedOption.length > 0) {
+		// Check if 'sort' parameter already exists and update its value
+		if (searchParams.has('sort') && valueOfSelectedOption.length > 0) {
 			searchParams.set('sort', valueOfSelectedOption.join(','));
+		} else if (valueOfSelectedOption.length > 0) {
+			// Add 'sort' parameter if it doesn't exist
+			searchParams.append('sort', valueOfSelectedOption.join(','));
 		}
 
-		let search = existingParams.toString();
-
-		if (searchParams.toString()) {
-			search += search
-				? '&' + searchParams.toString()
-				: searchParams.toString();
-		}
-
+		const search = searchParams.toString();
+		
 		navigate({ search });
 	}, [selectedOption]);
 

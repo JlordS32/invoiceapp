@@ -94,6 +94,7 @@ const Dashboard = () => {
 		setFilter(newFilter.split(','));
 	}, [location]);
 
+
 	return (
 		<div className={styles.dashboard}>
 			<DashboardNav length={data.length ?? 0} />
