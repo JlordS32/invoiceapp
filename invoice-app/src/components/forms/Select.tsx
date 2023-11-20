@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useEffect, useState } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 import ReactSelect, { StylesConfig } from 'react-select';
 
 // styles

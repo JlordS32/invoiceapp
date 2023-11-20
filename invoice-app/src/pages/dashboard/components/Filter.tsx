@@ -1,14 +1,8 @@
 // react
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 
 // components
-import Dropdown, {
-	DropdownRef,
-	OptionType,
-} from '../../../components/button/Dropdown';
-
-// rrd
-import { useNavigate } from 'react-router-dom';
+import Dropdown, { DropdownRef } from '../../../components/button/Dropdown';
 
 // heroicons
 import { FunnelIcon } from '@heroicons/react/24/solid';
@@ -30,33 +24,6 @@ const Filter = () => {
 		},
 	];
 
-	// rrd navigate
-	const navigate = useNavigate();
-
-	// state
-	const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
-
-	useEffect(() => {
-		const searchParams = new URLSearchParams(location.search);
-		const valueOfSelectedOption = selectedOption.map((item) => item.value);
-
-		// Check if 'sort' parameter already exists and update its value
-		if (searchParams.has('filter') && valueOfSelectedOption.length > 0) {
-			searchParams.set('filter', valueOfSelectedOption.join(','));
-		} else if (valueOfSelectedOption.length > 0) {
-			// Add 'sort' parameter if it doesn't exist
-			searchParams.append('filter', valueOfSelectedOption.join(','));
-		}
-
-		const search = searchParams.toString();
-
-		navigate({ search });
-	}, [selectedOption]);
-
-	useEffect(() => {
-		console.log(selectedOption)
-	}, [selectedOption])
-
 	const Icon = <FunnelIcon width={22} />;
 
 	return (
@@ -64,8 +31,7 @@ const Filter = () => {
 			<Dropdown
 				options={filterOptions}
 				ref={dropdownFilterRef}
-				setSelectedOption={setSelectedOption}
-				selectedOption={selectedOption}
+				searchParam='filter'
 				label='Filter by status'
 				smallScreenIcon={Icon}
 			/>

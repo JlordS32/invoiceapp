@@ -2,9 +2,7 @@
 import {
 	useImperativeHandle,
 	useRef,
-	forwardRef,
-	useState,
-	useEffect,
+	forwardRef
 } from 'react';
 
 // styles
@@ -15,6 +13,7 @@ import styles from '../../assets/styles/modules/dropdown.module.css';
 import downArrow from '../../assets/svg/icon-arrow-down.svg';
 
 import { useMediaQuery } from 'react-responsive';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export interface OptionType {
 	label: string;
@@ -25,8 +24,7 @@ interface DropdownProps {
 	options?: OptionType[];
 	label?: string;
 	smallScreenIcon: React.ReactNode;
-	setSelectedOption: React.Dispatch<React.SetStateAction<OptionType[]>>;
-	selectedOption: OptionType[];
+	searchParam: string;
 }
 
 export interface DropdownRef {
@@ -36,10 +34,12 @@ export interface DropdownRef {
 const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	// TODO url params persistant
 
-	const { options } = props;
+	const { options, searchParam } = props;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-	const { selectedOption, setSelectedOption } = props;
+	// rrd
+	const navigate = useNavigate();
+	const location = useLocation();
 
 	const isWide = useMediaQuery({
 		query: '(min-width: 768px)',
@@ -48,61 +48,39 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 	useImperativeHandle(ref, () => {
 		return {
 			get value() {
-				return selectedOption || [];
+				return [];
 			},
 		};
 	});
 
 	const handleClick = (option: OptionType) => {
-		const optionExists =
-			selectedOption &&
-			selectedOption.some((item) => {
-				return item.value === option.value;
-			});
+		const selectedOption = option.value;
+		const searchParams = new URLSearchParams(location.search);
+		const existingParams = searchParams.get(searchParam)?.split(',');
 
-		if (optionExists) {
-			setSelectedOption((prev) => {
-				const filteredData = prev.filter((item) => item.value !== option.value);
-				return filteredData;
-			});
+		if (!existingParams) {
+			searchParams.set(searchParam, selectedOption);
 		} else {
-			setSelectedOption((prev) => {
-				return [...prev, option];
-			});
-		}
-	};
+			const optionExist = existingParams.some(
+				(option) => option === selectedOption
+			);
 
-	// useEffect
-	useEffect(() => {
-		const currentParams = new URLSearchParams(location.search);
-		const filterValues = currentParams.get('filter')?.split(',');
-		const sortedValues = currentParams.get('sort')?.split(',');
+			if (optionExist) {
+				existingParams?.splice(existingParams?.indexOf(selectedOption));
+			} else {
+				existingParams?.push(selectedOption);
+			}
 
-		if (
-			(filterValues && filterValues.length > 0) ||
-			(sortedValues && sortedValues.length > 0)
-		) {
-			const mergedValues = [...(filterValues ?? []), ...(sortedValues ?? [])];
-			const updatedValues =
-				mergedValues &&
-				mergedValues.map((value) => {
-					return {
-						label: value[0].toUpperCase() + value.slice(1),
-						value: value,
-					};
-				});
-
-			if (setSelectedOption) {
-				setSelectedOption((prevOptions) => {
-					const optionSet = new Set(prevOptions.map((option) => option.value));
-					const newOptions = updatedValues.filter(
-						(option) => !optionSet.has(option.value)
-					);
-					return [...prevOptions, ...newOptions];
-				});
+			if (existingParams) {
+				searchParams.set(searchParam, existingParams.join(','));
 			}
 		}
-	}, []);
+
+		navigate({
+			pathname: location.pathname,
+			search: searchParams.toString(),
+		});
+	};
 
 	return (
 		<>
@@ -143,11 +121,6 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 					>
 						<div>
 							{options?.map((option, index) => {
-								const optionExists =
-									selectedOption &&
-									selectedOption.some((item) => {
-										return item.value === option.value;
-									});
 								return (
 									<div
 										onClick={() => {
@@ -155,11 +128,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 										}}
 										key={index}
 									>
-										<div
-											className={`${styles.checkbox} ${
-												optionExists ? styles.checked : ''
-											}`}
-										></div>
+										<div className={`${styles.checkbox}`}></div>
 										<span className='body-text'>{option.label}</span>
 									</div>
 								);
