@@ -30,7 +30,7 @@ const Invoice = () => {
 
 				<InvoiceNav status={invoice ? invoice.status : ''} />
 
-				<InvoicePaper invoice={invoice as InvoiceType} />
+				<InvoicePaper invoice={invoice} />
 			</div>
 		</div>
 	);

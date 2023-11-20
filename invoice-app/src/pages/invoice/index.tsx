@@ -5,7 +5,7 @@ import { InvoiceType } from '../../types';
 
 export interface paramsType {
 	id: string;
-	invoiceData: InvoiceType
+	invoice: InvoiceType
 }
 
 export const invoiceLoader: LoaderFunction<paramsType> = async ({ params }) => {
