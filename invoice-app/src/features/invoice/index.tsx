@@ -1,5 +1,5 @@
 // components
-import CreateInvoice from './components/CreateInvoice';
+import CreateInvoiceList from './components/CreateInvoiceList';
 
 // type imports
 import { InvoiceType } from '../../types/InvoiceTypes';
@@ -10,7 +10,7 @@ interface invoiceProps {
 }
 
 const Invoice = ({ data }: invoiceProps) => {
-	return <CreateInvoice invoice={data} />;
+	return <CreateInvoiceList invoice={data} />;
 };
 
 export default Invoice;

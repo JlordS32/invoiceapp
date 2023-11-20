@@ -3,7 +3,7 @@ import styles from '../../../assets/styles/modules/dashboard/invoice.module.css'
 import formatCurrency from '../../../utilities/formatCurrencies';
 
 // utils
-import formatDate from '../../../utilities/formatDate';
+import { formatToDateString } from '../../../utilities/formatDate';
 import checkStatusType from '../utils/CheckStatusType';
 import getTotal from '../../../utilities/getTotal';
 import extractPrices from '../../../utilities/extractPrices';
@@ -26,7 +26,7 @@ import Status from './Status';
 
 import { useMediaQuery } from 'react-responsive';
 
-const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
+const CreateInvoiceList = ({ invoice }: CreateInvoiceProps) => {
 	const status: paymentStatusType = checkStatusType(invoice.status);
 
 	const total = getTotal(extractPrices(invoice.items));
@@ -48,7 +48,7 @@ const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
 					</div>
 				</div>
 				<div className={styles.dueDate}>
-					<div>Due {formatDate(invoice.paymentDue)}</div>
+					<div>Due {formatToDateString(invoice.paymentDue)}</div>
 				</div>
 				<div className={styles.clientName}>
 					<div>{invoice.clientName}</div>
@@ -75,4 +75,4 @@ const CreateInvoice = ({ invoice }: CreateInvoiceProps) => {
 	);
 };
 
-export default CreateInvoice;
+export default CreateInvoiceList;

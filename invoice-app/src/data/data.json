@@ -228,35 +228,6 @@
         }
       ],
       "total": 3102.04
-    },
-    {
-      "id": "0LTH82",
-      "createdAt": "11-20-2023",
-      "paymentTerm": "30",
-      "paymentDue": "12-20-2023",
-      "items": [
-        {
-          "id": "6bd2a728-a167-4d9b-80f6-a2d4b07d8f8c",
-          "name": "Logo Design",
-          "quantity": 1,
-          "price": 100
-        }
-      ],
-      "senderAddress": {
-        "street": "Unit 13/7 Libya Place",
-        "city": "Sydney",
-        "postCode": "2122",
-        "country": "Australia"
-      },
-      "clientName": "Conor Goulding",
-      "clientEmail": "ccgoulding24@gmail.com",
-      "clientAddress": {
-        "clientStreet": "13/2 Marsden Field, Park",
-        "city": "Sydney",
-        "postcode": "2122",
-        "country": "Australia"
-      },
-      "description": "Very nomnom"
     }
   ]
 }

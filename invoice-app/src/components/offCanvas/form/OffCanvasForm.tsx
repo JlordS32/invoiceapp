@@ -1,5 +1,5 @@
 // react
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // styles
 import thisCanvasStyles from '../../../assets/styles/modules/offcanvas/createinvoicecanvas.module.css';
@@ -70,13 +70,14 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		});
 	};
 
-	const handleSaveDraft = () => {
-		close();
+	const handleSave = (status: string) => {
+		setFormData({
+			...formData,
+			status: status,
+		});
 	};
 
 	const handleSubmit = () => {
-		console.log('i submitted');
-
 		usePostData('http://localhost:3000/invoices', formData)
 			.then((response) => {
 				console.log(response);
@@ -84,18 +85,16 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 			.catch((error) => {
 				console.error(error);
 			});
-	};
 
-	useEffect(() => {
-		console.log(formData);
-	}, [formData]);
+		window.scrollTo(0, document.body.scrollHeight);
+	};
 
 	return (
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
-
 				handleSubmit();
+				close();
 			}}
 		>
 			<h2 className='text--h2'>{header}</h2>
@@ -118,12 +117,19 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				</Button>
 				<Button
 					variant='saveAsDraftButton'
-					onClick={handleSaveDraft}
+					onClick={() => {
+						handleSave('draft');
+					}}
 					type='button'
 				>
 					Save as Draft
 				</Button>
-				<Button type='submit'>Save & Send</Button>
+				<Button
+					type='submit'
+					onClick={() => handleSave('pending')}
+				>
+					Save & Send
+				</Button>
 			</div>
 		</form>
 	);

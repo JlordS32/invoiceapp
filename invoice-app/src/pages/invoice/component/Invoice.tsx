@@ -9,7 +9,6 @@ import styles from '../../../assets/styles/modules/invoice/invoicepage.module.cs
 
 // redux
 import { InvoiceType } from '../../../types/InvoiceTypes';
-import { useFetchDatabyId } from '../../../services/api/useFetch';
 
 // components
 import GoBack from '../../../components/button/GoBack';
@@ -20,23 +19,9 @@ import InvoicePaper from './../component/InvoicePaper';
 import { paramsType } from '..';
 
 const Invoice = () => {
-	// states
-	const [invoice, setInvoice] = useState<InvoiceType>();
 
 	// rrd
-	const { id } = useLoaderData() as paramsType;
-
-	// api handling
-	useEffect(() => {
-		const url = `http://localhost:3000/invoices`;
-		const fetchData = async () => {
-			const invoice = await useFetchDatabyId(url, { id: id });
-
-			setInvoice(invoice[0]);
-		};
-
-		fetchData();
-	}, []);
+	const { invoice } = useLoaderData() as paramsType;
 
 	return (
 		<div className={styles.invoicePage}>

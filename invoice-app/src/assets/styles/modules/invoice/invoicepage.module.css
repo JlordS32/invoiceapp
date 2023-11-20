@@ -64,6 +64,7 @@
 	font-weight: 500;
 	line-height: calc(var(--line-height) * 1.15rem);
 	margin-top: 0.5rem;
+	margin-bottom: 3.5rem;
 }
 
 .senderInfo > .invoiceId > p > span {
