@@ -50,7 +50,7 @@ export function validateData(key: string, data: string, target?: string) {
 				} else {
 					return {
 						valid: false,
-						errorMsg: "can't be zero",
+						errorMsg: "invalid",
 					};
 				}
 			}

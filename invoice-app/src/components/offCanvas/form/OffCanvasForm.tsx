@@ -181,6 +181,13 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const handleSave = (status: string) => {
+		setFormHasBeenClicked(true);
+
+		const valid = areAllValid(formError);
+		if (valid) {
+			status = 'pending';
+		}
+
 		setFormData({
 			...formData,
 			status: status,
@@ -188,10 +195,24 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const handleSubmit = () => {
-		setFormHasBeenClicked(true);
-		validateFormErrors();
+		if (formData.status === 'pending') {
+			if (isFormValid) {
+				validateFormErrors();
+				usePostData('https://invoiceapi.vercel.app/invoices', formData)
+					.then((response) => {
+						console.log(response);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
 
-		if (isFormValid) {
+				close();
+
+				window.scrollTo(0, document.body.scrollHeight);
+			}
+		}
+
+		if (formData.status === 'draft') {
 			usePostData('https://invoiceapi.vercel.app/invoices', formData)
 				.then((response) => {
 					console.log(response);
@@ -199,9 +220,11 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				.catch((error) => {
 					console.error(error);
 				});
-		}
 
-		window.scrollTo(0, document.body.scrollHeight);
+			close();
+
+			window.scrollTo(0, document.body.scrollHeight);
+		}
 	};
 
 	useEffect(() => {
@@ -223,7 +246,6 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 			onSubmit={(e) => {
 				e.preventDefault();
 				handleSubmit();
-				close();
 			}}
 		>
 			<h2 className='text--h2'>{header}</h2>
