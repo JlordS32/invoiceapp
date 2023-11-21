@@ -1,5 +1,5 @@
 import BillTo from './BillTo';
-import { FormDataType, FormErrorType } from '../../../../types';
+import { FormErrorType } from '../../../../types';
 
 export interface BillToProps {
 	handleInputChange: (
@@ -7,7 +7,7 @@ export interface BillToProps {
 		nest?: string | null
 	) => void;
 	formError?: FormErrorType;
-	update: (data: FormDataType) => void;
+	update: (data: any) => void;
 }
 const index = (props: BillToProps) => {
 	return <BillTo {...props} />;

@@ -15,7 +15,7 @@ import { calculatePaymentDueDate } from '../../../../utilities/calculatePaymentD
 // types
 import { BillToProps } from '.';
 import { OptionType } from '../../../button/Dropdown';
-const BillTo = ({ handleInputChange, update }: BillToProps) => {
+const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 	// defaults
 	const options = [
 		{
@@ -59,6 +59,11 @@ const BillTo = ({ handleInputChange, update }: BillToProps) => {
 		update(newData);
 	}, [formDate, selectedValue]);
 
+
+	// DESTRUCTED FORM ERRORS
+	const { street, city, postCode, country } = formError?.clientAddress ?? {};
+	const { clientName, clientEmail, description } = formError ?? {};
+
 	return (
 		<section className={styles.billTo}>
 			<h4 className='text--h3'>Bill To</h4>
@@ -67,17 +72,20 @@ const BillTo = ({ handleInputChange, update }: BillToProps) => {
 					label={`Client's Name`}
 					width='100%'
 					name='clientName'
+					isValid={clientName?.valid ?? false}
 					onChange={handleInputChange}
 				/>
 				<Form.Text
 					label={`Client's Email`}
 					width='100%'
 					name='clientEmail'
+					isValid={clientEmail?.valid ?? false}
 					onChange={handleInputChange}
 				/>
 				<Form.Text
 					label='Street Address'
 					width='100%'
+					isValid={street?.valid ?? false}
 					name='clientStreet'
 					onChange={(e) => {
 						handleInputChange(e, 'clientAddress');
@@ -90,6 +98,7 @@ const BillTo = ({ handleInputChange, update }: BillToProps) => {
 						label='City'
 						width='100%'
 						name='city'
+						isValid={city?.valid ?? false}
 						onChange={(e) => {
 							handleInputChange(e, 'clientAddress');
 						}}
@@ -100,6 +109,7 @@ const BillTo = ({ handleInputChange, update }: BillToProps) => {
 						label='Post Code'
 						width='100%'
 						name='postcode'
+						isValid={postCode?.valid ?? false}
 						onChange={(e) => {
 							handleInputChange(e, 'clientAddress');
 						}}
@@ -110,6 +120,7 @@ const BillTo = ({ handleInputChange, update }: BillToProps) => {
 						label='Country'
 						width='100%'
 						name='country'
+						isValid={country?.valid ?? false}
 						onChange={(e) => {
 							handleInputChange(e, 'clientAddress');
 						}}
@@ -137,6 +148,7 @@ const BillTo = ({ handleInputChange, update }: BillToProps) => {
 					label='Project Description'
 					width='100%'
 					name='description'
+					isValid={description?.valid ?? false}
 					onChange={handleInputChange}
 				/>
 			</div>

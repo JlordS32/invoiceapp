@@ -1,4 +1,6 @@
-export const defaultFormError = {
+import { FormDataType, FormErrorType } from "../../../../types";
+
+export const defaultFormError: FormErrorType = {
 	senderAddress: {
 		street: {
 			valid: true,
@@ -69,6 +71,35 @@ export const defaultFormError = {
 				valid: true,
 				errorMsg: '',
 			},
+		},
+	],
+};
+
+export const defaultForm: FormDataType = {
+	senderAddress: {
+		street: '',
+		city: '',
+		postCode: '',
+		country: '',
+	},
+	clientAddress: {
+		street: '',
+		city: '',
+		postCode: '',
+		country: '',
+	},
+	clientEmail: '',
+	clientName: '',
+	paymentTerms: '',
+	createdAt: '',
+	description: '',
+	paymentDue: '',
+	items: [
+		{
+			id: '',
+			name: '',
+			quantity: 0,
+			price: 0,
 		},
 	],
 };

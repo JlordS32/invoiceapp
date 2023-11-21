@@ -1,7 +1,8 @@
+import { FormErrorType } from '../../../../types';
 import ItemList from './ItemList';
-import { FormDataType } from '../../../../types';
 export interface ItemListProps {
-	update: (data: FormDataType) => void;
+	update: (data: any) => void;
+	formError?: FormErrorType;
 }
 const index = (props: ItemListProps) => {
 	return <ItemList {...props} />;

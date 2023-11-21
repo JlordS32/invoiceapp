@@ -4,19 +4,23 @@ import { useEffect, useState } from 'react';
 // styles
 import thisCanvasStyles from '../../../assets/styles/modules/offcanvas/createinvoicecanvas.module.css';
 
-// component
-import Button from '../../button/Button';
-
 // components
+import Button from '../../button/Button';
 import ItemList from './itemList';
 import BillTo from './billTo/BillTo';
 import BillForm from './billFrom/BillFrom';
 
+// utils
+import { validateData } from '../../../utilities/validateData';
+
+// defaults
+import { defaultFormError, defaultForm } from './defaultValues/default';
+
+// services
+import { usePostData } from '../../../services/api/usePostData';
+
 // types
 import { FormDataType, FormErrorType } from '../../../types';
-import { usePostData } from '../../../services/api/usePostData';
-import { validateData } from '../../../utilities/validateData';
-import { defaultFormError } from './defaultValues/defaultFormError';
 interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
@@ -24,10 +28,75 @@ interface OffCanvasFormProps {
 
 const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	// state
-	const [formData, setFormData] = useState<FormDataType>();
+	const [formData, setFormData] = useState<FormDataType>(defaultForm);
 	const [formError, setFormError] = useState<FormErrorType>(defaultFormError);
 
-	// function to handle formData
+	// FUNCTIONS
+	// util functions
+
+	const validateFormErrors = () => {
+		if (formData) {
+			Object.entries(formData).forEach(([key, value]) => {
+				let validated: {
+					valid: boolean;
+					errorMsg: string;
+				} = {
+					valid: true,
+					errorMsg: '',
+				};
+
+				if (typeof value === 'string') {
+					validated = validateData(key, value);
+
+					updateFormErrors(key, validated, 'string');
+				} else if (typeof value === 'object') {
+					Object.entries(value).forEach(([key2, value2]) => {
+						validated = validateData(key2, value2);
+
+						updateFormErrors(key, validated, 'object', key2);
+					});
+				}
+			});
+		}
+	};
+
+	const updateFormErrors = (
+		key: string,
+		validated: { valid: boolean; errorMsg: string },
+		type: 'string' | 'object',
+		key2?: string
+	) => {
+		if (type === 'string') {
+			setFormError((prev) => {
+				return {
+					...prev,
+					[key]: {
+						valid: validated.valid,
+						errorMsg: validated.errorMsg,
+					},
+				};
+			});
+		}
+
+		if (type === 'object') {
+			setFormError((prev: any) => {
+				if (prev && prev[key] && key2) {
+					return {
+						...prev,
+						[key]: {
+							...prev[key],
+							[key2]: {
+								valid: validated.valid,
+								errorMsg: validated.errorMsg,
+							},
+						},
+					};
+				}
+			});
+		}
+	};
+
+	// function to handle events
 	const handleInputChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
 		nest?: string | null
@@ -61,7 +130,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		}
 	};
 
-	const handleUpdateFormData = (data: FormDataType) => {
+	const handleUpdateFormData = (data: any) => {
 		setFormData({
 			...formData,
 			...data,
@@ -76,44 +145,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const handleSubmit = () => {
-		if (formData) {
-			Object.entries(formData).forEach(([key, value]) => {
-				let validated: {
-					valid: boolean;
-					errorMsg: string;
-				} = {
-					valid: true,
-					errorMsg: '',
-				};
-
-				
-				const _test = validateData('asdf', '123', 'email')
-
-				console.log(_test);
-
-				if (typeof value === 'string') {
-					setFormError((prev) => {
-						return {
-							...prev,
-							[key]: {
-								valid: validated.valid,
-								errorMsg: validated.errorMsg,
-							},
-						};
-					});
-				} else if (typeof value === 'object') {
-					// setFormError((prev) => {
-					// 	return {
-					// 		...prev,
-					// 		[key]: {
-					// 			valid: validated.valid,
-					// 			errorMsg: validated.errorMsg,
-					// 		},
-					// 	};
-					// });
-				}
-			});
-		}
+		validateFormErrors();
 
 		// usePostData('http://localhost:3000/invoices', formData)
 		// 	.then((response) => {
@@ -126,9 +158,15 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		window.scrollTo(0, document.body.scrollHeight);
 	};
 
+	// useEffect hooks
 	useEffect(() => {
 		console.log(formError);
+		console.log(formData);
 	}, [formError]);
+
+	// useEffect(() => {
+	// 	console.log(formData);
+	// }, [formData]);
 
 	return (
 		<form
@@ -147,9 +185,13 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 			<BillTo
 				handleInputChange={handleInputChange}
 				update={handleUpdateFormData}
+				formError={formError}
 			/>
 
-			<ItemList update={handleUpdateFormData} />
+			<ItemList
+				update={handleUpdateFormData}
+				formError={formError}
+			/>
 
 			<div className={thisCanvasStyles.buttons}>
 				<Button

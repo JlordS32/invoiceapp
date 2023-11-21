@@ -16,7 +16,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ItemType } from '../../../../types';
 import { ItemListProps } from '.';
 
-const ItemList = ({ update }: ItemListProps) => {
+const ItemList = ({ update, formError }: ItemListProps) => {
 	// default
 	const defaultItem = [
 		{
@@ -92,6 +92,7 @@ const ItemList = ({ update }: ItemListProps) => {
 								item={item}
 								itemList={items}
 								setItemList={setItems}
+								formError={formError}
 								deleteItem={handleDeleteItem}
 								key={item.id}
 							/>

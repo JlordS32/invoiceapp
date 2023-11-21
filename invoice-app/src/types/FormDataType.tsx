@@ -1,13 +1,27 @@
 import { ItemType, ItemTypeError } from './ItemType';
 
 export type FormDataType = {
-	[key: string]:
-		| string
-		| number
-		| ItemType[]
-		| {
-				[key: string]: string;
-		  };
+	senderAddress: {
+		street: string;
+		city: string;
+		postCode: string;
+		country: string;
+	};
+	clientAddress: {
+		street: string;
+		city: string;
+		postCode: string;
+		country: string;
+	};
+	clientEmail: string;
+	clientName: string;
+	paymentTerms: string;
+	paymentDue: string;
+	createdAt: string;
+	description: string;
+	items: ItemType[];
+} & {
+	[key: string]: string | number | ItemType[] | { [key: string]: string };
 };
 
 export type FormErrorType = {
