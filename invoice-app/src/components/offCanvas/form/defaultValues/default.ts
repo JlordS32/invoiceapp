@@ -58,20 +58,6 @@ export const defaultFormError: FormErrorType = {
 		errorMsg: '',
 	},
 	items: [
-		{
-			name: {
-				valid: true,
-				errorMsg: '',
-			},
-			quantity: {
-				valid: true,
-				errorMsg: '',
-			},
-			price: {
-				valid: true,
-				errorMsg: '',
-			},
-		},
 	],
 };
 

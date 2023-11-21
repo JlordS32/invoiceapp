@@ -10,7 +10,7 @@ import deleteSvg from '../../../../assets/svg/icon-delete.svg';
 import { useMediaQuery } from 'react-responsive';
 
 // types
-import { FormErrorType, ItemType } from '../../../../types';
+import { ItemType } from '../../../../types';
 import formatCurrency from '../../../../utilities/formatCurrencies';
 import { useEffect, useState } from 'react';
 interface FormItemsProps {
@@ -18,15 +18,14 @@ interface FormItemsProps {
 	deleteItem: (itemTodelete: ItemType) => void;
 	itemList: ItemType[];
 	setItemList: React.Dispatch<React.SetStateAction<ItemType[]>>;
-	formError: FormErrorType | undefined;
+	// formError: FormErrorType | undefined;
 }
 
 const FormItems = ({
 	item,
 	deleteItem,
 	itemList,
-	setItemList,
-	formError,
+	setItemList
 }: FormItemsProps) => {
 	// state
 	const [itemName, setItemName] = useState<string>(item.name);

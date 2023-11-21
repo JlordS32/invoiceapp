@@ -6,6 +6,7 @@ export interface ItemType {
 }
 
 export interface ItemTypeError {
+	id: string,
 	name: {
 		valid: boolean;
 		errorMsg: string;

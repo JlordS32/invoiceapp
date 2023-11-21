@@ -16,9 +16,6 @@ import { validateData } from '../../../utilities/validateData';
 // defaults
 import { defaultFormError, defaultForm } from './defaultValues/default';
 
-// services
-import { usePostData } from '../../../services/api/usePostData';
-
 // types
 import { FormDataType, FormErrorType } from '../../../types';
 interface OffCanvasFormProps {
@@ -136,6 +133,12 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 			...data,
 		});
 	};
+	const handleUpdateFormError = (data: any) => {
+		setFormError({
+			...formError,
+			...data,
+		});
+	};
 
 	const handleSave = (status: string) => {
 		setFormData({
@@ -159,14 +162,14 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	// useEffect hooks
-	useEffect(() => {
-		console.log(formError);
-		console.log(formData);
-	}, [formError]);
-
 	// useEffect(() => {
+	// 	console.log(formError);
 	// 	console.log(formData);
-	// }, [formData]);
+	// }, [formError]);
+
+	useEffect(() => {
+		console.log({ formData, formError });
+	}, [formData]);
 
 	return (
 		<form
@@ -190,6 +193,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 
 			<ItemList
 				update={handleUpdateFormData}
+				updateErrorForm={handleUpdateFormError}
 				formError={formError}
 			/>
 

@@ -1,9 +1,5 @@
 // styles
 import styles from '../../assets/styles/modules/offcanvas/offcanvas.module.css';
-import thisCanvasStyles from '../../assets/styles/modules/offcanvas/createinvoicecanvas.module.css';
-
-// component
-import Button from '../button/Button';
 
 // redux
 import { useDispatch } from 'react-redux';

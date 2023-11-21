@@ -30,7 +30,7 @@ const EditInvoiceCanvas = () => {
 		<div
 			className={`${styles.canvas} animate animate--very-slow animate-ease-in-out slideToRight`}
 		>
-			<OffCanvasForm header='Edit Form' />
+			<OffCanvasForm header='Edit Form' close={handleClose} />
 
 			<div className={thisCanvasStyles.buttons}>
 				<Button
