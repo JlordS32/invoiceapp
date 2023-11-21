@@ -45,7 +45,7 @@ export const defaultFormError: FormErrorType = {
 		valid: true,
 		errorMsg: '',
 	},
-	paymentTerms: {
+	paymentTerm: {
 		valid: true,
 		errorMsg: '',
 	},
@@ -76,7 +76,7 @@ export const defaultForm: FormDataType = {
 	},
 	clientEmail: '',
 	clientName: '',
-	paymentTerms: '',
+	paymentTerm: '',
 	createdAt: '',
 	description: '',
 	paymentDue: '',

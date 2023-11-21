@@ -1,3 +1,10 @@
+/**
+ * Validates the given data based on the provided key.
+ * @param {string} key - The key indicating the type of data to validate.
+ * @param {string} data - The data to be validated.
+ * @param {string} target - Optional target key to override the original key.
+ * @returns {object} - An object containing the validation result and error message.
+ */
 export function validateData(key: string, data: string, target?: string) {
 	// The third parameters will allow me to dynamically choose what to validate without having the key match the switch statements assuming that the target matches the switch statements.
 	if (target) {
@@ -10,7 +17,7 @@ export function validateData(key: string, data: string, target?: string) {
 			const isName = nameRegex.test(data);
 			return {
 				valid: isName,
-				errorMsg: isName ? '' : 'Invalid name',
+				errorMsg: isName ? '' : 'invalid name',
 			};
 		case 'clientemail':
 		case 'email':
@@ -18,14 +25,15 @@ export function validateData(key: string, data: string, target?: string) {
 			const isEmail = emailRegex.test(data);
 			return {
 				valid: isEmail,
-				errorMsg: isEmail ? '' : 'Invalid email address',
+				errorMsg: isEmail ? '' : 'invalid email',
 			};
 		case 'postcode':
 			const postcodeRegex = /^(0[289][0-9]{2})|([1-9][0-9]{3})$/i;
+
 			const isPostCode = postcodeRegex.test(data);
 			return {
 				valid: isPostCode,
-				errorMsg: isPostCode ? '' : 'Invalid postcode number',
+				errorMsg: isPostCode ? '' : 'invalid',
 			};
 		case 'price':
 		case 'quantity':
@@ -42,7 +50,7 @@ export function validateData(key: string, data: string, target?: string) {
 				} else {
 					return {
 						valid: false,
-						errorMsg: 'Number must be greater than 0',
+						errorMsg: "can't be zero",
 					};
 				}
 			}
@@ -56,7 +64,7 @@ export function validateData(key: string, data: string, target?: string) {
 			const dataNotEmpty = data !== '';
 			return {
 				valid: dataNotEmpty,
-				errorMsg: dataNotEmpty ? '' : 'Field can\'t be empty',
+				errorMsg: dataNotEmpty ? '' : "can't be empty",
 			};
 	}
 }

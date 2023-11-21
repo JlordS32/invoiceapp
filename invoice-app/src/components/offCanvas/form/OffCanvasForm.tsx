@@ -18,20 +18,34 @@ import { defaultFormError, defaultForm } from './defaultValues/default';
 
 // types
 import { FormDataType, FormErrorType } from '../../../types';
-import { ItemTypeError } from '../../../types/ItemType';
+import { areAllValid } from '../../../utilities/areAllValid';
+import { usePostData } from '../../../services/api/usePostData';
+
 interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
 }
 
+/**
+ * Renders an off-canvas form component with the provided header and close function.
+ *
+ * @param {OffCanvasFormProps} header - The header to display in the form component.
+ * @param {() => void} close - The function to close the off-canvas form.
+ * @return {JSX.Element} The rendered off-canvas form component.
+ */
 const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	// state
 	const [formData, setFormData] = useState<FormDataType>(defaultForm);
 	const [formError, setFormError] = useState<FormErrorType>(defaultFormError);
+	const [formHasBeenClicked, setFormHasBeenClicked] = useState(false);
+	const [isFormValid, setIsFormValid] = useState(false);
 
-	// FUNCTIONS
-	// util functions
-
+	/**
+	 * Validates the form errors by iterating over the formData object
+	 * and calling the validateData function for each value.
+	 *
+	 * @return {void}
+	 */
 	const validateFormErrors = () => {
 		if (formData) {
 			Object.entries(formData).forEach(([key, value]) => {
@@ -72,6 +86,16 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		}
 	};
 
+	/**
+	 * Updates the form errors based on the provided key, validated value, and type.
+	 * If the type is 'string', it sets the form error for the given key to the validated value.
+	 * If the type is 'object', it sets the form error for the given key and key2 to the validated value.
+	 *
+	 * @param {string} key - The key for which the form error needs to be updated.
+	 * @param {object} validated - An object containing the validated value and error message.
+	 * @param {'string' | 'object'} type - The type of form error to update.
+	 * @param {string} [key2] - The second key for which the form error needs to be updated (only applicable if type is 'object').
+	 */
 	const updateFormErrors = (
 		key: string,
 		validated: { valid: boolean; errorMsg: string },
@@ -164,35 +188,42 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const handleSubmit = () => {
+		setFormHasBeenClicked(true);
 		validateFormErrors();
 
-		// usePostData('http://localhost:3000/invoices', formData)
-		// 	.then((response) => {
-		// 		console.log(response);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error(error);
-		// 	});
+		if (isFormValid) {
+			usePostData('https://invoiceapi.vercel.app/invoices', formData)
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
 
 		window.scrollTo(0, document.body.scrollHeight);
 	};
 
-	// useEffect hooks
-	// useEffect(() => {
-	// 	console.log(formError);
-	// 	console.log(formData);
-	// }, [formError]);
+	useEffect(() => {
+		if (formHasBeenClicked) {
+			validateFormErrors();
+
+			const valid = areAllValid(formError);
+
+			setIsFormValid(valid);
+		}
+	}, [formData]);
 
 	useEffect(() => {
-		console.log({ formData, formError });
-	}, [formData]);
+		console.log(isFormValid);
+	}, [isFormValid]);
 
 	return (
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
 				handleSubmit();
-				// close();
+				close();
 			}}
 		>
 			<h2 className='text--h2'>{header}</h2>

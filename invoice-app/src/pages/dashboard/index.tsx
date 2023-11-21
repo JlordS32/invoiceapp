@@ -47,7 +47,8 @@ const Dashboard = () => {
 
 	// function to trigger data
 	const fetchData = async () => {
-		const url = 'http://localhost:3000/invoices';
+		const url = 'https://invoiceapi.vercel.app/invoices';
+
 		await dispatch(getInvoiceAsync(url));
 	};
 

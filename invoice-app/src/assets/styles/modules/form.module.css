@@ -8,6 +8,10 @@
 	border: 1px var(--09) solid;
 }
 
+.formContainer.error .labelGroup label {
+	color: var(--09);
+}
+
 .formContainer.error > input:focus {
 	border: 0;
 }
@@ -47,7 +51,12 @@
 	-moz-appearance: textfield;
 }
 
-.formContainer > label {
+.labelGroup {
+	display: flex;
+	justify-content: space-between;
+}
+
+.labelGroup > label {
 	color: var(--form-label);
 	font-family: League Spartan;
 	font-size: 1rem;
@@ -55,6 +64,10 @@
 	font-weight: 500;
 	line-height: 1.15385rem; /* 115.385% */
 	letter-spacing: -0.00769rem;
+}
+
+.labelGroup > label.labelError {
+	color: var(--09);
 }
 .calendarContainer {
 	position: relative;

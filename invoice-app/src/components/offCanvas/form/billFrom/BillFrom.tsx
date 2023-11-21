@@ -16,6 +16,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 				label='Street Address'
 				name='street'
 				isValid={street.valid ?? false}
+				errorMsg={street.errorMsg ?? ''}
 				onChange={(e) => {
 					handleInputChange(e, 'senderAddress');
 				}}
@@ -29,6 +30,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 						width='100%'
 						name='city'
 						isValid={city.valid ?? false}
+						errorMsg={city.errorMsg ?? ''}
 						onChange={(e) => {
 							handleInputChange(e, 'senderAddress');
 						}}
@@ -40,6 +42,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 						width='100%'
 						name='postCode'
 						isValid={postCode.valid ?? false}
+						errorMsg={postCode.errorMsg ?? ''}
 						onChange={(e) => {
 							handleInputChange(e, 'senderAddress');
 						}}
@@ -51,6 +54,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 						width='100%'
 						name='country'
 						isValid={country.valid ?? false}
+						errorMsg={country.errorMsg ?? ''}
 						onChange={(e) => {
 							handleInputChange(e, 'senderAddress');
 						}}

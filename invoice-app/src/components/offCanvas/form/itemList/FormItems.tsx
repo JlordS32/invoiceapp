@@ -68,6 +68,7 @@ const FormItems = ({
 				name='name'
 				defaultValue={item.name}
 				isValid={itemErrorState?.name?.valid ?? false}
+				errorMsg={itemErrorState?.name?.errorMsg ?? ''}
 				onChange={(e) => {
 					setItemName(e.target.value);
 				}}
@@ -78,6 +79,7 @@ const FormItems = ({
 				name='quantity'
 				defaultValue={`${item.quantity}`}
 				isValid={itemErrorState?.quantity?.valid ?? false}
+				errorMsg={itemErrorState?.quantity?.errorMsg ?? ''}
 				onChange={(e) => {
 					setQuantity(Number(e.target.value));
 				}}
@@ -89,6 +91,7 @@ const FormItems = ({
 				name='price'
 				defaultValue={`${item.price}`}
 				isValid={itemErrorState?.price?.valid ?? false}
+				errorMsg={itemErrorState?.price?.errorMsg ?? ''}
 				onChange={(e) => {
 					setPrice(Number(e.target.value));
 				}}

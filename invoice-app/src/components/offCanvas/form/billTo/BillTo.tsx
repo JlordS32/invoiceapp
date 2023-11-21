@@ -59,7 +59,6 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 		update(newData);
 	}, [formDate, selectedValue]);
 
-
 	// DESTRUCTED FORM ERRORS
 	const { street, city, postCode, country } = formError?.clientAddress ?? {};
 	const { clientName, clientEmail, description } = formError ?? {};
@@ -73,6 +72,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					width='100%'
 					name='clientName'
 					isValid={clientName?.valid ?? false}
+					errorMsg={clientName?.errorMsg ?? ''}
 					onChange={handleInputChange}
 				/>
 				<Form.Text
@@ -80,13 +80,15 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					width='100%'
 					name='clientEmail'
 					isValid={clientEmail?.valid ?? false}
+					errorMsg={clientEmail?.errorMsg ?? ''}
 					onChange={handleInputChange}
 				/>
 				<Form.Text
 					label='Street Address'
 					width='100%'
 					isValid={street?.valid ?? false}
-					name='clientStreet'
+					errorMsg={street?.errorMsg ?? ''}
+					name='street'
 					onChange={(e) => {
 						handleInputChange(e, 'clientAddress');
 					}}
@@ -99,6 +101,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						width='100%'
 						name='city'
 						isValid={city?.valid ?? false}
+						errorMsg={city?.errorMsg ?? ''}
 						onChange={(e) => {
 							handleInputChange(e, 'clientAddress');
 						}}
@@ -108,8 +111,9 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					<Form.Text
 						label='Post Code'
 						width='100%'
-						name='postcode'
+						name='postCode'
 						isValid={postCode?.valid ?? false}
+						errorMsg={postCode?.errorMsg ?? ''}
 						onChange={(e) => {
 							handleInputChange(e, 'clientAddress');
 						}}
@@ -121,6 +125,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						width='100%'
 						name='country'
 						isValid={country?.valid ?? false}
+						errorMsg={country?.errorMsg ?? ''}
 						onChange={(e) => {
 							handleInputChange(e, 'clientAddress');
 						}}
@@ -148,6 +153,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					label='Project Description'
 					width='100%'
 					name='description'
+					errorMsg={description?.errorMsg ?? ''}
 					isValid={description?.valid ?? false}
 					onChange={handleInputChange}
 				/>

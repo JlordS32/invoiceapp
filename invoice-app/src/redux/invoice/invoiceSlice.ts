@@ -41,7 +41,7 @@ export const getInvoiceAsync = createAsyncThunk(
 	'invoice/getInvoiceAsync',
 	async (url: string) => {
 		const data = await useFetchData(url);
-		return data;
+		return data.invoices;
 	}
 );
 

@@ -15,7 +15,7 @@ export type FormDataType = {
 	};
 	clientEmail: string;
 	clientName: string;
-	paymentTerms: string;
+	paymentTerm: string;
 	paymentDue: string;
 	createdAt: string;
 	description: string;
@@ -69,7 +69,7 @@ export type FormErrorType = {
 		valid: boolean;
 		errorMsg: string;
 	};
-	paymentTerms: {
+	paymentTerm: {
 		valid: boolean;
 		errorMsg: string;
 	};

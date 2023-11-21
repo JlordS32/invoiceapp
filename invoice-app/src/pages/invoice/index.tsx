@@ -1,24 +1,20 @@
 import Invoice from './component/Invoice';
 import { LoaderFunction } from 'react-router-dom';
-import { useFetchDatabyId } from '../../services/api/useFetch';
+import { useFetchData } from '../../services/api/useFetch';
 import { InvoiceType } from '../../types';
 
 export interface paramsType {
 	id: string;
-	invoice: InvoiceType
+	invoice: InvoiceType;
 }
 
 export const invoiceLoader: LoaderFunction<paramsType> = async ({ params }) => {
 	const id = params.id ?? '';
 
-	const url = `http://localhost:3000/invoices`;
-	const invoiceData = await useFetchDatabyId(url, { id: id });
+	const url = `https://invoiceapi.vercel.app/invoices/${id}`;
+	const invoiceData = await useFetchData(url);
 
-	if (invoiceData && invoiceData.length === 0 || !invoiceData) {
-		throw new Error('The invoice does not exist');
-	}
-
-	return { id, invoice: invoiceData[0] };
+	return { id, invoice: invoiceData.invoice };
 };
 const InvoicePage = () => {
 	return <Invoice />;

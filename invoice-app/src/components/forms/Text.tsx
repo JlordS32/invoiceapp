@@ -11,6 +11,7 @@ export interface FormTextProps extends FormProps {
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	isValid?: boolean;
 	type?: string;
+	errorMsg?: string;
 }
 
 export interface FormTextRef {
@@ -57,7 +58,12 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 				width: props.width,
 			}}
 		>
-			{props.label && <label htmlFor={props.id}>{props.label}</label>}
+			{props.label && (
+				<div className={styles.labelGroup}>
+					<label htmlFor={props.id}>{props.label}</label>
+					{!valid && <label htmlFor={props.id}>{props.errorMsg}</label>}
+				</div>
+			)}
 			<input
 				ref={childRef}
 				defaultValue={props.defaultValue}
