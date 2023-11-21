@@ -13,25 +13,29 @@ import { useMediaQuery } from 'react-responsive';
 import { ItemType } from '../../../../types';
 import formatCurrency from '../../../../utilities/formatCurrencies';
 import { useEffect, useState } from 'react';
+import { ItemTypeError } from '../../../../types/ItemType';
 interface FormItemsProps {
 	item: ItemType;
 	deleteItem: (itemTodelete: ItemType) => void;
 	itemList: ItemType[];
 	setItemList: React.Dispatch<React.SetStateAction<ItemType[]>>;
-	// formError: FormErrorType | undefined;
+	itemError: any;
 }
 
 const FormItems = ({
 	item,
 	deleteItem,
 	itemList,
-	setItemList
+	setItemList,
+	itemError,
 }: FormItemsProps) => {
 	// state
 	const [itemName, setItemName] = useState<string>(item.name);
 	const [quantity, setQuantity] = useState<number>(item.quantity as number);
 	const [price, setPrice] = useState<number>(item.price as number);
 	const [total, setTotal] = useState<number>(0);
+	const [itemErrorState, setItemErrorState] =
+		useState<ItemTypeError>(itemError);
 
 	// libraries
 	const isWide = useMediaQuery({ query: '(min-width: 620px)' });
@@ -51,7 +55,11 @@ const FormItems = ({
 		setItemList(updatedData);
 	}, [quantity, price, itemName]);
 
-	// FORM ERROR
+	useEffect(() => {
+		if (itemError) {
+			setItemErrorState(itemError[1]);
+		}
+	}, [itemError, itemErrorState]);
 
 	return (
 		<div className={styles.item}>
@@ -59,6 +67,7 @@ const FormItems = ({
 				id='name'
 				name='name'
 				defaultValue={item.name}
+				isValid={itemErrorState?.name?.valid ?? false}
 				onChange={(e) => {
 					setItemName(e.target.value);
 				}}
@@ -68,15 +77,18 @@ const FormItems = ({
 				id='quantity'
 				name='quantity'
 				defaultValue={`${item.quantity}`}
+				isValid={itemErrorState?.quantity?.valid ?? false}
 				onChange={(e) => {
 					setQuantity(Number(e.target.value));
 				}}
+				type='number'
 				label={!isWide ? 'Qty.' : ''}
 			/>
 			<Form.Text
 				id='price'
 				name='price'
 				defaultValue={`${item.price}`}
+				isValid={itemErrorState?.price?.valid ?? false}
 				onChange={(e) => {
 					setPrice(Number(e.target.value));
 				}}

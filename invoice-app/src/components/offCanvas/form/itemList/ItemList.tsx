@@ -16,7 +16,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ItemType } from '../../../../types';
 import { ItemListProps } from '.';
 
-const ItemList = ({ update, updateErrorForm }: ItemListProps) => {
+const ItemList = ({ update, updateErrorForm, formError }: ItemListProps) => {
 	// default
 	const defaultItem = [
 		{
@@ -72,11 +72,21 @@ const ItemList = ({ update, updateErrorForm }: ItemListProps) => {
 		const itemsError = items.map((item) => {
 			return {
 				id: item.id,
-				error: false,
-				errorMsg: '',
+				name: {
+					valid: true,
+					errorMsg: '',
+				},
+				quantity: {
+					valid: true,
+					errorMsg: '',
+				},
+				price: {
+					valid: true,
+					errorMsg: '',
+				},
 			};
 		});
-		
+
 		updateErrorForm({
 			items: itemsError,
 		});
@@ -101,9 +111,15 @@ const ItemList = ({ update, updateErrorForm }: ItemListProps) => {
 					ref={animateParent}
 				>
 					{items.map((item) => {
+						const itemError = Object.entries(formError?.items || {}).filter(
+							([_, value]) => {
+								return value.id === item.id;
+							}
+						)[0];
 						return (
 							<FormItems
 								item={item}
+								itemError={itemError}
 								itemList={items}
 								setItemList={setItems}
 								deleteItem={handleDeleteItem}

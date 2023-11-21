@@ -18,6 +18,7 @@ import { defaultFormError, defaultForm } from './defaultValues/default';
 
 // types
 import { FormDataType, FormErrorType } from '../../../types';
+import { ItemTypeError } from '../../../types/ItemType';
 interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
@@ -34,13 +35,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	const validateFormErrors = () => {
 		if (formData) {
 			Object.entries(formData).forEach(([key, value]) => {
-				let validated: {
-					valid: boolean;
-					errorMsg: string;
-				} = {
-					valid: true,
-					errorMsg: '',
-				};
+				let validated: any = [];
 
 				if (typeof value === 'string') {
 					validated = validateData(key, value);
@@ -48,8 +43,28 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 					updateFormErrors(key, validated, 'string');
 				} else if (typeof value === 'object') {
 					Object.entries(value).forEach(([key2, value2]) => {
-						validated = validateData(key2, value2);
+						if (key === 'items') {
+							let validatedItem = Object.entries(value2).reduce(
+								(acc: any, [key3, value3]) => {
+									if (key3 === 'id') {
+										return {
+											...acc,
+											id: value3,
+										};
+									}
 
+									return {
+										...acc,
+										[key3]: validateData(key3, value3 as string),
+									};
+								},
+								{}
+							);
+
+							validated = [...validated, validatedItem];
+						} else {
+							validated = validateData(key2, value2);
+						}
 						updateFormErrors(key, validated, 'object', key2);
 					});
 				}
@@ -67,10 +82,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 			setFormError((prev) => {
 				return {
 					...prev,
-					[key]: {
-						valid: validated.valid,
-						errorMsg: validated.errorMsg,
-					},
+					[key]: validated,
 				};
 			});
 		}
@@ -78,14 +90,18 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		if (type === 'object') {
 			setFormError((prev: any) => {
 				if (prev && prev[key] && key2) {
+					if (key === 'items') {
+						return {
+							...prev,
+							[key]: validated,
+						};
+					}
+
 					return {
 						...prev,
 						[key]: {
 							...prev[key],
-							[key2]: {
-								valid: validated.valid,
-								errorMsg: validated.errorMsg,
-							},
+							[key2]: validated,
 						},
 					};
 				}
