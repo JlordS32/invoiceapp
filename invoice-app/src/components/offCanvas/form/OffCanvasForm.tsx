@@ -195,36 +195,36 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const handleSubmit = () => {
-		if (formData.status === 'pending') {
-			if (isFormValid) {
-				validateFormErrors();
-				usePostData('https://invoiceapi.vercel.app/invoices', formData)
-					.then((response) => {
-						console.log(response);
-					})
-					.catch((error) => {
-						console.error(error);
-					});
+		// if (formData.status === 'pending') {
+		// 	if (isFormValid) {
+		// 		validateFormErrors();
+		// 		usePostData('https://invoiceapi.vercel.app/invoices', formData)
+		// 			.then((response) => {
+		// 				console.log(response);
+		// 			})
+		// 			.catch((error) => {
+		// 				console.error(error);
+		// 			});
 
-				close();
+		// 		close();
 
-				window.scrollTo(0, document.body.scrollHeight);
-			}
-		}
+		// 		window.scrollTo(0, document.body.scrollHeight);
+		// 	}
+		// }
 
-		if (formData.status === 'draft') {
-			usePostData('https://invoiceapi.vercel.app/invoices', formData)
-				.then((response) => {
-					console.log(response);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+		// if (formData.status === 'draft') {
+		// 	usePostData('https://invoiceapi.vercel.app/invoices', formData)
+		// 		.then((response) => {
+		// 			console.log(response);
+		// 		})
+		// 		.catch((error) => {
+		// 			console.error(error);
+		// 		});
 
-			close();
+		// 	close();
 
-			window.scrollTo(0, document.body.scrollHeight);
-		}
+		// 	window.scrollTo(0, document.body.scrollHeight);
+		// }
 	};
 
 	useEffect(() => {
