@@ -182,64 +182,42 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 
 	const handleSave = (status: string) => {
 		setFormHasBeenClicked(true);
-
-		const valid = areAllValid(formError);
-		if (valid) {
-			status = 'pending';
-		}
-
 		setFormData({
 			...formData,
 			status: status,
 		});
 	};
 
+	// TODO - Make sure this works properly
+	// Issue: When submit function is invoked, we need to validate the date before being submitted when user intends to send it as pending,
+	// Validation can be ignored if user leaves it as a draft.
 	const handleSubmit = () => {
-		// if (formData.status === 'pending') {
-		// 	if (isFormValid) {
-		// 		validateFormErrors();
-		// 		usePostData('https://invoiceapi.vercel.app/invoices', formData)
-		// 			.then((response) => {
-		// 				console.log(response);
-		// 			})
-		// 			.catch((error) => {
-		// 				console.error(error);
-		// 			});
+		validateFormErrors();
+		if (formData.status === 'pending') {
+			if (isFormValid) {
+				validateFormErrors();
+				usePostData('https://invoiceapi.vercel.app/invoices', formData)
+					.then((response) => {
+						console.log(response);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
 
-		// 		close();
+				close();
 
-		// 		window.scrollTo(0, document.body.scrollHeight);
-		// 	}
-		// }
-
-		// if (formData.status === 'draft') {
-		// 	usePostData('https://invoiceapi.vercel.app/invoices', formData)
-		// 		.then((response) => {
-		// 			console.log(response);
-		// 		})
-		// 		.catch((error) => {
-		// 			console.error(error);
-		// 		});
-
-		// 	close();
-
-		// 	window.scrollTo(0, document.body.scrollHeight);
-		// }
+				window.scrollTo(0, document.body.scrollHeight);
+			}
+		}
 	};
 
 	useEffect(() => {
 		if (formHasBeenClicked) {
 			validateFormErrors();
-
 			const valid = areAllValid(formError);
-
 			setIsFormValid(valid);
 		}
 	}, [formData]);
-
-	useEffect(() => {
-		console.log(isFormValid);
-	}, [isFormValid]);
 
 	return (
 		<form
