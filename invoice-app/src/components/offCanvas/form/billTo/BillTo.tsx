@@ -52,7 +52,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 	useEffect(() => {
 		const newData = {
 			createdAt: formatDate(formDate.toString()),
-			paymentTerm: selectedValue,
+			paymentTerms: selectedValue,
 			paymentDue: calculatePaymentDueDate(formDate, Number(selectedValue)),
 		};
 
@@ -111,6 +111,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					<Form.Text
 						label='Post Code'
 						width='100%'
+						type='number'
 						name='postCode'
 						isValid={postCode?.valid ?? false}
 						errorMsg={postCode?.errorMsg ?? ''}

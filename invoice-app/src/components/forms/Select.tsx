@@ -41,10 +41,13 @@ const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
 			: '1px solid var(--form-outline)',
 		fontWeight: '700',
 		padding: '0 0.7rem',
-
 		'&:hover': {
 			outline: '1px solid var(--primary)',
 		},
+	}),
+	input: (provided) => ({
+		...provided,
+		color: 'var(--text)'
 	}),
 	option: (provided, state) => ({
 		...provided,

@@ -41,6 +41,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 						label='Post Code'
 						width='100%'
 						name='postCode'
+						type='number'
 						isValid={postCode.valid ?? false}
 						errorMsg={postCode.errorMsg ?? ''}
 						onChange={(e) => {

@@ -12,12 +12,13 @@ import {
 	onLoadCanvas,
 	toggleCanvas,
 } from '../../../redux/offcanvas/offCanvasSlice';
+import { InvoiceType } from '../../../types';
 
 interface InvoiceNavProps {
-	status: string;
+	invoice: InvoiceType;
 }
 
-const InvoiceNav = ({ status }: InvoiceNavProps) => {
+const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 	// redux
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -25,6 +26,8 @@ const InvoiceNav = ({ status }: InvoiceNavProps) => {
 		dispatch(toggleCanvas());
 		dispatch(onLoadCanvas('edit-invoice'));
 	};
+
+	const { status } = invoice;
 
 	return (
 		<div

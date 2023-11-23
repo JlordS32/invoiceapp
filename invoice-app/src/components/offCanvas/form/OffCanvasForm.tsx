@@ -133,6 +133,20 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		}
 	};
 
+	const submitData = () => {
+		usePostData('https://invoiceapi.vercel.app/invoices', formData)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+
+		close();
+
+		window.scrollTo(0, document.body.scrollHeight);
+	};
+
 	// function to handle events
 	const handleInputChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
@@ -196,17 +210,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		if (formData.status === 'pending') {
 			if (isFormValid) {
 				validateFormErrors();
-				usePostData('https://invoiceapi.vercel.app/invoices', formData)
-					.then((response) => {
-						console.log(response);
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-
-				close();
-
-				window.scrollTo(0, document.body.scrollHeight);
+				submitData();
 			}
 		}
 	};

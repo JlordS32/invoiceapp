@@ -23,7 +23,7 @@ const Invoice = () => {
 			<div className={styles.container}>
 				<GoBack />
 
-				<InvoiceNav status={invoice ? invoice.status : ''} />
+				<InvoiceNav invoice={invoice} />
 
 				<InvoicePaper invoice={invoice} />
 			</div>
