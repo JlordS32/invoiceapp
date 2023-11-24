@@ -218,6 +218,16 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		}
 	}, [formIsSaved]);
 
+	useEffect(() => {
+		if (formIsSaved) {
+			validateFormErrors();
+		}
+	}, [formData]);
+
+	useEffect(() => {
+		console.log(formData)
+	}, [formData])
+
 	return (
 		<form
 			onSubmit={(e) => {

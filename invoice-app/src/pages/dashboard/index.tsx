@@ -44,6 +44,8 @@ const Dashboard = () => {
 	// redux
 	const invoiceData = useSelector((state: RootState) => state.invoice);
 	const dispatch = useDispatch<AppDispatch>();
+	
+	const { loading, invoiceItems } = invoiceData;
 
 	// function to trigger data
 	const fetchData = async () => {
@@ -52,7 +54,7 @@ const Dashboard = () => {
 		await dispatch(getInvoiceAsync(url));
 	};
 
-	const debouncedFetchData = useCallback(debounce(fetchData, 500), []);
+	const debouncedFetchData = useCallback(debounce(fetchData, 5000), []);
 	// UseEffects
 
 	// First two useEffect to handle data fetching.
@@ -68,12 +70,11 @@ const Dashboard = () => {
 
 	// setting fetched data into data state
 	useEffect(() => {
-		const { loading, invoiceItems } = invoiceData;
 
 		if (!loading) {
 			setData(invoiceItems);
 		}
-	}, [data, invoiceData.loading, invoiceData.invoiceItems]);
+	}, [data, loading, invoiceItems]);
 
 	// a logic to handle sorted items
 	useEffect(() => {
