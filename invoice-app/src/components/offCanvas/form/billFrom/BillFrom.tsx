@@ -15,6 +15,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 			<Form.Text
 				label='Street Address'
 				name='street'
+				id='senderStreet'
 				isValid={street.valid ?? false}
 				errorMsg={street.errorMsg ?? ''}
 				onChange={(e) => {
@@ -29,6 +30,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 						label='City'
 						width='100%'
 						name='city'
+						id='senderCity'
 						isValid={city.valid ?? false}
 						errorMsg={city.errorMsg ?? ''}
 						onChange={(e) => {
@@ -41,6 +43,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 						label='Post Code'
 						width='100%'
 						name='postCode'
+						id='senderPostCode'
 						type='number'
 						isValid={postCode.valid ?? false}
 						errorMsg={postCode.errorMsg ?? ''}
@@ -54,6 +57,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 						label='Country'
 						width='100%'
 						name='country'
+						id='senderCountry'
 						isValid={country.valid ?? false}
 						errorMsg={country.errorMsg ?? ''}
 						onChange={(e) => {

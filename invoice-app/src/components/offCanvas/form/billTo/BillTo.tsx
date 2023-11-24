@@ -71,6 +71,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					label={`Client's Name`}
 					width='100%'
 					name='clientName'
+					id='clientName'
 					isValid={clientName?.valid ?? false}
 					errorMsg={clientName?.errorMsg ?? ''}
 					onChange={handleInputChange}
@@ -86,6 +87,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 				<Form.Text
 					label='Street Address'
 					width='100%'
+					id='clientStreet'
 					isValid={street?.valid ?? false}
 					errorMsg={street?.errorMsg ?? ''}
 					name='street'
@@ -100,6 +102,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						label='City'
 						width='100%'
 						name='city'
+						id='clientCity'
 						isValid={city?.valid ?? false}
 						errorMsg={city?.errorMsg ?? ''}
 						onChange={(e) => {
@@ -113,6 +116,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						width='100%'
 						type='number'
 						name='postCode'
+						id='clientPostCode'
 						isValid={postCode?.valid ?? false}
 						errorMsg={postCode?.errorMsg ?? ''}
 						onChange={(e) => {
@@ -125,6 +129,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						label='Country'
 						width='100%'
 						name='country'
+						id='clientCountry'
 						isValid={country?.valid ?? false}
 						errorMsg={country?.errorMsg ?? ''}
 						onChange={(e) => {
@@ -137,11 +142,13 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 			<div className='d-flex gap-2 pt-4'>
 				<Form.Date
 					label='Invoice Date'
+					id='clientData'
 					date={formDate}
 					setDate={setFormDate}
 				/>
 				<Form.Select
 					label='Payment Terms'
+					id='clientPaymentTerms'
 					onChange={handleOnChange}
 					selectedValue={selectedValue}
 					options={options}
@@ -152,6 +159,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 			<div className='pt-2'>
 				<Form.Text
 					label='Project Description'
+					id='invoiceDesc'
 					width='100%'
 					name='description'
 					errorMsg={description?.errorMsg ?? ''}

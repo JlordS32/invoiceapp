@@ -64,7 +64,7 @@ const FormItems = ({
 	return (
 		<div className={styles.item}>
 			<Form.Text
-				id='name'
+				id={`${item.id}-name`}
 				name='name'
 				defaultValue={item.name}
 				isValid={itemErrorState?.name?.valid ?? false}
@@ -75,7 +75,7 @@ const FormItems = ({
 				label={!isWide ? 'Item Name' : ''}
 			/>
 			<Form.Text
-				id='quantity'
+				id={`${item.id}-quantity`}
 				name='quantity'
 				defaultValue={`${item.quantity}`}
 				isValid={itemErrorState?.quantity?.valid ?? false}
@@ -87,7 +87,7 @@ const FormItems = ({
 				label={!isWide ? 'Qty.' : ''}
 			/>
 			<Form.Text
-				id='price'
+				id={`${item.id}-price`}
 				name='price'
 				defaultValue={`${item.price}`}
 				isValid={itemErrorState?.price?.valid ?? false}

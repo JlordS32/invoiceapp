@@ -73,6 +73,7 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 						props.onChange(e);
 					}
 				}}
+				id={props.id || ''}
 				type={props.type || 'text'}
 				placeholder={props.placeholder ?? ''}
 			/>

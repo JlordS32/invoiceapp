@@ -1,5 +1,5 @@
 // react
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // styles
 import thisCanvasStyles from '../../../assets/styles/modules/offcanvas/createinvoicecanvas.module.css';
@@ -37,8 +37,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	// state
 	const [formData, setFormData] = useState<FormDataType>(defaultForm);
 	const [formError, setFormError] = useState<FormErrorType>(defaultFormError);
-	const [formHasBeenClicked, setFormHasBeenClicked] = useState(false);
-	const [isFormValid, setIsFormValid] = useState(false);
+	const [formIsSaved, setFormIsSaved] = useState<boolean>();
 
 	/**
 	 * Validates the form errors by iterating over the formData object
@@ -195,7 +194,6 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const handleSave = (status: string) => {
-		setFormHasBeenClicked(true);
 		setFormData({
 			...formData,
 			status: status,
@@ -205,23 +203,20 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	// TODO - Make sure this works properly
 	// Issue: When submit function is invoked, we need to validate the date before being submitted when user intends to send it as pending,
 	// Validation can be ignored if user leaves it as a draft.
-	const handleSubmit = () => {
-		validateFormErrors();
-		if (formData.status === 'pending') {
-			if (isFormValid) {
-				validateFormErrors();
+
+	// Fix 1: Validation was handled from the backend.
+	// FIx 2: Needs to be handle from the frontend as well - in progresss
+	const handleSubmit = useCallback(() => {
+		if (formIsSaved) {
+			const isValid = areAllValid(formError);
+
+			if (isValid) {
 				submitData();
 			}
+		} else {
+			submitData();
 		}
-	};
-
-	useEffect(() => {
-		if (formHasBeenClicked) {
-			validateFormErrors();
-			const valid = areAllValid(formError);
-			setIsFormValid(valid);
-		}
-	}, [formData]);
+	}, [formIsSaved]);
 
 	return (
 		<form
@@ -260,6 +255,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 					variant='saveAsDraftButton'
 					onClick={() => {
 						handleSave('draft');
+						setFormIsSaved(false);
 					}}
 					type='submit'
 				>
@@ -267,7 +263,11 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				</Button>
 				<Button
 					type='submit'
-					onClick={() => handleSave('pending')}
+					onClick={() => {
+						handleSave('pending');
+						setFormIsSaved(true);
+						validateFormErrors();
+					}}
 				>
 					Save & Send
 				</Button>
