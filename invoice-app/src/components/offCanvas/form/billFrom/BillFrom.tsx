@@ -6,7 +6,7 @@ import Form from '../../../forms';
 
 // types
 import { BillFromProps } from '.';
-const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
+const BillForm = ({ handleInputChange, formError, inputRef }: BillFromProps) => {
 	const { street, city, postCode, country } = formError?.senderAddress ?? {};
 
 	return (
@@ -14,6 +14,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 			<h4 className='text--h3'>Bill From</h4>
 			<Form.Text
 				label='Street Address'
+				ref={inputRef}
 				name='street'
 				id='senderStreet'
 				isValid={street.valid ?? false}
@@ -28,6 +29,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 				<div className={styles.billFromfieldsetInner}>
 					<Form.Text
 						label='City'
+						ref={inputRef}
 						width='100%'
 						name='city'
 						id='senderCity'
@@ -41,6 +43,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 				<div className={styles.billFromfieldsetInner}>
 					<Form.Text
 						label='Post Code'
+						ref={inputRef}
 						width='100%'
 						name='postCode'
 						id='senderPostCode'
@@ -55,6 +58,7 @@ const BillForm = ({ handleInputChange, formError }: BillFromProps) => {
 				<div className={styles.billFromfieldsetInner}>
 					<Form.Text
 						label='Country'
+						ref={inputRef}
 						width='100%'
 						name='country'
 						id='senderCountry'

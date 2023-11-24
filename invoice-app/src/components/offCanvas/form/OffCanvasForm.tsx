@@ -1,5 +1,5 @@
 // react
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 // styles
 import thisCanvasStyles from '../../../assets/styles/modules/offcanvas/createinvoicecanvas.module.css';
@@ -20,6 +20,7 @@ import { defaultFormError, defaultForm } from './defaultValues/default';
 import { FormDataType, FormErrorType } from '../../../types';
 import { areAllValid } from '../../../utilities/areAllValid';
 import { usePostData } from '../../../services/api/usePostData';
+import { FormTextRef } from '../../forms/Text';
 
 interface OffCanvasFormProps {
 	header: string;
@@ -38,6 +39,9 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	const [formData, setFormData] = useState<FormDataType>(defaultForm);
 	const [formError, setFormError] = useState<FormErrorType>(defaultFormError);
 	const [formIsSaved, setFormIsSaved] = useState<boolean>();
+
+	// ref
+	const inputRef = useRef<FormTextRef>(null);
 
 	/**
 	 * Validates the form errors by iterating over the formData object
@@ -133,8 +137,8 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	};
 
 	const submitData = (status: string) => {
-		const data = {...formData, status: status}
-		
+		const data = { ...formData, status: status };
+
 		usePostData('https://invoiceapi.vercel.app/invoices', data)
 			.then((response) => {
 				console.log(response);
@@ -221,8 +225,8 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 	}, [formData]);
 
 	useEffect(() => {
-		console.log(formData)
-	}, [formData])
+		console.log(formData);
+	}, [formData]);
 
 	return (
 		<form
@@ -235,12 +239,14 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 			<BillForm
 				handleInputChange={handleInputChange}
 				formError={formError}
+				inputRef={inputRef}
 			/>
 
 			<BillTo
 				handleInputChange={handleInputChange}
 				update={handleUpdateFormData}
 				formError={formError}
+				inputRef={inputRef}
 			/>
 
 			<ItemList
@@ -271,6 +277,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 					onClick={() => {
 						setFormIsSaved(true);
 						validateFormErrors();
+						inputRef.current?.scrollIntoView();
 					}}
 				>
 					Save & Send

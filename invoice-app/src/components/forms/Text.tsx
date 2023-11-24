@@ -23,6 +23,7 @@ export interface FormTextRef {
 
 const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 	const childRef = useRef<HTMLInputElement | null>(null);
+	const valid = props.isValid ?? false;
 
 	useImperativeHandle(
 		ref,
@@ -40,16 +41,14 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 					}
 				},
 				scrollIntoView() {
-					if (childRef.current) {
-						childRef.current.scrollIntoView();
+					if (childRef.current && !valid) {
+						childRef.current.scrollIntoView(false);
 					}
 				},
 			};
 		},
-		[]
+		[valid]
 	);
-
-	const valid = props.isValid ?? true;
 
 	return (
 		<div

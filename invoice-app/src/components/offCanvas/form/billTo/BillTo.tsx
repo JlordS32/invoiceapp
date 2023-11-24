@@ -15,7 +15,12 @@ import { calculatePaymentDueDate } from '../../../../utilities/calculatePaymentD
 // types
 import { BillToProps } from '.';
 import { OptionType } from '../../../button/Dropdown';
-const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
+const BillTo = ({
+	handleInputChange,
+	update,
+	formError,
+	inputRef,
+}: BillToProps) => {
 	// defaults
 	const options = [
 		{
@@ -71,6 +76,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					label={`Client's Name`}
 					width='100%'
 					name='clientName'
+					ref={inputRef}
 					id='clientName'
 					isValid={clientName?.valid ?? false}
 					errorMsg={clientName?.errorMsg ?? ''}
@@ -80,6 +86,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					label={`Client's Email`}
 					width='100%'
 					name='clientEmail'
+					ref={inputRef}
 					isValid={clientEmail?.valid ?? false}
 					errorMsg={clientEmail?.errorMsg ?? ''}
 					onChange={handleInputChange}
@@ -88,6 +95,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 					label='Street Address'
 					width='100%'
 					id='clientStreet'
+					ref={inputRef}
 					isValid={street?.valid ?? false}
 					errorMsg={street?.errorMsg ?? ''}
 					name='street'
@@ -102,6 +110,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						label='City'
 						width='100%'
 						name='city'
+						ref={inputRef}
 						id='clientCity'
 						isValid={city?.valid ?? false}
 						errorMsg={city?.errorMsg ?? ''}
@@ -115,6 +124,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						label='Post Code'
 						width='100%'
 						type='number'
+						ref={inputRef}
 						name='postCode'
 						id='clientPostCode'
 						isValid={postCode?.valid ?? false}
@@ -129,6 +139,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 						label='Country'
 						width='100%'
 						name='country'
+						ref={inputRef}
 						id='clientCountry'
 						isValid={country?.valid ?? false}
 						errorMsg={country?.errorMsg ?? ''}
@@ -159,6 +170,7 @@ const BillTo = ({ handleInputChange, update, formError }: BillToProps) => {
 			<div className='pt-2'>
 				<Form.Text
 					label='Project Description'
+					ref={inputRef}
 					id='invoiceDesc'
 					width='100%'
 					name='description'

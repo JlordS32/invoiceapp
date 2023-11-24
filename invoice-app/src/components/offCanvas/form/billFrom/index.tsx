@@ -1,5 +1,6 @@
 import { FormErrorType } from '../../../../types';
 import BillFrom from './BillFrom';
+import { FormTextRef } from '../../../forms/Text';
 
 export interface BillFromProps {
 	handleInputChange: (
@@ -7,6 +8,7 @@ export interface BillFromProps {
 		nest?: string | null
 	) => void;
 	formError: FormErrorType;
+	inputRef: React.RefObject<FormTextRef>;
 }
 
 const index = (props: BillFromProps) => {
