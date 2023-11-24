@@ -132,8 +132,10 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		}
 	};
 
-	const submitData = () => {
-		usePostData('https://invoiceapi.vercel.app/invoices', formData)
+	const submitData = (status: string) => {
+		const data = {...formData, status: status}
+		
+		usePostData('https://invoiceapi.vercel.app/invoices', data)
 			.then((response) => {
 				console.log(response);
 			})
@@ -193,13 +195,6 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		});
 	};
 
-	const handleSave = (status: string) => {
-		setFormData({
-			...formData,
-			status: status,
-		});
-	};
-
 	// TODO - Make sure this works properly
 	// Issue: When submit function is invoked, we need to validate the date before being submitted when user intends to send it as pending,
 	// Validation can be ignored if user leaves it as a draft.
@@ -210,13 +205,14 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 		if (formIsSaved) {
 			const isValid = areAllValid(formError);
 
+			console.log(isValid, { formError, formData });
 			if (isValid) {
-				submitData();
+				submitData('pending');
 			}
 		} else {
-			submitData();
+			submitData('draft');
 		}
-	}, [formIsSaved]);
+	}, [formIsSaved, formData, formError]);
 
 	useEffect(() => {
 		if (formIsSaved) {
@@ -264,7 +260,6 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				<Button
 					variant='saveAsDraftButton'
 					onClick={() => {
-						handleSave('draft');
 						setFormIsSaved(false);
 					}}
 					type='submit'
@@ -274,7 +269,6 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				<Button
 					type='submit'
 					onClick={() => {
-						handleSave('pending');
 						setFormIsSaved(true);
 						validateFormErrors();
 					}}
