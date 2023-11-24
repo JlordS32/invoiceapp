@@ -25,6 +25,7 @@ import { FormTextRef } from '../../forms/Text';
 interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
+	data?: Record<string, any>;
 }
 
 /**
@@ -34,7 +35,7 @@ interface OffCanvasFormProps {
  * @param {() => void} close - The function to close the off-canvas form.
  * @return {JSX.Element} The rendered off-canvas form component.
  */
-const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
+const OffCanvasForm = ({ header, close, data = {} }: OffCanvasFormProps) => {
 	// state
 	const [formData, setFormData] = useState<FormDataType>(defaultForm);
 	const [formError, setFormError] = useState<FormErrorType>(defaultFormError);
@@ -240,6 +241,7 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				handleInputChange={handleInputChange}
 				formError={formError}
 				inputRef={inputRef}
+				data={data}
 			/>
 
 			<BillTo
@@ -247,12 +249,14 @@ const OffCanvasForm = ({ header, close }: OffCanvasFormProps) => {
 				update={handleUpdateFormData}
 				formError={formError}
 				inputRef={inputRef}
+				data={data}
 			/>
 
 			<ItemList
 				update={handleUpdateFormData}
 				updateErrorForm={handleUpdateFormError}
 				formError={formError}
+				data={data}
 			/>
 
 			<div className={thisCanvasStyles.buttons}>

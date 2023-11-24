@@ -10,6 +10,7 @@ export interface BillToProps {
 	formError?: FormErrorType;
 	update: (data: any) => void;
 	inputRef: React.RefObject<FormTextRef>;
+	data: Record<string, any>;
 }
 const index = (props: BillToProps) => {
 	return <BillTo {...props} />;

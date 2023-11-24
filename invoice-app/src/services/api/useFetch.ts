@@ -10,7 +10,7 @@ export const useFetchDatabyId = (
 		id: string;
 	}
 ) => {
-	return getData(url, params);
+	return getData(`${url}/${params.id}`);
 };
 const getData = async (url: string, params = {}) => {
 	return await axios({

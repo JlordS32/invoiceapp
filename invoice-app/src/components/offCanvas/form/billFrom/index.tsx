@@ -9,6 +9,7 @@ export interface BillFromProps {
 	) => void;
 	formError: FormErrorType;
 	inputRef: React.RefObject<FormTextRef>;
+	data: Record<string, any>;
 }
 
 const index = (props: BillFromProps) => {

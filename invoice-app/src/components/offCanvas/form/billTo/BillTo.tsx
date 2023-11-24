@@ -20,6 +20,7 @@ const BillTo = ({
 	update,
 	formError,
 	inputRef,
+	data
 }: BillToProps) => {
 	// defaults
 	const options = [
@@ -77,6 +78,7 @@ const BillTo = ({
 					width='100%'
 					name='clientName'
 					ref={inputRef}
+					defaultValue={data?.clientName ?? ''}
 					id='clientName'
 					isValid={clientName?.valid ?? false}
 					errorMsg={clientName?.errorMsg ?? ''}
@@ -87,6 +89,7 @@ const BillTo = ({
 					width='100%'
 					name='clientEmail'
 					ref={inputRef}
+					defaultValue={data?.clientEmail ?? ''}
 					isValid={clientEmail?.valid ?? false}
 					errorMsg={clientEmail?.errorMsg ?? ''}
 					onChange={handleInputChange}
@@ -96,6 +99,7 @@ const BillTo = ({
 					width='100%'
 					id='clientStreet'
 					ref={inputRef}
+					defaultValue={data.clientAddress?.street ?? ''}
 					isValid={street?.valid ?? false}
 					errorMsg={street?.errorMsg ?? ''}
 					name='street'
@@ -111,6 +115,7 @@ const BillTo = ({
 						width='100%'
 						name='city'
 						ref={inputRef}
+						defaultValue={data.clientAddress?.city ?? ''}
 						id='clientCity'
 						isValid={city?.valid ?? false}
 						errorMsg={city?.errorMsg ?? ''}
@@ -123,8 +128,8 @@ const BillTo = ({
 					<Form.Text
 						label='Post Code'
 						width='100%'
-						type='number'
 						ref={inputRef}
+						defaultValue={data.clientAddress?.postCode ?? ''}
 						name='postCode'
 						id='clientPostCode'
 						isValid={postCode?.valid ?? false}
@@ -140,6 +145,7 @@ const BillTo = ({
 						width='100%'
 						name='country'
 						ref={inputRef}
+						defaultValue={data.clientAddress?.country ?? ''}
 						id='clientCountry'
 						isValid={country?.valid ?? false}
 						errorMsg={country?.errorMsg ?? ''}
@@ -171,6 +177,7 @@ const BillTo = ({
 				<Form.Text
 					label='Project Description'
 					ref={inputRef}
+					defaultValue={data?.description ?? ''}
 					id='invoiceDesc'
 					width='100%'
 					name='description'

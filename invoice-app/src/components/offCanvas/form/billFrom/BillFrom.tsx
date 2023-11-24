@@ -6,7 +6,12 @@ import Form from '../../../forms';
 
 // types
 import { BillFromProps } from '.';
-const BillForm = ({ handleInputChange, formError, inputRef }: BillFromProps) => {
+const BillForm = ({
+	handleInputChange,
+	formError,
+	inputRef,
+	data,
+}: BillFromProps) => {
 	const { street, city, postCode, country } = formError?.senderAddress ?? {};
 
 	return (
@@ -17,6 +22,7 @@ const BillForm = ({ handleInputChange, formError, inputRef }: BillFromProps) => 
 				ref={inputRef}
 				name='street'
 				id='senderStreet'
+				defaultValue={data.senderAddress?.street ?? ''}
 				isValid={street.valid ?? false}
 				errorMsg={street.errorMsg ?? ''}
 				onChange={(e) => {
@@ -30,6 +36,7 @@ const BillForm = ({ handleInputChange, formError, inputRef }: BillFromProps) => 
 					<Form.Text
 						label='City'
 						ref={inputRef}
+						defaultValue={data.senderAddress?.city ?? ''}
 						width='100%'
 						name='city'
 						id='senderCity'
@@ -44,10 +51,10 @@ const BillForm = ({ handleInputChange, formError, inputRef }: BillFromProps) => 
 					<Form.Text
 						label='Post Code'
 						ref={inputRef}
+						defaultValue={data.senderAddress?.postCode}
 						width='100%'
 						name='postCode'
 						id='senderPostCode'
-						type='number'
 						isValid={postCode.valid ?? false}
 						errorMsg={postCode.errorMsg ?? ''}
 						onChange={(e) => {
@@ -59,6 +66,7 @@ const BillForm = ({ handleInputChange, formError, inputRef }: BillFromProps) => 
 					<Form.Text
 						label='Country'
 						ref={inputRef}
+						defaultValue={data.senderAddress?.country}
 						width='100%'
 						name='country'
 						id='senderCountry'
