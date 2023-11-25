@@ -7,7 +7,7 @@ import styles from '../../assets/styles/modules/form.module.css';
 import { FormProps } from './index';
 
 export interface FormTextProps extends FormProps {
-	defaultValue?: string;
+	defaultValue?: string | number;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	isValid?: boolean;
 	type?: string;

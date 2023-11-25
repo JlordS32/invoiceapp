@@ -105,6 +105,10 @@ const ItemList = ({
 		});
 	}, [items]);
 
+	useEffect(() => {
+		console.log(items);
+	}, [items]);
+
 	return (
 		<section className={styles.itemList}>
 			<h2 className='text--h2'>Item List</h2>

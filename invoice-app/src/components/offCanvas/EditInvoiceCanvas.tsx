@@ -64,7 +64,10 @@ const EditInvoiceCanvas = () => {
 		handleClose();
 	};
 
-	// useEffect
+	// // useEffect
+	// useEffect(() => {
+	// 	console.log(editedFormData)
+	// }, [editedFormData])
 
 	useEffect(() => {
 		const fetchData = async () => {

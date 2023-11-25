@@ -77,19 +77,20 @@ const FormItems = ({
 			<Form.Text
 				id={`${item.id}-quantity`}
 				name='quantity'
-				defaultValue={`${item.quantity}`}
+				defaultValue={item.quantity}
 				isValid={itemErrorState?.quantity?.valid ?? false}
 				errorMsg={itemErrorState?.quantity?.errorMsg ?? ''}
+				type='number'
 				onChange={(e) => {
 					setQuantity(Number(e.target.value));
 				}}
-				type='number'
 				label={!isWide ? 'Qty.' : ''}
 			/>
 			<Form.Text
 				id={`${item.id}-price`}
 				name='price'
-				defaultValue={`${item.price}`}
+				defaultValue={item.price}
+				type='number'
 				isValid={itemErrorState?.price?.valid ?? false}
 				errorMsg={itemErrorState?.price?.errorMsg ?? ''}
 				onChange={(e) => {
