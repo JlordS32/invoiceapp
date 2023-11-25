@@ -16,7 +16,12 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ItemType } from '../../../../types';
 import { ItemListProps } from '.';
 
-const ItemList = ({ update, updateErrorForm, formError }: ItemListProps) => {
+const ItemList = ({
+	update,
+	updateErrorForm,
+	formError,
+	data,
+}: ItemListProps) => {
 	// default
 	const defaultItem = [
 		{
@@ -67,6 +72,14 @@ const ItemList = ({ update, updateErrorForm, formError }: ItemListProps) => {
 			});
 		}, 100);
 	}, [items]);
+
+	useEffect(() => {
+		const { items } = data;
+
+		if (data && items) {
+			setItems(items);
+		}
+	}, [data]);
 
 	useEffect(() => {
 		const itemsError = items.map((item) => {

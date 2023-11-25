@@ -65,13 +65,6 @@ const EditInvoiceCanvas = () => {
 				>
 					Cancel
 				</Button>
-				<Button
-					onClick={() => {
-						console.log(data);
-					}}
-				>
-					Log it
-				</Button>
 				<Button onClick={handleSave}>Save Changes</Button>
 			</div>
 		</div>

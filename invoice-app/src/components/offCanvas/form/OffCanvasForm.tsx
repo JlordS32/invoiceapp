@@ -140,13 +140,11 @@ const OffCanvasForm = ({ header, close, data = {} }: OffCanvasFormProps) => {
 	const submitData = (status: string) => {
 		const data = { ...formData, status: status };
 
-		usePostData('https://invoiceapi.vercel.app/invoices', data)
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((error) => {
+		usePostData('https://invoiceapi.vercel.app/invoices', data).catch(
+			(error) => {
 				console.error(error);
-			});
+			}
+		);
 
 		close();
 
@@ -209,8 +207,6 @@ const OffCanvasForm = ({ header, close, data = {} }: OffCanvasFormProps) => {
 	const handleSubmit = useCallback(() => {
 		if (formIsSaved) {
 			const isValid = areAllValid(formError);
-
-			console.log(isValid, { formError, formData });
 			if (isValid) {
 				submitData('pending');
 			}
