@@ -12,7 +12,10 @@ export function validateData(key: string, data: string, target?: string) {
 	}
 
 	switch (key.toLowerCase()) {
-		case 'name':
+		case 'firstName':
+		case 'lastName':
+		case 'fullName':
+		case 'clientName':
 			const nameRegex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
 			const isName = nameRegex.test(data);
 			return {

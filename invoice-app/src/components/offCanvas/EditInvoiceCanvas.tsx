@@ -15,7 +15,7 @@ import {
 import OffCanvasForm from './form/OffCanvasForm';
 
 // rrd
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // react
 import { useEffect, useState } from 'react';
@@ -25,6 +25,7 @@ import { usePostDataById } from '../../services/api/usePostData';
 import { useFetchDatabyId } from '../../services/api/useFetch';
 
 const EditInvoiceCanvas = () => {
+	const navigate = useNavigate();
 	const params = useParams();
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -37,19 +38,20 @@ const EditInvoiceCanvas = () => {
 		setEditedFormData(data);
 	};
 
-	const submitData = () => {
+	const submitData = async () => {
 		if (editedFormData) {
 			const filteredData = Object.entries(editedFormData).filter(
 				([key, _]) => key !== 'id'
 			);
 
-			usePostDataById(
+			await usePostDataById(
 				'https://invoiceapi.vercel.app/invoices',
 				params.id as string,
 				Object.fromEntries(filteredData)
 			);
 
 			setData(editedFormData);
+			navigate(0);
 		}
 	};
 
@@ -64,10 +66,10 @@ const EditInvoiceCanvas = () => {
 		handleClose();
 	};
 
-	// // useEffect
-	// useEffect(() => {
-	// 	console.log(editedFormData)
-	// }, [editedFormData])
+	// useEffect
+	useEffect(() => {
+		console.log(editedFormData);
+	}, [editedFormData]);
 
 	useEffect(() => {
 		const fetchData = async () => {

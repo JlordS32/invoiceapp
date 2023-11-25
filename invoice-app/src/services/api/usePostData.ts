@@ -13,7 +13,11 @@ export async function usePostDataById(url: string, id: string, data: any) {
 		url: `${url}/${id}`,
 		method: 'POST',
 		data: data,
-	}).catch((err) => {
-		console.log(err.response.data.message);
-	});
+	})
+		.then((res) => {
+			console.log(res.data);
+		})
+		.catch((err) => {
+			console.log(err.response.data.message);
+		});
 }

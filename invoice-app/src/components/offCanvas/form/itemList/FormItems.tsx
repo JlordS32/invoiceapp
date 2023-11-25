@@ -66,7 +66,7 @@ const FormItems = ({
 			<Form.Text
 				id={`${item.id}-name`}
 				name='name'
-				defaultValue={item.name}
+				defaultValue={item.name.toString()}
 				isValid={itemErrorState?.name?.valid ?? false}
 				errorMsg={itemErrorState?.name?.errorMsg ?? ''}
 				onChange={(e) => {
@@ -77,10 +77,9 @@ const FormItems = ({
 			<Form.Text
 				id={`${item.id}-quantity`}
 				name='quantity'
-				defaultValue={item.quantity}
+				defaultValue={item.quantity ? item.quantity.toString() : ''}
 				isValid={itemErrorState?.quantity?.valid ?? false}
 				errorMsg={itemErrorState?.quantity?.errorMsg ?? ''}
-				type='number'
 				onChange={(e) => {
 					setQuantity(Number(e.target.value));
 				}}
@@ -89,8 +88,7 @@ const FormItems = ({
 			<Form.Text
 				id={`${item.id}-price`}
 				name='price'
-				defaultValue={item.price}
-				type='number'
+				defaultValue={item.price ? item.price.toString() : ''}
 				isValid={itemErrorState?.price?.valid ?? false}
 				errorMsg={itemErrorState?.price?.errorMsg ?? ''}
 				onChange={(e) => {

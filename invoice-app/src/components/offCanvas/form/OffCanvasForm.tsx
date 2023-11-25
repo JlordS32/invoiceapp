@@ -241,6 +241,10 @@ const OffCanvasForm = ({
 
 	// TODO Make sure default Values are set when canvas is loaded for edit form.
 
+	useEffect(() => {
+		console.log(formError);
+	}, [formError]);
+
 	return (
 		<form
 			onSubmit={(e) => {
