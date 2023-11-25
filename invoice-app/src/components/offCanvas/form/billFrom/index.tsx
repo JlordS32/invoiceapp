@@ -8,6 +8,7 @@ export interface BillFromProps {
 		nest?: string | null
 	) => void;
 	formError: FormErrorType;
+	update: (data: any) => void;
 	inputRef: React.RefObject<FormTextRef>;
 	data: Record<string, any>;
 }

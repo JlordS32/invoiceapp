@@ -20,7 +20,7 @@ const BillTo = ({
 	update,
 	formError,
 	inputRef,
-	data
+	data,
 }: BillToProps) => {
 	// defaults
 	const options = [
@@ -44,26 +44,47 @@ const BillTo = ({
 
 	// state
 	const [formDate, setFormDate] = useState<Date>(new Date());
-	const [selectedValue, setSelectedValue] = useState<string>('30');
+	const [selectedValue, setSelectedValue] = useState<OptionType>(options[0]);
 
 	// ref
 	const OptionRef = useRef<FormSelectRef>(null);
 
 	// FUNCTIONS
-	const handleOnChange = (option: OptionType | null) => {
-		setSelectedValue(option?.value ?? '');
+	const handleOnChange = (option: OptionType) => {
+		setSelectedValue(option);
 	};
 
 	// useEffect hooks
 	useEffect(() => {
 		const newData = {
 			createdAt: formatDate(formDate.toString()),
-			paymentTerms: selectedValue,
-			paymentDue: calculatePaymentDueDate(formDate, Number(selectedValue)),
+			paymentTerms: selectedValue.value,
+			paymentDue: calculatePaymentDueDate(
+				formDate,
+				Number(selectedValue.value)
+			),
 		};
 
 		update(newData);
 	}, [formDate, selectedValue]);
+
+	// useEffect to set defaults
+	useEffect(() => {
+		if (data && data.createdAt && data.paymentTerms) {
+			const getPaymentTerms = options.filter((option) => {
+				return option.value === data.paymentTerms.toString();
+			});
+
+			setFormDate(new Date(data.createdAt));
+			setSelectedValue(getPaymentTerms[0]);
+		}
+	}, [data]);
+
+	useEffect(() => {
+		if (data && data.clientAddress && data.clientName && data.clientAddress) {
+			update(data);
+		}
+	}, [data]);
 
 	// DESTRUCTED FORM ERRORS
 	const { street, city, postCode, country } = formError?.clientAddress ?? {};
@@ -168,6 +189,7 @@ const BillTo = ({
 					id='clientPaymentTerms'
 					onChange={handleOnChange}
 					selectedValue={selectedValue}
+					defaultValue={data?.paymentTerms ?? null}
 					options={options}
 					ref={OptionRef}
 				/>

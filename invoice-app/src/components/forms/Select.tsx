@@ -1,4 +1,10 @@
-import { forwardRef, useImperativeHandle } from 'react';
+import {
+	forwardRef,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useState,
+} from 'react';
 import ReactSelect, { StylesConfig } from 'react-select';
 
 // styles
@@ -21,13 +27,14 @@ type GroupBase<OptionType> = {
 
 export interface FormSelectProps extends FormProps {
 	options: OptionType[];
-	onChange?: (option: OptionType | null) => void;
-	selectedValue: string;
+	onChange?: (option: OptionType) => void;
+	selectedValue: OptionType;
+	defaultValue?: number;
 }
 
 export interface FormSelectRef {
 	_test: (value: string) => void;
-	value: string;
+	value: OptionType;
 }
 
 const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
@@ -47,7 +54,7 @@ const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
 	}),
 	input: (provided) => ({
 		...provided,
-		color: 'var(--text)'
+		color: 'var(--text)',
 	}),
 	option: (provided, state) => ({
 		...provided,
@@ -80,6 +87,7 @@ const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
 };
 
 const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
+
 	useImperativeHandle(
 		ref,
 		() => {
@@ -94,7 +102,6 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 		},
 		[props.selectedValue]
 	);
-
 	return (
 		<div
 			className={styles.formContainer}
@@ -106,7 +113,7 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 			<ReactSelect
 				options={props.options}
 				onChange={props.onChange}
-				defaultValue={props.options[0]}
+				value={props.selectedValue}
 				styles={customStyles}
 				classNamePrefix='custom-select'
 			/>

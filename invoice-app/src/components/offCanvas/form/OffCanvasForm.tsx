@@ -225,6 +225,9 @@ const OffCanvasForm = ({ header, close, data = {} }: OffCanvasFormProps) => {
 		console.log(formData);
 	}, [formData]);
 
+	// TODO Make sure default Values are set when canvas is loaded for edit form.
+
+	
 	return (
 		<form
 			onSubmit={(e) => {
@@ -235,6 +238,7 @@ const OffCanvasForm = ({ header, close, data = {} }: OffCanvasFormProps) => {
 			<h2 className='text--h2'>{header}</h2>
 			<BillForm
 				handleInputChange={handleInputChange}
+				update={handleUpdateFormData}
 				formError={formError}
 				inputRef={inputRef}
 				data={data}
