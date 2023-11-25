@@ -13,8 +13,15 @@ import {
 	onLoadCanvas,
 } from '../../redux/offcanvas/offCanvasSlice';
 import OffCanvasForm from './form/OffCanvasForm';
+
+// rrd
 import { useParams } from 'react-router-dom';
+
+// react
 import { useEffect, useState } from 'react';
+
+// services
+import { usePostDataById } from '../../services/api/usePostData';
 import { useFetchDatabyId } from '../../services/api/useFetch';
 
 const EditInvoiceCanvas = () => {
@@ -22,16 +29,42 @@ const EditInvoiceCanvas = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	// state
-	const [data, setData] = useState([]);
+	const [data, setData] = useState({});
+	const [editedFormData, setEditedFormData] = useState({});
 
+	// utils
+	const updateForm = (data: Record<string, any>) => {
+		setEditedFormData(data);
+	};
+
+	const submitData = () => {
+		if (editedFormData) {
+			const filteredData = Object.entries(editedFormData).filter(
+				([key, _]) => key !== 'id'
+			);
+
+			usePostDataById(
+				'https://invoiceapi.vercel.app/invoices',
+				params.id as string,
+				Object.fromEntries(filteredData)
+			);
+
+			setData(editedFormData);
+		}
+	};
+
+	// event handlers
 	const handleClose = () => {
 		dispatch(toggleCanvas());
 		dispatch(onLoadCanvas(''));
 	};
 
 	const handleSave = () => {
+		submitData();
 		handleClose();
 	};
+
+	// useEffect
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -56,6 +89,7 @@ const EditInvoiceCanvas = () => {
 				header='Edit Form'
 				close={handleClose}
 				data={data}
+				updateForm={updateForm}
 			/>
 
 			<div className={thisCanvasStyles.buttons}>

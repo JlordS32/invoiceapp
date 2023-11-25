@@ -26,6 +26,7 @@ interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
 	data?: Record<string, any>;
+	updateForm?: (data: Record<string, any>) => void;
 }
 
 /**
@@ -35,7 +36,12 @@ interface OffCanvasFormProps {
  * @param {() => void} close - The function to close the off-canvas form.
  * @return {JSX.Element} The rendered off-canvas form component.
  */
-const OffCanvasForm = ({ header, close, data = {} }: OffCanvasFormProps) => {
+const OffCanvasForm = ({
+	header,
+	close,
+	data = {},
+	updateForm,
+}: OffCanvasFormProps) => {
 	// state
 	const [formData, setFormData] = useState<FormDataType>(defaultForm);
 	const [formError, setFormError] = useState<FormErrorType>(defaultFormError);
@@ -222,12 +228,19 @@ const OffCanvasForm = ({ header, close, data = {} }: OffCanvasFormProps) => {
 	}, [formData]);
 
 	useEffect(() => {
-		console.log(formData);
+		if (updateForm) {
+			updateForm(formData);
+		}
 	}, [formData]);
+
+	useEffect(() => {
+		if (data && data.senderAddress && data.clientAddress) {
+			handleUpdateFormData(data);
+		}
+	}, [data]);
 
 	// TODO Make sure default Values are set when canvas is loaded for edit form.
 
-	
 	return (
 		<form
 			onSubmit={(e) => {

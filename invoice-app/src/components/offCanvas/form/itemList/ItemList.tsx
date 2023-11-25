@@ -123,7 +123,7 @@ const ItemList = ({
 					className={styles.itemsWrapper}
 					ref={animateParent}
 				>
-					{items.map((item) => {
+					{items.map((item, index) => {
 						const itemError = Object.entries(formError?.items || {}).filter(
 							([_, value]) => {
 								return value.id === item.id;
@@ -136,7 +136,7 @@ const ItemList = ({
 								itemList={items}
 								setItemList={setItems}
 								deleteItem={handleDeleteItem}
-								key={item.id}
+								key={index}
 							/>
 						);
 					})}
