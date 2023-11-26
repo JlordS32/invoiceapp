@@ -4,6 +4,7 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 // components
 import Navbar from './Navbar';
 import OffCanvas from '../components/offCanvas/OffCanvas';
+import Modal from '../components/modal/Modal';
 
 const MainLayout = () => {
 	return (
@@ -11,7 +12,8 @@ const MainLayout = () => {
 			<Navbar />
 			<main>
 				<Outlet />
-				<OffCanvas />	
+				<OffCanvas />
+				<Modal />
 			</main>
 			<ScrollRestoration />
 		</div>

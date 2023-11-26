@@ -36,8 +36,7 @@ const OffCanvas = () => {
 		} else {
 			document.body.style.overflow = 'unset';
 		}
-	});
-
+	}, []);
 
 	return (
 		<div>

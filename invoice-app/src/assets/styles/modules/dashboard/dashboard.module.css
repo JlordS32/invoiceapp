@@ -1,5 +1,6 @@
 .dashboard {
 	min-height: 100vh;
+	margin-left: 8rem;
 }
 
 .dashboardNav {
@@ -37,7 +38,6 @@
 	align-items: center;
 	justify-content: center;
 	padding: 5rem 0;
-	width: 100%;
 }
 
 @media screen and (max-width: 860px) {
@@ -49,6 +49,10 @@
 }
 
 @media screen and (max-width: 767px) {
+	.dashboard {
+		margin: 0;
+	}
+	
 	.dashboardNav {
 		width: 92%;
 		padding-top: 2.77rem;

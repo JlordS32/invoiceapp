@@ -121,7 +121,7 @@ button:focus {
 }
 
 main {
-	margin-left: 8rem;
+	margin: 0;
 	position: relative;
 }
 
@@ -144,7 +144,6 @@ main {
 
 @media screen and (max-width: 767px) {
 	main {
-		margin: 0;
 		padding-top: 6rem;
 	}
 }
