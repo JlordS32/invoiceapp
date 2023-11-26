@@ -1,5 +1,10 @@
+// styles
+import styles from '../../../assets/styles/modules/modal/sub/confirmDelete.module.css';
+
+// components
 import Button from '../../button/Button';
 
+// types
 interface ConfirmDeleteProps {
 	id: string;
 	close: () => void;
@@ -12,7 +17,7 @@ const ConfirmDelete = ({ id, close, goHome }: ConfirmDeleteProps) => {
 	};
 
 	const handleDelete = () => {
-      close();
+		close();
 		goHome();
 	};
 
@@ -24,7 +29,7 @@ const ConfirmDelete = ({ id, close, goHome }: ConfirmDeleteProps) => {
 				<span className='standout'>#{`${id}`}</span>. This ac tion cannot be
 				undone.
 			</p>
-			<div className='d-flex justify-content-end gap-1'>
+			<div className={styles.confirmDeleteBtn}>
 				<Button
 					variant='editButton'
 					onClick={handleCancel}
@@ -34,6 +39,7 @@ const ConfirmDelete = ({ id, close, goHome }: ConfirmDeleteProps) => {
 				<Button
 					variant='deleteButton'
 					onClick={handleDelete}
+               shorttext='Delete'
 				>
 					Delete Button
 				</Button>
