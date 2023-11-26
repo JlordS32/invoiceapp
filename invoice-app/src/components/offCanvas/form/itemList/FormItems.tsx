@@ -61,6 +61,13 @@ const FormItems = ({
 		}
 	}, [itemError, itemErrorState]);
 
+	useEffect(() => {
+		if (item) {
+			setQuantity(item.quantity);
+			setPrice(item.price);
+		}
+	}, [item])
+
 	return (
 		<div className={styles.item}>
 			<Form.Text

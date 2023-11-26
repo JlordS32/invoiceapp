@@ -47,7 +47,6 @@
 
 /* clientName */
 .clientName {
-	grid-column: span 2;
 	justify-content: start;
 	color: hsl(232, 23%, 61%);
 }
@@ -63,6 +62,9 @@
 	font-weight: 700;
 	font-size: 1.15rem;
 	line-height: calc(1rem * 1.6);
+	grid-column: span 2;
+	justify-self: flex-end;
+	padding: 0 1rem;
 }
 
 /* status */
@@ -178,5 +180,9 @@
 	.invoice .dueDate {
 		align-self: flex-end;
 	}
-	
+
+	.invoice .totalPrice {
+		padding: 0;
+		justify-self: flex-start !important;
+	}
 }
