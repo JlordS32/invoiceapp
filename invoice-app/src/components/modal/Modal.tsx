@@ -5,14 +5,24 @@ import { useEffect } from 'react';
 import styles from '../../assets/styles/modules/modal/modal.module.css';
 
 // redux
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../redux/store';
+import { toggleModal, loadModal } from '../../redux/modal/modalSlice';
 
 // components
 import ConfirmDelete from './modalToRender/ConfirmDelete';
 
+// rrd
+import { useParams, useNavigate } from 'react-router-dom';
+
 const Modal = () => {
+	// rrd
+	const { id } = useParams();
+	const navigate = useNavigate();
+
+	// redux
 	const { isOpen, contentKey } = useSelector((state: RootState) => state.modal);
+	const dispatch = useDispatch<AppDispatch>();
 
 	// disable scrolling
 	useEffect(() => {
@@ -23,23 +33,35 @@ const Modal = () => {
 		}
 	}, [isOpen]);
 
+	// event handlers
+	const handleClose = () => {
+		dispatch(toggleModal());
+		dispatch(loadModal(''));
+	};
+
+	// utils
 	const getKey = () => {
 		switch (contentKey) {
 			case 'confirm-delete':
-				return <ConfirmDelete />;
+				return (
+					<ConfirmDelete
+						id={id as string}
+						close={handleClose}
+						goHome={goHome}
+					/>
+				);
 		}
+	};
+
+	const goHome = () => {
+		navigate('/');
 	};
 
 	return (
 		<>
 			{isOpen && (
 				<div className={styles.modalBackdrop}>
-					<div className={styles.modal}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-						doloribus, corrupti ut cupiditate sed quasi, quidem hic perferendis,
-						voluptatem tempora temporibus minima! Quis dolorem consequuntur,
-						praesentium inventore incidunt quisquam necessitatibus.
-					</div>
+					<div className={styles.modal}>{getKey()}</div>
 				</div>
 			)}
 		</>

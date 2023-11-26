@@ -13,8 +13,7 @@
 
 .modal {
 	width: clamp(25.15385rem, 90%, 36.92308rem);
-	height: 19.15385rem;
 	background-color: var(--box-bg);
 	border-radius: 0.5rem;
-	padding: 3.8rem;
+	padding: 3.9rem 3.6rem 3.6rem 3.6rem;
 }

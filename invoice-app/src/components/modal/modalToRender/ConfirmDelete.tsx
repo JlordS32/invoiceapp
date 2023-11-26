@@ -1,9 +1,45 @@
-import React from 'react'
+import Button from '../../button/Button';
 
-const ConfirmDelete = () => {
-  return (
-    <div>ConfirmDelete</div>
-  )
+interface ConfirmDeleteProps {
+	id: string;
+	close: () => void;
+	goHome: () => void;
 }
 
-export default ConfirmDelete
+const ConfirmDelete = ({ id, close, goHome }: ConfirmDeleteProps) => {
+	const handleCancel = () => {
+		close();
+	};
+
+	const handleDelete = () => {
+      close();
+		goHome();
+	};
+
+	return (
+		<>
+			<h2 className='text--h2'>Confirm Deletion</h2>
+			<p className='py-1 body-text-2'>
+				Are you sure you want delete invoice{' '}
+				<span className='standout'>#{`${id}`}</span>. This ac tion cannot be
+				undone.
+			</p>
+			<div className='d-flex justify-content-end gap-1'>
+				<Button
+					variant='editButton'
+					onClick={handleCancel}
+				>
+					Cancel
+				</Button>
+				<Button
+					variant='deleteButton'
+					onClick={handleDelete}
+				>
+					Delete Button
+				</Button>
+			</div>
+		</>
+	);
+};
+
+export default ConfirmDelete;
