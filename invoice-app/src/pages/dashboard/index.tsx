@@ -44,7 +44,7 @@ const Dashboard = () => {
 	// redux
 	const invoiceData = useSelector((state: RootState) => state.invoice);
 	const dispatch = useDispatch<AppDispatch>();
-	
+
 	const { loading, invoiceItems } = invoiceData;
 
 	// function to trigger data
@@ -70,7 +70,6 @@ const Dashboard = () => {
 
 	// setting fetched data into data state
 	useEffect(() => {
-
 		if (!loading) {
 			setData(invoiceItems);
 		}
@@ -95,7 +94,6 @@ const Dashboard = () => {
 
 		setFilter(newFilter.split(','));
 	}, [location]);
-
 
 	return (
 		<div className={styles.dashboard}>

@@ -4,6 +4,10 @@ import styles from '../../../assets/styles/modules/modal/sub/confirmDelete.modul
 // components
 import Button from '../../button/Button';
 
+// services
+import { useDelete } from '../../../services/api/useDelete';
+import { useState } from 'react';
+
 // types
 interface ConfirmDeleteProps {
 	id: string;
@@ -12,11 +16,20 @@ interface ConfirmDeleteProps {
 }
 
 const ConfirmDelete = ({ id, close, goHome }: ConfirmDeleteProps) => {
+	const [isClicked, setIsClicked] = useState<boolean>(false);
+
 	const handleCancel = () => {
 		close();
 	};
 
-	const handleDelete = () => {
+	const handleDelete = async () => {
+		// forcibly disables the button when clicked
+		setIsClicked(true);
+		await useDelete('https://invoiceapi.vercel.app/invoices', id);
+
+		// enables it back once the api call finishes
+		// close modal -> navigate to home
+		setIsClicked(false);
 		close();
 		goHome();
 	};
@@ -26,7 +39,7 @@ const ConfirmDelete = ({ id, close, goHome }: ConfirmDeleteProps) => {
 			<h2 className='text--h2'>Confirm Deletion</h2>
 			<p className='py-1 body-text-2'>
 				Are you sure you want delete invoice{' '}
-				<span className='standout'>#{`${id}`}</span>. This ac tion cannot be
+				<span className='standout'>#{`${id}`}</span>. This action cannot be
 				undone.
 			</p>
 			<div className={styles.confirmDeleteBtn}>
@@ -39,9 +52,9 @@ const ConfirmDelete = ({ id, close, goHome }: ConfirmDeleteProps) => {
 				<Button
 					variant='deleteButton'
 					onClick={handleDelete}
-               shorttext='Delete'
+					disabled={isClicked}
 				>
-					Delete Button
+					Delete
 				</Button>
 			</div>
 		</>
