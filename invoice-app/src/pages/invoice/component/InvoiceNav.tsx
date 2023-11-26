@@ -12,7 +12,7 @@ import {
 	onLoadCanvas,
 	toggleCanvas,
 } from '../../../redux/offcanvas/offCanvasSlice';
-import { toggleModal as toggleModalAction } from '../../../redux/modal/modalSlice';
+import { loadModal, toggleModal as toggleModalAction } from '../../../redux/modal/modalSlice';
 import { InvoiceType } from '../../../types';
 
 interface InvoiceNavProps {
@@ -30,12 +30,13 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 
 	const toggleModal = () => {
 		dispatch(toggleModalAction());
+		dispatch(loadModal('confirm-delete'));
 	};
 
 	const { status } = invoice;
 
 	return (
-		<div
+		<div	
 			className={styles.invoiceNav}
 			id='invoiceNav'
 		>
@@ -59,7 +60,13 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 				>
 					Delete
 				</Button>
-				<Button>Mark as Paid</Button>
+				
+				{/* hide this component is status is paid */}
+				{
+					invoice.status !== 'paid' && (
+						<Button>Mark as Paid</Button>
+					)
+				}
 			</div>
 		</div>
 	);

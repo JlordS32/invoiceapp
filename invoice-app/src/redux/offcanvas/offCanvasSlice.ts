@@ -1,13 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+type contentKey = 'create-invoice' | 'edit-invoice' | '';
+
 type stateType = {
 	isOpen: boolean;
-	contentKey: string | null; // Use a key to identify the content
+	contentKey: contentKey; // Use a key to identify the content
 };
 
 const initialState: stateType = {
 	isOpen: false,
-	contentKey: null,
+	contentKey: '',
 };
 
 const offCanvasSlice = createSlice({
@@ -17,7 +19,7 @@ const offCanvasSlice = createSlice({
 		toggleCanvas: (state) => {
 			state.isOpen = !state.isOpen;
 		},
-		onLoadCanvas: (state, action: PayloadAction<string>) => {
+		onLoadCanvas: (state, action: PayloadAction<contentKey>) => {
 			state.contentKey = action.payload;
 		},
 	},

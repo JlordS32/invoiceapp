@@ -13,10 +13,9 @@ import CreateInvoiceCanvas from './CreateInvoiceCanvas';
 import EditInvoiceCanvas from './EditInvoiceCanvas';
 
 const OffCanvas = () => {
-	// redux
-	const offCanvasState = useSelector((state: RootState) => state.offCanvas);
-
-	const { isOpen, contentKey } = offCanvasState;
+	const { isOpen, contentKey } = useSelector(
+		(state: RootState) => state.offCanvas
+	);
 
 	const getKey = () => {
 		switch (contentKey) {
@@ -36,7 +35,7 @@ const OffCanvas = () => {
 		} else {
 			document.body.style.overflow = 'unset';
 		}
-	}, []);
+	}, [isOpen]);
 
 	return (
 		<div>
