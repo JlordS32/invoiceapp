@@ -12,6 +12,7 @@ import {
 	onLoadCanvas,
 	toggleCanvas,
 } from '../../../redux/offcanvas/offCanvasSlice';
+import { toggleModal as toggleModalAction } from '../../../redux/modal/modalSlice';
 import { InvoiceType } from '../../../types';
 
 interface InvoiceNavProps {
@@ -25,6 +26,10 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 	const toggleOffCanvas = () => {
 		dispatch(toggleCanvas());
 		dispatch(onLoadCanvas('edit-invoice'));
+	};
+
+	const toggleModal = () => {
+		dispatch(toggleModalAction());
 	};
 
 	const { status } = invoice;
@@ -48,7 +53,12 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 				>
 					Edit
 				</Button>
-				<Button variant='deleteButton'>Delete</Button>
+				<Button
+					variant='deleteButton'
+					onClick={toggleModal}
+				>
+					Delete
+				</Button>
 				<Button>Mark as Paid</Button>
 			</div>
 		</div>
