@@ -20,7 +20,7 @@ const BillTo = ({
 	update,
 	formError,
 	inputRef,
-	data,
+	formData,
 }: BillToProps) => {
 	// defaults
 	const options = [
@@ -53,38 +53,44 @@ const BillTo = ({
 	const handleOnChange = (option: OptionType) => {
 		setSelectedValue(option);
 	};
-
-	// useEffect hooks
+	
 	useEffect(() => {
-		const newData = {
-			createdAt: formatDate(formDate.toString()),
-			paymentTerms: selectedValue.value,
-			paymentDue: calculatePaymentDueDate(
-				formDate,
-				Number(selectedValue.value)
-			),
-		};
+		if (formData) {
+			const newData = {
+				createdAt: formatDate(formDate.toString()),
+				paymentTerms: selectedValue.value,
+				paymentDue: calculatePaymentDueDate(
+					formDate,
+					Number(selectedValue.value)
+				),
+			};
 
-		update(newData);
+			update(newData);
+		}
 	}, [formDate, selectedValue]);
 
-	// useEffect to set defaults
-	useEffect(() => {
-		if (data && data.createdAt && data.paymentTerms) {
-			const getPaymentTerms = options.filter((option) => {
-				return option.value === data.paymentTerms.toString();
-			});
-
-			setFormDate(new Date(data.createdAt));
-			setSelectedValue(getPaymentTerms[0]);
-		}
-	}, [data]);
+	// useEffect(() => {
+	// 	console.log('running')
+	// 	if (
+	// 		formData?.createdAt &&
+	// 		formDate.getTime() !== new Date(formData.createdAt).getTime()
+	// 	) {
+	// 		setFormDate(new Date(formData.createdAt));
+	// 	}
+	// }, [formDate, formData]);
 
 	useEffect(() => {
-		if (data && data.clientAddress && data.clientName && data.clientAddress) {
-			update(data);
+		console.log('sdfsdf')
+		if (formData && formData.paymentTerms) {
+			const getOption = options.find(
+				(option) => option.value === formData.paymentTerms
+			);
+
+			// if (getOption) {
+			// 	setSelectedValue(getOption);
+			// }
 		}
-	}, [data]);
+	}, [formData, options]);
 
 	// DESTRUCTED FORM ERRORS
 	const { street, city, postCode, country } = formError?.clientAddress ?? {};
@@ -99,7 +105,7 @@ const BillTo = ({
 					width='100%'
 					name='clientName'
 					ref={inputRef}
-					defaultValue={data?.clientName ?? ''}
+					value={formData.clientName}
 					id='clientName'
 					isValid={clientName?.valid ?? false}
 					errorMsg={clientName?.errorMsg ?? ''}
@@ -110,7 +116,7 @@ const BillTo = ({
 					width='100%'
 					name='clientEmail'
 					ref={inputRef}
-					defaultValue={data?.clientEmail ?? ''}
+					value={formData.clientEmail}
 					isValid={clientEmail?.valid ?? false}
 					errorMsg={clientEmail?.errorMsg ?? ''}
 					onChange={handleInputChange}
@@ -120,7 +126,7 @@ const BillTo = ({
 					width='100%'
 					id='clientStreet'
 					ref={inputRef}
-					defaultValue={data.clientAddress?.street ?? ''}
+					value={formData.clientAddress?.street ?? ''}
 					isValid={street?.valid ?? false}
 					errorMsg={street?.errorMsg ?? ''}
 					name='street'
@@ -136,7 +142,7 @@ const BillTo = ({
 						width='100%'
 						name='city'
 						ref={inputRef}
-						defaultValue={data.clientAddress?.city ?? ''}
+						value={formData.clientAddress?.city ?? ''}
 						id='clientCity'
 						isValid={city?.valid ?? false}
 						errorMsg={city?.errorMsg ?? ''}
@@ -150,7 +156,7 @@ const BillTo = ({
 						label='Post Code'
 						width='100%'
 						ref={inputRef}
-						defaultValue={data.clientAddress?.postCode ?? ''}
+						value={formData.clientAddress?.postCode ?? ''}
 						name='postCode'
 						id='clientPostCode'
 						isValid={postCode?.valid ?? false}
@@ -166,7 +172,7 @@ const BillTo = ({
 						width='100%'
 						name='country'
 						ref={inputRef}
-						defaultValue={data.clientAddress?.country ?? ''}
+						value={formData.clientAddress?.country ?? ''}
 						id='clientCountry'
 						isValid={country?.valid ?? false}
 						errorMsg={country?.errorMsg ?? ''}
@@ -189,7 +195,6 @@ const BillTo = ({
 					id='clientPaymentTerms'
 					onChange={handleOnChange}
 					selectedValue={selectedValue}
-					defaultValue={data?.paymentTerms ?? null}
 					options={options}
 					ref={OptionRef}
 				/>
@@ -199,7 +204,7 @@ const BillTo = ({
 				<Form.Text
 					label='Project Description'
 					ref={inputRef}
-					defaultValue={data?.description ?? ''}
+					value={formData?.description ?? ''}
 					id='invoiceDesc'
 					width='100%'
 					name='description'

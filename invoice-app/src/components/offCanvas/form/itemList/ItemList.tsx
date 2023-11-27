@@ -20,7 +20,7 @@ const ItemList = ({
 	update,
 	updateErrorForm,
 	formError,
-	data,
+	formData,
 }: ItemListProps) => {
 	// default
 	const defaultItem = [
@@ -64,46 +64,45 @@ const ItemList = ({
 		return;
 	};
 
-	// useEffect
-	useEffect(() => {
-		setTimeout(() => {
-			update({
-				items: items,
-			});
-		}, 100);
-	}, [items]);
+	// useEffect(() => {
+	// 	setTimeout(() => {
+	// 		update({
+	// 			items: items,
+	// 		});
+	// 	}, 100);
+	// }, []);
 
 	useEffect(() => {
-		const { items } = data;
+		// const { items } = formData;
 
-		if (data && items) {
-			setItems(items);
-		}
-	}, [data]);
+		// if (formData && items) {
+		// 	setItems(items);
+		// }
+	}, [formData]);
 
-	useEffect(() => {
-		const itemsError = items.map((item) => {
-			return {
-				id: item.id,
-				name: {
-					valid: true,
-					errorMsg: '',
-				},
-				quantity: {
-					valid: true,
-					errorMsg: '',
-				},
-				price: {
-					valid: true,
-					errorMsg: '',
-				},
-			};
-		});
+	// useEffect(() => {
+	// 	const itemsError = items.map((item) => {
+	// 		return {
+	// 			id: item.id,
+	// 			name: {
+	// 				valid: true,
+	// 				errorMsg: '',
+	// 			},
+	// 			quantity: {
+	// 				valid: true,
+	// 				errorMsg: '',
+	// 			},
+	// 			price: {
+	// 				valid: true,
+	// 				errorMsg: '',
+	// 			},
+	// 		};
+	// 	});
 
-		updateErrorForm({
-			items: itemsError,
-		});
-	}, [items]);
+	// 	updateErrorForm({
+	// 		items: itemsError,
+	// 	});
+	// }, [items]);
 
 	return (
 		<section className={styles.itemList}>

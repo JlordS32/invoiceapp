@@ -6,11 +6,11 @@ import Form from '../../../forms';
 
 // types
 import { BillFromProps } from '.';
-const BillForm = ({
+const BillFrom = ({
 	handleInputChange,
 	formError,
+	formData,
 	inputRef,
-	data,
 }: BillFromProps) => {
 	const { street, city, postCode, country } = formError?.senderAddress ?? {};
 
@@ -22,7 +22,7 @@ const BillForm = ({
 				ref={inputRef}
 				name='street'
 				id='senderStreet'
-				defaultValue={data.senderAddress?.street ?? ''}
+				value={formData.senderAddress.street ?? ''}
 				isValid={street.valid ?? false}
 				errorMsg={street.errorMsg ?? ''}
 				onChange={(e) => {
@@ -36,7 +36,7 @@ const BillForm = ({
 					<Form.Text
 						label='City'
 						ref={inputRef}
-						defaultValue={data.senderAddress?.city ?? ''}
+						value={formData.senderAddress.city ?? ''}
 						width='100%'
 						name='city'
 						id='senderCity'
@@ -51,7 +51,7 @@ const BillForm = ({
 					<Form.Text
 						label='Post Code'
 						ref={inputRef}
-						defaultValue={data.senderAddress?.postCode}
+						value={formData.senderAddress.postCode ?? ''}
 						width='100%'
 						name='postCode'
 						id='senderPostCode'
@@ -66,7 +66,7 @@ const BillForm = ({
 					<Form.Text
 						label='Country'
 						ref={inputRef}
-						defaultValue={data.senderAddress?.country}
+						value={formData.senderAddress.country ?? ''}
 						width='100%'
 						name='country'
 						id='senderCountry'
@@ -82,4 +82,4 @@ const BillForm = ({
 	);
 };
 
-export default BillForm;
+export default BillFrom;

@@ -23,7 +23,6 @@ export interface FormSelectProps extends FormProps {
 	options: OptionType[];
 	onChange?: (newvalue: any) => void;
 	selectedValue: OptionType;
-	defaultValue?: number;
 }
 
 export interface FormSelectRef {

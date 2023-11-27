@@ -12,7 +12,10 @@ import {
 	onLoadCanvas,
 	toggleCanvas,
 } from '../../../redux/offcanvas/offCanvasSlice';
-import { loadModal, toggleModal as toggleModalAction } from '../../../redux/modal/modalSlice';
+import {
+	loadModal,
+	toggleModal as toggleModalAction,
+} from '../../../redux/modal/modalSlice';
 import { InvoiceType } from '../../../types';
 
 interface InvoiceNavProps {
@@ -36,14 +39,14 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 	const { status } = invoice;
 
 	return (
-		<div	
+		<div
 			className={styles.invoiceNav}
 			id='invoiceNav'
 		>
 			<div className={styles.status}>
 				<div>
 					<span className='body-text-2'>Status</span>
-					<Status status={status} />
+					<Status status={status as string} />
 				</div>
 			</div>
 
@@ -60,13 +63,8 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 				>
 					Delete
 				</Button>
-				
-				{/* hide this component is status is paid */}
-				{
-					invoice.status !== 'paid' && (
-						<Button>Mark as Paid</Button>
-					)
-				}
+
+				{invoice.status === 'pending' && <Button>Mark as Paid</Button>}
 			</div>
 		</div>
 	);

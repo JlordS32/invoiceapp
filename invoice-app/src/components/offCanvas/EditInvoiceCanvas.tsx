@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 // services
 import { usePostDataById } from '../../services/api/usePostData';
 import { useFetchDatabyId } from '../../services/api/useFetch';
+import { InvoiceType } from '../../types';
 
 const EditInvoiceCanvas = () => {
 	const navigate = useNavigate();
@@ -30,11 +31,11 @@ const EditInvoiceCanvas = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	// state
-	const [data, setData] = useState({});
-	const [editedFormData, setEditedFormData] = useState({});
+	const [data, setData] = useState<InvoiceType>();
+	const [editedFormData, setEditedFormData] = useState<InvoiceType>();
 
 	// utils
-	const updateForm = (data: Record<string, any>) => {
+	const updateForm = (data: InvoiceType) => {
 		setEditedFormData(data);
 	};
 
@@ -65,11 +66,6 @@ const EditInvoiceCanvas = () => {
 		submitData();
 		handleClose();
 	};
-
-	// useEffect
-	useEffect(() => {
-		console.log(editedFormData);
-	}, [editedFormData]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -104,7 +100,20 @@ const EditInvoiceCanvas = () => {
 				>
 					Cancel
 				</Button>
-				<Button onClick={handleSave}>Save Changes</Button>
+				{data && data.status === 'draft' ? (
+					<Button
+						variant='saveAsDraftButton'
+						onClick={handleSave}
+					>
+						Save Draft
+					</Button>
+				) : (
+					<Button onClick={handleSave}>Save Changes</Button>
+				)}
+
+				{data && data.status === 'draft' && (
+					<Button onClick={handleClose}>Save and Send</Button>
+				)}
 			</div>
 		</div>
 	);

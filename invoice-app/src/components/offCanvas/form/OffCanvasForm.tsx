@@ -17,7 +17,7 @@ import { validateData } from '../../../utilities/validateData';
 import { defaultFormError, defaultForm } from './defaultValues/default';
 
 // types
-import { FormDataType, FormErrorType } from '../../../types';
+import { FormDataType, FormErrorType, InvoiceType } from '../../../types';
 import { areAllValid } from '../../../utilities/areAllValid';
 import { usePostData } from '../../../services/api/usePostData';
 import { FormTextRef } from '../../forms/Text';
@@ -25,8 +25,8 @@ import { FormTextRef } from '../../forms/Text';
 interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
-	data?: Record<string, any>;
-	updateForm?: (data: Record<string, any>) => void;
+	data?: InvoiceType;
+	updateForm?: (data: InvoiceType) => void;
 }
 
 /**
@@ -39,7 +39,7 @@ interface OffCanvasFormProps {
 const OffCanvasForm = ({
 	header,
 	close,
-	data = {},
+	data,
 	updateForm,
 }: OffCanvasFormProps) => {
 	// state
@@ -239,11 +239,9 @@ const OffCanvasForm = ({
 		}
 	}, [data]);
 
-	// TODO Make sure default Values are set when canvas is loaded for edit form.
-
 	useEffect(() => {
-		console.log(formError);
-	}, [formError]);
+		console.log(formData)
+	}, [formData])
 
 	return (
 		<form
@@ -256,9 +254,9 @@ const OffCanvasForm = ({
 			<BillForm
 				handleInputChange={handleInputChange}
 				update={handleUpdateFormData}
+				formData={formData}
 				formError={formError}
 				inputRef={inputRef}
-				data={data}
 			/>
 
 			<BillTo
@@ -266,14 +264,14 @@ const OffCanvasForm = ({
 				update={handleUpdateFormData}
 				formError={formError}
 				inputRef={inputRef}
-				data={data}
+				formData={formData}
 			/>
 
 			<ItemList
 				update={handleUpdateFormData}
 				updateErrorForm={handleUpdateFormError}
 				formError={formError}
-				data={data}
+				formData={formData}
 			/>
 
 			<div className={thisCanvasStyles.buttons}>

@@ -1,13 +1,13 @@
 // types
 export interface InvoiceType {
-	id: string;
+	id?: string;
 	createdAt: string;
 	paymentDue: string;
 	description: string;
-	paymentTerms: number;
+	paymentTerms: string;
 	clientName: string;
 	clientEmail: string;
-	status: string;
+	status?: string;
 	senderAddress: {
 		street: string;
 		city: string;
@@ -21,10 +21,9 @@ export interface InvoiceType {
 		country: string;
 	};
 	items: {
+		id: string;
 		name: string;
 		quantity: number;
 		price: number;
-		total: number;
 	}[];
-	total: number;
 }

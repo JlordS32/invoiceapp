@@ -1,4 +1,4 @@
-import { FormErrorType } from '../../../../types';
+import { FormDataType, FormErrorType, InvoiceType } from '../../../../types';
 import BillFrom from './BillFrom';
 import { FormTextRef } from '../../../forms/Text';
 
@@ -8,9 +8,9 @@ export interface BillFromProps {
 		nest?: string | null
 	) => void;
 	formError: FormErrorType;
+	formData: FormDataType;
 	update: (data: any) => void;
 	inputRef: React.RefObject<FormTextRef>;
-	data: Record<string, any>;
 }
 
 const index = (props: BillFromProps) => {

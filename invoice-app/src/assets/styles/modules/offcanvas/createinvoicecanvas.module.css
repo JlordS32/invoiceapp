@@ -23,6 +23,7 @@
 	.buttons {
 		border-radius: 0;
 		padding: 1.9rem;
+		position: fixed;
 	}
 
 	.buttons button span {

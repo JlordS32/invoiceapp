@@ -7,7 +7,7 @@ import styles from '../../assets/styles/modules/form.module.css';
 import { FormProps } from './index';
 
 export interface FormTextProps extends FormProps {
-	defaultValue?: string | number;
+	value?: string | number;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	isValid?: boolean;
 	type?: string;
@@ -65,7 +65,7 @@ const Text = forwardRef<FormTextRef, FormTextProps>((props, ref) => {
 			)}
 			<input
 				ref={childRef}
-				defaultValue={props.defaultValue}
+				value={props.value}
 				name={props.name ?? ''}
 				onChange={(e) => {
 					if (props.onChange) {

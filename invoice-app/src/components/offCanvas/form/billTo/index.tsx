@@ -1,5 +1,5 @@
 import BillTo from './BillTo';
-import { FormErrorType } from '../../../../types';
+import { FormDataType, FormErrorType } from '../../../../types';
 import { FormTextRef } from '../../../forms/Text';
 
 export interface BillToProps {
@@ -10,7 +10,7 @@ export interface BillToProps {
 	formError?: FormErrorType;
 	update: (data: any) => void;
 	inputRef: React.RefObject<FormTextRef>;
-	data: Record<string, any>;
+	formData: FormDataType
 }
 const index = (props: BillToProps) => {
 	return <BillTo {...props} />;
