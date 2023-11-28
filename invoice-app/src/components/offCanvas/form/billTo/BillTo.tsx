@@ -68,14 +68,6 @@ const BillTo = ({
 		}
 	}, [formDate, selectedValue]);
 
-	useEffect(() => {
-		console.log(formData);
-	}, [formData]);
-
-	useEffect(() => {
-		console.log(selectedValue);
-	}, [selectedValue])
-
 	// DESTRUCTED FORM ERRORS
 	const { street, city, postCode, country } = formError?.clientAddress ?? {};
 	const { clientName, clientEmail, description } = formError ?? {};

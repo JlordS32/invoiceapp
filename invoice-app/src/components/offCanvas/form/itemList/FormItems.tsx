@@ -66,15 +66,15 @@ const FormItems = ({
 			setQuantity(item.quantity);
 			setPrice(item.price);
 		}
-	}, [item])
+	}, [item]);
 
 	return (
 		<div className={styles.item}>
 			<Form.Text
 				id={`${item.id}-name`}
 				name='name'
-				defaultValue={item.name.toString()}
 				isValid={itemErrorState?.name?.valid ?? false}
+				value={item.name ? item.name.toString() : ''}
 				errorMsg={itemErrorState?.name?.errorMsg ?? ''}
 				onChange={(e) => {
 					setItemName(e.target.value);
@@ -84,7 +84,7 @@ const FormItems = ({
 			<Form.Text
 				id={`${item.id}-quantity`}
 				name='quantity'
-				defaultValue={item.quantity ? item.quantity.toString() : ''}
+				value={item.quantity ? item.quantity.toString() : ''}
 				isValid={itemErrorState?.quantity?.valid ?? false}
 				errorMsg={itemErrorState?.quantity?.errorMsg ?? ''}
 				onChange={(e) => {
@@ -95,7 +95,7 @@ const FormItems = ({
 			<Form.Text
 				id={`${item.id}-price`}
 				name='price'
-				defaultValue={item.price ? item.price.toString() : ''}
+				value={item.price ? item.price.toString() : ''}
 				isValid={itemErrorState?.price?.valid ?? false}
 				errorMsg={itemErrorState?.price?.errorMsg ?? ''}
 				onChange={(e) => {

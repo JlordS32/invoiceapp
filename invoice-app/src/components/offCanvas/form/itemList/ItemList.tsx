@@ -64,45 +64,57 @@ const ItemList = ({
 		return;
 	};
 
-	// useEffect(() => {
-	// 	setTimeout(() => {
-	// 		update({
-	// 			items: items,
-	// 		});
-	// 	}, 100);
-	// }, []);
+	useEffect(() => {
+		setTimeout(() => {
+			update({
+				items: items,
+			});
+		}, 100);
+	}, []);
 
 	useEffect(() => {
-		// const { items } = formData;
+		const itemsError = items.map((item) => {
+			return {
+				id: item.id,
+				name: {
+					valid: true,
+					errorMsg: '',
+				},
+				quantity: {
+					valid: true,
+					errorMsg: '',
+				},
+				price: {
+					valid: true,
+					errorMsg: '',
+				},
+			};
+		});
 
-		// if (formData && items) {
-		// 	setItems(items);
-		// }
-	}, [formData]);
+		updateErrorForm({
+			items: itemsError,
+		});
+	}, [items]);
 
-	// useEffect(() => {
-	// 	const itemsError = items.map((item) => {
-	// 		return {
-	// 			id: item.id,
-	// 			name: {
-	// 				valid: true,
-	// 				errorMsg: '',
-	// 			},
-	// 			quantity: {
-	// 				valid: true,
-	// 				errorMsg: '',
-	// 			},
-	// 			price: {
-	// 				valid: true,
-	// 				errorMsg: '',
-	// 			},
-	// 		};
-	// 	});
 
-	// 	updateErrorForm({
-	// 		items: itemsError,
-	// 	});
-	// }, [items]);
+	// TODO: Prevent infinite rendering
+	// Reason: the effect renders infinitely due to the behaviours 
+	// of using state and useEffect hook.
+	// when the effect runs to update formData, it updates the formData
+	// but becuz formData is updated, it also update the items, thus causing a loop
+	// Solution: Figuring it out
+	useEffect(() => {
+		const { items: formDataItems } = formData;
+		const newItems = {
+			items: items,
+		};
+
+		update(newItems);
+
+		if (formData && items) {
+			setItems(formDataItems);
+		}
+	}, [items]);
 
 	return (
 		<section className={styles.itemList}>

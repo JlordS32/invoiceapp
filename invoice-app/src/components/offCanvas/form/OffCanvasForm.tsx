@@ -238,9 +238,9 @@ const OffCanvasForm = ({
 		}
 	}, [data]);
 
-	// useEffect(() => {
-	// 	console.log(formData);
-	// }, [formData]);
+	useEffect(() => {
+		console.log(formData);
+	}, [formData]);
 
 	return (
 		<form
