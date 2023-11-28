@@ -191,12 +191,17 @@ const OffCanvasForm = ({
 		}
 	};
 
-	const handleUpdateFormData = (data: any) => {
-		setFormData({
-			...formData,
-			...data,
-		});
-	};
+	const handleUpdateFormData = useCallback(
+		(data: any) => {
+
+			setFormData({
+				...formData,
+				...data,
+			});
+		},
+		[formData, formError]
+	);
+
 	const handleUpdateFormError = (data: any) => {
 		setFormError({
 			...formError,
@@ -204,12 +209,6 @@ const OffCanvasForm = ({
 		});
 	};
 
-	// TODO - Make sure this works properly
-	// Issue: When submit function is invoked, we need to validate the date before being submitted when user intends to send it as pending,
-	// Validation can be ignored if user leaves it as a draft.
-
-	// Fix 1: Validation was handled from the backend.
-	// FIx 2: Needs to be handle from the frontend as well - in progresss
 	const handleSubmit = useCallback(() => {
 		if (formIsSaved) {
 			const isValid = areAllValid(formError);
@@ -239,9 +238,9 @@ const OffCanvasForm = ({
 		}
 	}, [data]);
 
-	useEffect(() => {
-		console.log(formData)
-	}, [formData])
+	// useEffect(() => {
+	// 	console.log(formData);
+	// }, [formData]);
 
 	return (
 		<form

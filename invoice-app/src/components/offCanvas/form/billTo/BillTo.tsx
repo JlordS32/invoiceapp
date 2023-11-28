@@ -44,54 +44,37 @@ const BillTo = ({
 
 	// state
 	const [formDate, setFormDate] = useState<Date>(new Date());
-	const [selectedValue, setSelectedValue] = useState<OptionType>();
-	const [newFormData, setNewFormData] = useState();
+	const [selectedValue, setSelectedValue] = useState<OptionType>(options[0]);
 
 	// ref
 	const OptionRef = useRef<FormSelectRef>(null);
 
-	// FUNCTIONS
-	const handleOnChange = (option: OptionType) => {
-		setSelectedValue(option);
-	};
+	// functions
+	const handleSelectChange = (value: OptionType) => {
+		setSelectedValue(value)
+	}
 
 	useEffect(() => {
 		if (formData) {
 			const newData = {
 				createdAt: formatDate(formDate.toString()),
-				paymentTerms: selectedValue ? selectedValue.value : options[0],
 				paymentDue: calculatePaymentDueDate(
 					formDate,
-					Number(selectedValue ? selectedValue.value : options[0])
+					Number(formData.paymentTerms)
 				),
 			};
 
-			setNewFormData(newData);
+			update(newData);
 		}
 	}, [formDate, selectedValue]);
 
-	// Setting defaults
 	useEffect(() => {
-		if (formData && formData.createdAt) {
-			setFormDate(new Date(formData.createdAt));
-		}
-	}, [formData.createdAt]);
-
-	useEffect(() => {
-		setTimeout(() => {
-			if (formData && formData.paymentTerms) {
-				const getOption: OptionType =
-					options.find((option) => option.value === formData.paymentTerms) ??
-					options[0];
-
-				setSelectedValue(getOption);
-			}
-		}, 100);
+		console.log(formData);
 	}, [formData]);
 
 	useEffect(() => {
-		console.log(newFormData)
-	}, [newFormData])
+		console.log(selectedValue);
+	}, [selectedValue])
 
 	// DESTRUCTED FORM ERRORS
 	const { street, city, postCode, country } = formError?.clientAddress ?? {};
@@ -189,12 +172,14 @@ const BillTo = ({
 					label='Invoice Date'
 					id='clientData'
 					date={formDate}
+					defaultDate={formData.createdAt}
 					setDate={setFormDate}
 				/>
 				<Form.Select
 					label='Payment Terms'
 					id='clientPaymentTerms'
-					onChange={handleOnChange}
+					onChange={handleSelectChange}
+					defaultOption={formData.paymentTerms}
 					selectedValue={selectedValue as OptionType}
 					options={options}
 					ref={OptionRef}

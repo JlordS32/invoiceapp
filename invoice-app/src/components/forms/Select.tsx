@@ -1,5 +1,9 @@
-import { forwardRef, useImperativeHandle } from 'react';
-import ReactSelect, { StylesConfig } from 'react-select';
+import { forwardRef, useEffect, useImperativeHandle } from 'react';
+import ReactSelect, {
+	ActionMeta,
+	SingleValue,
+	StylesConfig,
+} from 'react-select';
 
 // styles
 import styles from '../../assets/styles/modules/form.module.css';
@@ -21,8 +25,9 @@ type GroupBase<OptionType> = {
 
 export interface FormSelectProps extends FormProps {
 	options: OptionType[];
-	onChange?: (newvalue: any) => void;
+	onChange?: (value: OptionType) => void;
 	selectedValue: OptionType;
+	defaultOption: string;
 }
 
 export interface FormSelectRef {
@@ -80,6 +85,8 @@ const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
 };
 
 const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
+	const { onChange, selectedValue, options, id, label, defaultOption } = props;
+
 	useImperativeHandle(
 		ref,
 		() => {
@@ -88,12 +95,22 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 					console.log('test', value);
 				},
 				get value() {
-					return props.selectedValue;
+					return selectedValue;
 				},
 			};
 		},
-		[props.selectedValue]
+		[selectedValue]
 	);
+
+	useEffect(() => {
+		const selected: OptionType[] = options.filter(option => option.value === defaultOption);
+
+		if (defaultOption && selected) {
+			onChange?.(selected[0]);
+		}
+
+	}, [defaultOption]);
+
 	return (
 		<div
 			className={styles.formContainer}
@@ -101,11 +118,15 @@ const Select = forwardRef<FormSelectRef, FormSelectProps>((props, ref) => {
 				width: props.width ?? '18.46154rem',
 			}}
 		>
-			{props.label && <label htmlFor={props.id}>{props.label}</label>}
+			{label && <label htmlFor={id}>{label}</label>}
 			<ReactSelect
-				options={props.options}
-				onChange={props.onChange}
-				value={props.selectedValue}
+				options={options}
+				onChange={(value) => {
+					if (value) {
+						onChange?.(value);
+					}
+				}}
+				value={selectedValue}
 				styles={customStyles}
 				classNamePrefix='custom-select'
 			/>
