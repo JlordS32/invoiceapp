@@ -104,6 +104,7 @@ const DateComponent = forwardRef<FormSelectRef, FormSelectProps>(
 					name='createdAt'
 					maxDate={today}
 					onChange={(date) => {
+						console.log('from Date:', date);
 						if (date) {
 							props.setDate(date);
 						}

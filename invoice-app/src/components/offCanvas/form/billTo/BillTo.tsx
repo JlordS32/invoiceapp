@@ -1,5 +1,5 @@
 // react
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 // styles
 import styles from '../../../../assets/styles/modules/offcanvas/offcanvasform.module.css';
@@ -44,7 +44,8 @@ const BillTo = ({
 
 	// state
 	const [formDate, setFormDate] = useState<Date>(new Date());
-	const [selectedValue, setSelectedValue] = useState<OptionType>(options[0]);
+	const [selectedValue, setSelectedValue] = useState<OptionType>();
+	const [newFormData, setNewFormData] = useState();
 
 	// ref
 	const OptionRef = useRef<FormSelectRef>(null);
@@ -53,44 +54,44 @@ const BillTo = ({
 	const handleOnChange = (option: OptionType) => {
 		setSelectedValue(option);
 	};
-	
+
 	useEffect(() => {
 		if (formData) {
 			const newData = {
 				createdAt: formatDate(formDate.toString()),
-				paymentTerms: selectedValue.value,
+				paymentTerms: selectedValue ? selectedValue.value : options[0],
 				paymentDue: calculatePaymentDueDate(
 					formDate,
-					Number(selectedValue.value)
+					Number(selectedValue ? selectedValue.value : options[0])
 				),
 			};
 
-			update(newData);
+			setNewFormData(newData);
 		}
 	}, [formDate, selectedValue]);
 
-	// useEffect(() => {
-	// 	console.log('running')
-	// 	if (
-	// 		formData?.createdAt &&
-	// 		formDate.getTime() !== new Date(formData.createdAt).getTime()
-	// 	) {
-	// 		setFormDate(new Date(formData.createdAt));
-	// 	}
-	// }, [formDate, formData]);
+	// Setting defaults
+	useEffect(() => {
+		if (formData && formData.createdAt) {
+			setFormDate(new Date(formData.createdAt));
+		}
+	}, [formData.createdAt]);
 
 	useEffect(() => {
-		console.log('sdfsdf')
-		if (formData && formData.paymentTerms) {
-			const getOption = options.find(
-				(option) => option.value === formData.paymentTerms
-			);
+		setTimeout(() => {
+			if (formData && formData.paymentTerms) {
+				const getOption: OptionType =
+					options.find((option) => option.value === formData.paymentTerms) ??
+					options[0];
 
-			// if (getOption) {
-			// 	setSelectedValue(getOption);
-			// }
-		}
-	}, [formData, options]);
+				setSelectedValue(getOption);
+			}
+		}, 100);
+	}, [formData]);
+
+	useEffect(() => {
+		console.log(newFormData)
+	}, [newFormData])
 
 	// DESTRUCTED FORM ERRORS
 	const { street, city, postCode, country } = formError?.clientAddress ?? {};
@@ -194,7 +195,7 @@ const BillTo = ({
 					label='Payment Terms'
 					id='clientPaymentTerms'
 					onChange={handleOnChange}
-					selectedValue={selectedValue}
+					selectedValue={selectedValue as OptionType}
 					options={options}
 					ref={OptionRef}
 				/>

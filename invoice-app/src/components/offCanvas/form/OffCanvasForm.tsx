@@ -253,7 +253,6 @@ const OffCanvasForm = ({
 			<h2 className='text--h2'>{header}</h2>
 			<BillForm
 				handleInputChange={handleInputChange}
-				update={handleUpdateFormData}
 				formData={formData}
 				formError={formError}
 				inputRef={inputRef}
