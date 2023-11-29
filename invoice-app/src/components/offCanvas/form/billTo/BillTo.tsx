@@ -1,5 +1,5 @@
 // react
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // styles
 import styles from '../../../../assets/styles/modules/offcanvas/offcanvasform.module.css';

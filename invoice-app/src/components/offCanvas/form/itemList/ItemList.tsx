@@ -1,5 +1,5 @@
 // react
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // styles
 import styles from '../../../../assets/styles/modules/offcanvas/offcanvasform.module.css';
@@ -15,6 +15,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 // types
 import { ItemType } from '../../../../types';
 import { ItemListProps } from '.';
+import { random } from 'lodash';
 
 const ItemList = ({
 	update,
@@ -22,55 +23,40 @@ const ItemList = ({
 	formError,
 	formData,
 }: ItemListProps) => {
-	// default
-	const defaultItem = [
-		{
-			id: crypto.randomUUID(),
-			name: '',
-			quantity: 0,
-			price: 0,
-		},
-	];
+	const { items } = formData;
 
 	// libraries
 	const isWide = useMediaQuery({ query: '(min-width: 620px)' });
 	const [animateParent] = useAutoAnimate();
 
-	// state
-	const [items, setItems] = useState<ItemType[]>(defaultItem);
-
-	// FUNCTIONS
-	// function to handle Adding items for offCanvas
 	const handleAddNewItem = () => {
-		setItems([
-			...items,
-			{
-				id: crypto.randomUUID(),
-				name: '',
-				quantity: 0,
-				price: 0,
-			},
-		]);
+		if (formData && formData.items) {
+			const currentItems = formData.items;
+
+			update({
+				items: [
+					...currentItems,
+					{ id: crypto.randomUUID(), name: '', quantity: 0, price: 0 },
+				],
+			});
+		}
 	};
 
-	// function to handle deleting Items
-	const handleDeleteItem = (itemToDelete: ItemType) => {
-		if (items.length > 1) {
-			const filteredItem = items.filter((item) => item.id !== itemToDelete.id);
+	const handleDeleteItem = (id: string) => {
+		if (formData && formData.items.length === 1) return;
 
-			setItems(filteredItem);
+		if (formData && formData.items) {
+			const updatedItems = formData.items.filter((item) => {
+				return item.id !== id;
+			});
+
+			update({ items: updatedItems });
+
+			return;
 		}
 
-		return;
+		throw new Error('There was a problem deleting your item!');
 	};
-
-	useEffect(() => {
-		setTimeout(() => {
-			update({
-				items: items,
-			});
-		}, 100);
-	}, []);
 
 	useEffect(() => {
 		const itemsError = items.map((item) => {
@@ -96,25 +82,12 @@ const ItemList = ({
 		});
 	}, [items]);
 
-
 	// TODO: Prevent infinite rendering
-	// Reason: the effect renders infinitely due to the behaviours 
+	// Reason: the effect renders infinitely due to the behaviours
 	// of using state and useEffect hook.
 	// when the effect runs to update formData, it updates the formData
 	// but becuz formData is updated, it also update the items, thus causing a loop
 	// Solution: Figuring it out
-	useEffect(() => {
-		const { items: formDataItems } = formData;
-		const newItems = {
-			items: items,
-		};
-
-		update(newItems);
-
-		if (formData && items) {
-			setItems(formDataItems);
-		}
-	}, [items]);
 
 	return (
 		<section className={styles.itemList}>
@@ -134,23 +107,24 @@ const ItemList = ({
 					className={styles.itemsWrapper}
 					ref={animateParent}
 				>
-					{items.map((item, index) => {
-						const itemError = Object.entries(formError?.items || {}).filter(
-							([_, value]) => {
-								return value.id === item.id;
-							}
-						)[0];
-						return (
-							<FormItems
-								item={item}
-								itemError={itemError}
-								itemList={items}
-								setItemList={setItems}
-								deleteItem={handleDeleteItem}
-								key={index}
-							/>
-						);
-					})}
+					{formData &&
+						formData.items.map((item, index) => {
+							const itemError = Object.entries(formError?.items || {}).filter(
+								([_, value]) => {
+									return value.id === item.id;
+								}
+							)[0];
+							return (
+								<FormItems
+									item={item}
+									itemError={itemError}
+									itemList={items}
+									updateItems={update}
+									deleteItem={handleDeleteItem}
+									key={index}
+								/>
+							);
+						})}
 				</div>
 
 				<div className={styles.addNewItem}>

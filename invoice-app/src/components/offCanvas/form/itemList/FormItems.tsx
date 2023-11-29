@@ -16,9 +16,9 @@ import { useEffect, useState } from 'react';
 import { ItemTypeError } from '../../../../types/ItemType';
 interface FormItemsProps {
 	item: ItemType;
-	deleteItem: (itemTodelete: ItemType) => void;
+	deleteItem: (id: string) => void;
 	itemList: ItemType[];
-	setItemList: React.Dispatch<React.SetStateAction<ItemType[]>>;
+	updateItems: (data: any) => void;
 	itemError: any;
 }
 
@@ -26,7 +26,7 @@ const FormItems = ({
 	item,
 	deleteItem,
 	itemList,
-	setItemList,
+	updateItems,
 	itemError,
 }: FormItemsProps) => {
 	// state
@@ -52,7 +52,8 @@ const FormItems = ({
 			}
 			return itemlist;
 		});
-		setItemList(updatedData);
+
+		updateItems({ items: updatedData });
 	}, [quantity, price, itemName]);
 
 	useEffect(() => {
@@ -62,11 +63,16 @@ const FormItems = ({
 	}, [itemError, itemErrorState]);
 
 	useEffect(() => {
-		if (item) {
+		if (item && item.quantity && item.price && item.name) {
 			setQuantity(item.quantity);
 			setPrice(item.price);
+			setItemName(item.name);
 		}
 	}, [item]);
+
+	useEffect(() => {
+		console.log(item)
+	}, [item])
 
 	return (
 		<div className={styles.item}>
@@ -112,7 +118,7 @@ const FormItems = ({
 					<p>{formatCurrency(total)}</p>
 					<div
 						onClick={() => {
-							deleteItem(item);
+							deleteItem(item.id);
 						}}
 						id='someElement'
 					>

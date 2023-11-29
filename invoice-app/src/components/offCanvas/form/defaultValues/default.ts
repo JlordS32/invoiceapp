@@ -1,4 +1,5 @@
-import { FormDataType, FormErrorType } from "../../../../types";
+import { random } from 'lodash';
+import { FormDataType, FormErrorType } from '../../../../types';
 
 export const defaultFormError: FormErrorType = {
 	senderAddress: {
@@ -57,8 +58,7 @@ export const defaultFormError: FormErrorType = {
 		valid: true,
 		errorMsg: '',
 	},
-	items: [
-	],
+	items: [],
 };
 
 export const defaultForm: FormDataType = {
@@ -82,7 +82,7 @@ export const defaultForm: FormDataType = {
 	paymentDue: '',
 	items: [
 		{
-			id: '',
+			id: crypto.randomUUID(),
 			name: '',
 			quantity: 0,
 			price: 0,

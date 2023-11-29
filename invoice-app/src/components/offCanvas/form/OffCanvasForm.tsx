@@ -193,7 +193,6 @@ const OffCanvasForm = ({
 
 	const handleUpdateFormData = useCallback(
 		(data: any) => {
-
 			setFormData({
 				...formData,
 				...data,
@@ -237,10 +236,6 @@ const OffCanvasForm = ({
 			handleUpdateFormData(data);
 		}
 	}, [data]);
-
-	useEffect(() => {
-		console.log(formData);
-	}, [formData]);
 
 	return (
 		<form

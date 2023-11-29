@@ -1,7 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle } from 'react';
 import ReactSelect, {
-	ActionMeta,
-	SingleValue,
 	StylesConfig,
 } from 'react-select';
 
