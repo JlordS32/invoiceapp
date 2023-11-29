@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react';
 // services
 import { usePostDataById } from '../../services/api/usePostData';
 import { useFetchDatabyId } from '../../services/api/useFetch';
-import { InvoiceType } from '../../types';
+import { FormDataType } from '../../types';
 
 const EditInvoiceCanvas = () => {
 	const navigate = useNavigate();
@@ -31,11 +31,11 @@ const EditInvoiceCanvas = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	// state
-	const [data, setData] = useState<InvoiceType>();
-	const [editedFormData, setEditedFormData] = useState<InvoiceType>();
+	const [data, setData] = useState<FormDataType>();
+	const [editedFormData, setEditedFormData] = useState<FormDataType>();
 
 	// utils
-	const updateForm = (data: InvoiceType) => {
+	const updateForm = (data: FormDataType) => {
 		setEditedFormData(data);
 	};
 

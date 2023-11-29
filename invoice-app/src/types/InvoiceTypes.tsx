@@ -1,3 +1,5 @@
+import { ItemType } from './ItemType';
+
 // types
 export interface InvoiceType {
 	id: string;
@@ -20,10 +22,5 @@ export interface InvoiceType {
 		postCode: string;
 		country: string;
 	};
-	items: {
-		id: string;
-		name: string;
-		quantity: number;
-		price: number;
-	}[];
+	items: ItemType[];
 }

@@ -17,7 +17,7 @@ import { validateData } from '../../../utilities/validateData';
 import { defaultFormError, defaultForm } from './defaultValues/default';
 
 // types
-import { FormDataType, FormErrorType, InvoiceType } from '../../../types';
+import { FormDataType, FormErrorType } from '../../../types';
 import { areAllValid } from '../../../utilities/areAllValid';
 import { usePostData } from '../../../services/api/usePostData';
 import { FormTextRef } from '../../forms/Text';
@@ -25,8 +25,8 @@ import { FormTextRef } from '../../forms/Text';
 interface OffCanvasFormProps {
 	header: string;
 	close: () => void;
-	data?: InvoiceType;
-	updateForm?: (data: InvoiceType) => void;
+	data?: FormDataType;
+	updateForm?: (data: FormDataType) => void;
 }
 
 /**
@@ -236,10 +236,6 @@ const OffCanvasForm = ({
 			handleUpdateFormData(data);
 		}
 	}, [data]);
-
-	useEffect(() => {
-		console.log(formData);
-	}, [formData]);
 
 	return (
 		<form
