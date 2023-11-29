@@ -17,6 +17,8 @@ import {
 	toggleModal as toggleModalAction,
 } from '../../../redux/modal/modalSlice';
 import { InvoiceType } from '../../../types';
+import { usePostDataById } from '../../../services/api/usePostData';
+import { useNavigate } from 'react-router-dom';
 
 interface InvoiceNavProps {
 	invoice: InvoiceType;
@@ -26,6 +28,9 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 	// redux
 	const dispatch = useDispatch<AppDispatch>();
 
+	// rrd
+	const navigate = useNavigate();
+
 	const toggleOffCanvas = () => {
 		dispatch(toggleCanvas());
 		dispatch(onLoadCanvas('edit-invoice'));
@@ -34,6 +39,14 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 	const toggleModal = () => {
 		dispatch(toggleModalAction());
 		dispatch(loadModal('confirm-delete'));
+	};
+
+	const markAsPaid = async () => {
+		await usePostDataById('https://invoiceapi.vercel.app/invoices', invoice.id, {
+			status: 'paid',
+		});
+
+		navigate(0);
 	};
 
 	const { status } = invoice;
@@ -64,7 +77,9 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 					Delete
 				</Button>
 
-				{invoice.status === 'pending' && <Button>Mark as Paid</Button>}
+				{invoice.status === 'pending' && (
+					<Button onClick={markAsPaid}>Mark as Paid</Button>
+				)}
 			</div>
 		</div>
 	);

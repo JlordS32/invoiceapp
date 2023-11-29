@@ -1,6 +1,6 @@
 // types
 export interface InvoiceType {
-	id?: string;
+	id: string;
 	createdAt: string;
 	paymentDue: string;
 	description: string;

@@ -27,7 +27,7 @@ import Status from './Status';
 import { useMediaQuery } from 'react-responsive';
 
 const CreateInvoiceList = ({ invoice }: CreateInvoiceProps) => {
-	const status: paymentStatusType = checkStatusType(invoice.status);
+	const status: paymentStatusType = checkStatusType(invoice.status as string);
 
 	const total = getTotal(extractPrices(invoice.items));
 

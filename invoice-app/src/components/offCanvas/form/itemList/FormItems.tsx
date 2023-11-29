@@ -70,9 +70,6 @@ const FormItems = ({
 		}
 	}, [item]);
 
-	useEffect(() => {
-		console.log(item)
-	}, [item])
 
 	return (
 		<div className={styles.item}>

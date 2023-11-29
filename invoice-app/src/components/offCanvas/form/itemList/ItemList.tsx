@@ -1,5 +1,5 @@
 // react
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 // styles
 import styles from '../../../../assets/styles/modules/offcanvas/offcanvasform.module.css';
@@ -13,9 +13,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 // types
-import { ItemType } from '../../../../types';
 import { ItemListProps } from '.';
-import { random } from 'lodash';
 
 const ItemList = ({
 	update,
@@ -81,13 +79,6 @@ const ItemList = ({
 			items: itemsError,
 		});
 	}, [items]);
-
-	// TODO: Prevent infinite rendering
-	// Reason: the effect renders infinitely due to the behaviours
-	// of using state and useEffect hook.
-	// when the effect runs to update formData, it updates the formData
-	// but becuz formData is updated, it also update the items, thus causing a loop
-	// Solution: Figuring it out
 
 	return (
 		<section className={styles.itemList}>

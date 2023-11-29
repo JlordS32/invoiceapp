@@ -82,8 +82,10 @@ const EditInvoiceCanvas = () => {
 		fetchData();
 	}, []);
 
+	console.log()
+
 	return (
-		<div
+		<div 
 			className={`${styles.canvas} animate animate--very-slow animate-ease-in-out slideToRight`}
 		>
 			<OffCanvasForm

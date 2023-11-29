@@ -1,4 +1,4 @@
-import { random } from 'lodash';
+
 import { FormDataType, FormErrorType } from '../../../../types';
 
 export const defaultFormError: FormErrorType = {

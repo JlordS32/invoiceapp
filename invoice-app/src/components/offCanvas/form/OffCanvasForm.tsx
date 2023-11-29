@@ -237,6 +237,10 @@ const OffCanvasForm = ({
 		}
 	}, [data]);
 
+	useEffect(() => {
+		console.log(formData);
+	}, [formData]);
+
 	return (
 		<form
 			onSubmit={(e) => {
