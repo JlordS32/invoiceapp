@@ -42,9 +42,13 @@ const InvoiceNav = ({ invoice }: InvoiceNavProps) => {
 	};
 
 	const markAsPaid = async () => {
-		await usePostDataById('https://invoiceapi.vercel.app/invoices', invoice.id, {
-			status: 'paid',
-		});
+		await usePostDataById(
+			'https://invoiceapi.vercel.app/invoices',
+			invoice.id,
+			{
+				status: 'paid',
+			}
+		);
 
 		navigate(0);
 	};

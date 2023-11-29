@@ -54,7 +54,7 @@ const Dashboard = () => {
 		await dispatch(getInvoiceAsync(url));
 	};
 
-	const debouncedFetchData = useCallback(debounce(fetchData, 5000), []);
+	const debouncedFetchData = useCallback(debounce(fetchData, 1000), []);
 	// UseEffects
 
 	// First two useEffect to handle data fetching.
